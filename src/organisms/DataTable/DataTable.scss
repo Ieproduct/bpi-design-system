@@ -1,0 +1,156 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// DataTable Component — BEM
+// ============================================================
+
+.bpi-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  font-family: $bpi-font-family-sans;
+}
+
+.bpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $bpi-font-size-sm;
+
+  // --- Head ---
+  thead {
+    background-color: $bpi-bg-secondary;
+  }
+
+  th,
+  td {
+    padding: $bpi-space-3 $bpi-space-4;
+    text-align: left;
+    border-bottom: 1px solid $bpi-border-default;
+  }
+
+  th {
+    font-weight: $bpi-font-weight-semibold;
+    color: $bpi-text-secondary;
+    font-size: $bpi-font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $bpi-tracking-wide;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  td {
+    color: $bpi-text-primary;
+  }
+
+  // --- Sortable ---
+  .bpi-th--sortable {
+    cursor: pointer;
+    transition: color $bpi-transition-fast;
+
+    &:hover {
+      color: $bpi-text-primary;
+    }
+  }
+
+  .bpi-th--sorted {
+    color: $bpi-primary;
+  }
+
+  .bpi-th__sort-icon {
+    display: inline-block;
+    margin-left: $bpi-space-1;
+    vertical-align: middle;
+    opacity: 0.4;
+
+    .bpi-th--sorted & {
+      opacity: 1;
+    }
+  }
+
+  // --- Row States ---
+  tbody tr {
+    transition: background-color $bpi-transition-fast;
+
+    &:hover {
+      background-color: $bpi-bg-secondary;
+    }
+  }
+
+  .bpi-tr--selected {
+    background-color: $bpi-primary-light;
+
+    &:hover {
+      background-color: $bpi-primary-light;
+    }
+  }
+
+  // --- Striped ---
+  &--striped tbody tr:nth-child(even) {
+    background-color: $bpi-bg-secondary;
+  }
+}
+
+// --- Empty State ---
+.bpi-table__empty {
+  padding: $bpi-space-12 $bpi-space-4;
+  text-align: center;
+  color: $bpi-text-muted;
+  font-size: $bpi-font-size-sm;
+}
+
+// --- Pagination ---
+.bpi-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $bpi-space-3 $bpi-space-4;
+  border-top: 1px solid $bpi-border-default;
+
+  &__info {
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-secondary;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: $bpi-space-1;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 $bpi-space-2;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    border: 1px solid $bpi-border-default;
+    border-radius: $bpi-radius-md;
+    background: $bpi-bg-primary;
+    color: $bpi-text-secondary;
+    cursor: pointer;
+    transition: all $bpi-transition-fast;
+
+    &:hover:not(:disabled) {
+      border-color: $bpi-primary;
+      color: $bpi-primary;
+    }
+
+    &--active {
+      background-color: $bpi-primary;
+      border-color: $bpi-primary;
+      color: $bpi-text-inverse;
+
+      &:hover:not(:disabled) {
+        background-color: $bpi-primary-dark;
+        color: $bpi-text-inverse;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}

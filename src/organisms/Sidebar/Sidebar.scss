@@ -1,0 +1,84 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Sidebar Component — BEM
+// ============================================================
+
+.bpi-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  height: 100%;
+  background-color: $bpi-bg-primary;
+  border-right: 1px solid $bpi-border-default;
+  font-family: $bpi-font-family-sans;
+  overflow-y: auto;
+
+  &--collapsed {
+    width: 64px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $bpi-space-4;
+    border-bottom: 1px solid $bpi-border-default;
+  }
+
+  &__content {
+    flex: 1;
+    padding: $bpi-space-2;
+    overflow-y: auto;
+  }
+
+  &__section {
+    margin-bottom: $bpi-space-4;
+  }
+
+  &__section-title {
+    padding: $bpi-space-2 $bpi-space-3;
+    font-size: $bpi-font-size-xs;
+    font-weight: $bpi-font-weight-semibold;
+    color: $bpi-text-muted;
+    text-transform: uppercase;
+    letter-spacing: $bpi-tracking-wide;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $bpi-space-3;
+    padding: $bpi-space-2 $bpi-space-3;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-secondary;
+    text-decoration: none;
+    border-radius: $bpi-radius-md;
+    cursor: pointer;
+    transition: all $bpi-transition-fast;
+
+    &:hover {
+      background-color: $bpi-bg-secondary;
+      color: $bpi-text-primary;
+    }
+
+    &--active {
+      background-color: $bpi-primary-light;
+      color: $bpi-primary;
+      font-weight: $bpi-font-weight-medium;
+    }
+  }
+
+  &__item-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__footer {
+    padding: $bpi-space-4;
+    border-top: 1px solid $bpi-border-default;
+  }
+}

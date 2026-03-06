@@ -1,0 +1,49 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// FormField Component — BEM
+// ============================================================
+
+.bpi-form-field {
+  display: block;
+  margin-bottom: $bpi-space-4;
+
+  // --- Label ---
+  &__label {
+    display: block;
+    margin-bottom: $bpi-space-1;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-medium;
+    color: $bpi-text-primary;
+  }
+
+  &__required {
+    color: $bpi-danger;
+    margin-left: 2px;
+  }
+
+  // --- Input wrapper ---
+  &__control {
+    display: block;
+    width: 100%;
+  }
+
+  // --- Hint ---
+  &__hint {
+    display: block;
+    margin-top: $bpi-space-1;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-xs;
+    color: $bpi-text-muted;
+  }
+
+  // --- Error ---
+  &__error {
+    display: block;
+    margin-top: $bpi-space-1;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-xs;
+    color: $bpi-danger;
+  }
+}

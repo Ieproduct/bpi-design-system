@@ -1,0 +1,61 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Badge Component — BEM
+// ============================================================
+
+.bpi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $bpi-space-1;
+  padding: 2px $bpi-space-2;
+  font-family: $bpi-font-family-sans;
+  font-size: $bpi-font-size-xs;
+  font-weight: $bpi-font-weight-medium;
+  line-height: $bpi-line-height-tight;
+  border-radius: $bpi-radius-full;
+  white-space: nowrap;
+
+  // --- Variants ---
+  &--primary {
+    background-color: $bpi-primary-light;
+    color: $bpi-primary-dark;
+  }
+
+  &--success {
+    background-color: $bpi-success-light;
+    color: $bpi-success-dark;
+  }
+
+  &--warning {
+    background-color: $bpi-warning-light;
+    color: $bpi-warning-dark;
+  }
+
+  &--danger {
+    background-color: $bpi-danger-light;
+    color: $bpi-danger-dark;
+  }
+
+  &--info {
+    background-color: $bpi-info-light;
+    color: $bpi-info-dark;
+  }
+
+  &--neutral {
+    background-color: $bpi-gray-100;
+    color: $bpi-gray-700;
+  }
+
+  // --- Dot modifier ---
+  &--dot {
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: $bpi-radius-full;
+      background-color: currentColor;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Input Component — BEM
+// ============================================================
+
+.bpi-input {
+  display: block;
+  width: 100%;
+  font-family: $bpi-font-family-sans;
+  font-weight: $bpi-font-weight-normal;
+  color: $bpi-text-primary;
+  background-color: $bpi-bg-primary;
+  border: 1px solid $bpi-border-default;
+  border-radius: $bpi-radius-md;
+  transition: border-color $bpi-transition-fast,
+              box-shadow $bpi-transition-fast;
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $bpi-text-muted;
+  }
+
+  &:focus {
+    border-color: $bpi-border-focus;
+    box-shadow: 0 0 0 $bpi-focus-ring-width $bpi-focus-ring-color;
+  }
+
+  // --- Sizes ---
+  &--sm {
+    padding: $bpi-space-1 $bpi-space-2;
+    font-size: $bpi-font-size-xs;
+  }
+
+  &--md {
+    padding: $bpi-space-2 $bpi-space-3;
+    font-size: $bpi-font-size-sm;
+  }
+
+  &--lg {
+    padding: $bpi-space-3 $bpi-space-4;
+    font-size: $bpi-font-size-base;
+  }
+
+  // --- Error ---
+  &--error {
+    border-color: $bpi-danger;
+
+    &:focus {
+      box-shadow: 0 0 0 $bpi-focus-ring-width rgba($bpi-danger, 0.3);
+    }
+  }
+
+  // --- Disabled ---
+  &:disabled,
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: $bpi-bg-secondary;
+  }
+
+  // --- Hint & Error Text ---
+  &__hint {
+    display: block;
+    margin-top: $bpi-space-1;
+    font-size: $bpi-font-size-xs;
+    color: $bpi-text-muted;
+  }
+
+  &__error {
+    display: block;
+    margin-top: $bpi-space-1;
+    font-size: $bpi-font-size-xs;
+    color: $bpi-danger;
+  }
+}

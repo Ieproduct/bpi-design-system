@@ -1,0 +1,57 @@
+// ============================================================
+// BPI Design System — Typography Tokens
+// Primary: Inter, Fallback: Sarabun (Thai support)
+// ============================================================
+
+// --- Font Families ---
+$bpi-font-family-sans: 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$bpi-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !default;
+
+// --- Font Sizes ---
+$bpi-font-size-xs: 0.75rem !default;    // 12px
+$bpi-font-size-sm: 0.875rem !default;   // 14px
+$bpi-font-size-base: 1rem !default;     // 16px
+$bpi-font-size-lg: 1.125rem !default;   // 18px
+$bpi-font-size-xl: 1.25rem !default;    // 20px
+$bpi-font-size-2xl: 1.5rem !default;    // 24px
+$bpi-font-size-3xl: 1.875rem !default;  // 30px
+
+// --- Font Weights ---
+$bpi-font-weight-light: 300 !default;
+$bpi-font-weight-normal: 400 !default;
+$bpi-font-weight-medium: 500 !default;
+$bpi-font-weight-semibold: 600 !default;
+$bpi-font-weight-bold: 700 !default;
+
+// --- Line Heights ---
+$bpi-line-height-tight: 1.25 !default;
+$bpi-line-height-normal: 1.5 !default;
+$bpi-line-height-relaxed: 1.75 !default;
+
+// --- Letter Spacing ---
+$bpi-tracking-tight: -0.025em !default;
+$bpi-tracking-normal: 0 !default;
+$bpi-tracking-wide: 0.025em !default;
+
+:root {
+  --bpi-font-family-sans: #{$bpi-font-family-sans};
+  --bpi-font-family-mono: #{$bpi-font-family-mono};
+
+  --bpi-font-size-xs: #{$bpi-font-size-xs};
+  --bpi-font-size-sm: #{$bpi-font-size-sm};
+  --bpi-font-size-base: #{$bpi-font-size-base};
+  --bpi-font-size-lg: #{$bpi-font-size-lg};
+  --bpi-font-size-xl: #{$bpi-font-size-xl};
+  --bpi-font-size-2xl: #{$bpi-font-size-2xl};
+  --bpi-font-size-3xl: #{$bpi-font-size-3xl};
+
+  --bpi-font-weight-light: #{$bpi-font-weight-light};
+  --bpi-font-weight-normal: #{$bpi-font-weight-normal};
+  --bpi-font-weight-medium: #{$bpi-font-weight-medium};
+  --bpi-font-weight-semibold: #{$bpi-font-weight-semibold};
+  --bpi-font-weight-bold: #{$bpi-font-weight-bold};
+
+  --bpi-line-height-tight: #{$bpi-line-height-tight};
+  --bpi-line-height-normal: #{$bpi-line-height-normal};
+  --bpi-line-height-relaxed: #{$bpi-line-height-relaxed};
+}

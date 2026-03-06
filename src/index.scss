@@ -1,0 +1,30 @@
+// ============================================================
+// BPI Design System — Main Stylesheet
+// All @use rules must come first (before any CSS rules)
+// ============================================================
+
+// --- Tokens ---
+@use 'tokens' as *;
+
+// --- Atoms ---
+@use 'atoms/Button/Button';
+@use 'atoms/Input/Input';
+@use 'atoms/Badge/Badge';
+@use 'atoms/Icon/Icon';
+
+// --- Molecules ---
+@use 'molecules/FormField/FormField';
+@use 'molecules/SearchBar/SearchBar';
+@use 'molecules/Card/Card';
+
+// --- Organisms ---
+@use 'organisms/DataTable/DataTable';
+@use 'organisms/Navbar/Navbar';
+@use 'organisms/Sidebar/Sidebar';
+
+// --- Base Reset (must come after @use) ---
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

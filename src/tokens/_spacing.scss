@@ -1,0 +1,28 @@
+// ============================================================
+// BPI Design System — Spacing Tokens
+// Base unit: 4px
+// ============================================================
+
+$bpi-space-1: 4px !default;    // 4px
+$bpi-space-2: 8px !default;    // 8px
+$bpi-space-3: 12px !default;   // 12px
+$bpi-space-4: 16px !default;   // 16px
+$bpi-space-5: 20px !default;   // 20px
+$bpi-space-6: 24px !default;   // 24px
+$bpi-space-8: 32px !default;   // 32px
+$bpi-space-10: 40px !default;  // 40px
+$bpi-space-12: 48px !default;  // 48px
+$bpi-space-16: 64px !default;  // 64px
+
+:root {
+  --bpi-space-1: #{$bpi-space-1};
+  --bpi-space-2: #{$bpi-space-2};
+  --bpi-space-3: #{$bpi-space-3};
+  --bpi-space-4: #{$bpi-space-4};
+  --bpi-space-5: #{$bpi-space-5};
+  --bpi-space-6: #{$bpi-space-6};
+  --bpi-space-8: #{$bpi-space-8};
+  --bpi-space-10: #{$bpi-space-10};
+  --bpi-space-12: #{$bpi-space-12};
+  --bpi-space-16: #{$bpi-space-16};
+}

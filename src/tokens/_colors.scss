@@ -1,0 +1,128 @@
+@use 'sass:color';
+
+// ============================================================
+// BPI Design System — Color Tokens
+// All variables use !default so teams can override before import
+// ============================================================
+
+// --- Brand Colors ---
+$bpi-brand-primary: #1E40AF !default;
+$bpi-brand-secondary: #7C3AED !default;
+$bpi-brand-accent: #0891B2 !default;
+
+// --- Semantic Colors ---
+$bpi-primary: $bpi-brand-primary !default;
+$bpi-primary-light: color.adjust($bpi-primary, $lightness: 35%) !default;
+$bpi-primary-dark: color.adjust($bpi-primary, $lightness: -10%) !default;
+
+$bpi-secondary: $bpi-brand-secondary !default;
+$bpi-secondary-light: color.adjust($bpi-secondary, $lightness: 35%) !default;
+$bpi-secondary-dark: color.adjust($bpi-secondary, $lightness: -10%) !default;
+
+$bpi-success: #16A34A !default;
+$bpi-success-light: color.adjust($bpi-success, $lightness: 35%) !default;
+$bpi-success-dark: color.adjust($bpi-success, $lightness: -10%) !default;
+
+$bpi-danger: #DC2626 !default;
+$bpi-danger-light: color.adjust($bpi-danger, $lightness: 35%) !default;
+$bpi-danger-dark: color.adjust($bpi-danger, $lightness: -10%) !default;
+
+$bpi-warning: #D97706 !default;
+$bpi-warning-light: color.adjust($bpi-warning, $lightness: 35%) !default;
+$bpi-warning-dark: color.adjust($bpi-warning, $lightness: -10%) !default;
+
+$bpi-info: #0284C7 !default;
+$bpi-info-light: color.adjust($bpi-info, $lightness: 35%) !default;
+$bpi-info-dark: color.adjust($bpi-info, $lightness: -10%) !default;
+
+// --- Neutral / Gray Scale ---
+$bpi-gray-50: #F9FAFB !default;
+$bpi-gray-100: #F3F4F6 !default;
+$bpi-gray-200: #E5E7EB !default;
+$bpi-gray-300: #D1D5DB !default;
+$bpi-gray-400: #9CA3AF !default;
+$bpi-gray-500: #6B7280 !default;
+$bpi-gray-600: #4B5563 !default;
+$bpi-gray-700: #374151 !default;
+$bpi-gray-800: #1F2937 !default;
+$bpi-gray-900: #111827 !default;
+$bpi-gray-950: #030712 !default;
+
+// --- Aliases ---
+$bpi-text-primary: $bpi-gray-900 !default;
+$bpi-text-secondary: $bpi-gray-600 !default;
+$bpi-text-muted: $bpi-gray-400 !default;
+$bpi-text-inverse: #FFFFFF !default;
+
+$bpi-bg-primary: #FFFFFF !default;
+$bpi-bg-secondary: $bpi-gray-50 !default;
+$bpi-bg-tertiary: $bpi-gray-100 !default;
+
+$bpi-border-default: $bpi-gray-200 !default;
+$bpi-border-strong: $bpi-gray-300 !default;
+$bpi-border-focus: $bpi-primary !default;
+
+$bpi-white: #FFFFFF !default;
+$bpi-black: #000000 !default;
+
+// ============================================================
+// CSS Custom Properties (runtime overridable)
+// ============================================================
+:root {
+  // Brand
+  --bpi-brand-primary: #{$bpi-brand-primary};
+  --bpi-brand-secondary: #{$bpi-brand-secondary};
+  --bpi-brand-accent: #{$bpi-brand-accent};
+
+  // Semantic
+  --bpi-primary: #{$bpi-primary};
+  --bpi-primary-light: #{$bpi-primary-light};
+  --bpi-primary-dark: #{$bpi-primary-dark};
+
+  --bpi-secondary: #{$bpi-secondary};
+  --bpi-secondary-light: #{$bpi-secondary-light};
+  --bpi-secondary-dark: #{$bpi-secondary-dark};
+
+  --bpi-success: #{$bpi-success};
+  --bpi-success-light: #{$bpi-success-light};
+  --bpi-success-dark: #{$bpi-success-dark};
+
+  --bpi-danger: #{$bpi-danger};
+  --bpi-danger-light: #{$bpi-danger-light};
+  --bpi-danger-dark: #{$bpi-danger-dark};
+
+  --bpi-warning: #{$bpi-warning};
+  --bpi-warning-light: #{$bpi-warning-light};
+  --bpi-warning-dark: #{$bpi-warning-dark};
+
+  --bpi-info: #{$bpi-info};
+  --bpi-info-light: #{$bpi-info-light};
+  --bpi-info-dark: #{$bpi-info-dark};
+
+  // Neutrals
+  --bpi-gray-50: #{$bpi-gray-50};
+  --bpi-gray-100: #{$bpi-gray-100};
+  --bpi-gray-200: #{$bpi-gray-200};
+  --bpi-gray-300: #{$bpi-gray-300};
+  --bpi-gray-400: #{$bpi-gray-400};
+  --bpi-gray-500: #{$bpi-gray-500};
+  --bpi-gray-600: #{$bpi-gray-600};
+  --bpi-gray-700: #{$bpi-gray-700};
+  --bpi-gray-800: #{$bpi-gray-800};
+  --bpi-gray-900: #{$bpi-gray-900};
+  --bpi-gray-950: #{$bpi-gray-950};
+
+  // Aliases
+  --bpi-text-primary: #{$bpi-text-primary};
+  --bpi-text-secondary: #{$bpi-text-secondary};
+  --bpi-text-muted: #{$bpi-text-muted};
+  --bpi-text-inverse: #{$bpi-text-inverse};
+
+  --bpi-bg-primary: #{$bpi-bg-primary};
+  --bpi-bg-secondary: #{$bpi-bg-secondary};
+  --bpi-bg-tertiary: #{$bpi-bg-tertiary};
+
+  --bpi-border-default: #{$bpi-border-default};
+  --bpi-border-strong: #{$bpi-border-strong};
+  --bpi-border-focus: #{$bpi-border-focus};
+}

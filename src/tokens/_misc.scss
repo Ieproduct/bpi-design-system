@@ -1,0 +1,74 @@
+// ============================================================
+// BPI Design System — Misc Tokens
+// Border radii, shadows, z-index, transitions
+// ============================================================
+
+// --- Border Radius ---
+$bpi-radius-none: 0 !default;
+$bpi-radius-sm: 4px !default;
+$bpi-radius-md: 6px !default;
+$bpi-radius-lg: 8px !default;
+$bpi-radius-xl: 12px !default;
+$bpi-radius-2xl: 16px !default;
+$bpi-radius-full: 9999px !default;
+
+// --- Box Shadows ---
+$bpi-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$bpi-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !default;
+$bpi-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !default;
+$bpi-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !default;
+$bpi-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !default;
+$bpi-shadow-none: none !default;
+
+// --- Z-Index Scale ---
+$bpi-z-dropdown: 1000 !default;
+$bpi-z-sticky: 1020 !default;
+$bpi-z-fixed: 1030 !default;
+$bpi-z-modal-backdrop: 1040 !default;
+$bpi-z-modal: 1050 !default;
+$bpi-z-popover: 1060 !default;
+$bpi-z-tooltip: 1070 !default;
+$bpi-z-toast: 1080 !default;
+
+// --- Transitions ---
+$bpi-transition-fast: 150ms ease !default;
+$bpi-transition-normal: 250ms ease !default;
+$bpi-transition-slow: 350ms ease !default;
+
+// --- Focus Ring ---
+$bpi-focus-ring-width: 2px !default;
+$bpi-focus-ring-offset: 2px !default;
+$bpi-focus-ring-color: rgba(30, 64, 175, 0.5) !default;
+
+:root {
+  --bpi-radius-none: #{$bpi-radius-none};
+  --bpi-radius-sm: #{$bpi-radius-sm};
+  --bpi-radius-md: #{$bpi-radius-md};
+  --bpi-radius-lg: #{$bpi-radius-lg};
+  --bpi-radius-xl: #{$bpi-radius-xl};
+  --bpi-radius-2xl: #{$bpi-radius-2xl};
+  --bpi-radius-full: #{$bpi-radius-full};
+
+  --bpi-shadow-xs: #{$bpi-shadow-xs};
+  --bpi-shadow-sm: #{$bpi-shadow-sm};
+  --bpi-shadow-md: #{$bpi-shadow-md};
+  --bpi-shadow-lg: #{$bpi-shadow-lg};
+  --bpi-shadow-xl: #{$bpi-shadow-xl};
+
+  --bpi-z-dropdown: #{$bpi-z-dropdown};
+  --bpi-z-sticky: #{$bpi-z-sticky};
+  --bpi-z-fixed: #{$bpi-z-fixed};
+  --bpi-z-modal-backdrop: #{$bpi-z-modal-backdrop};
+  --bpi-z-modal: #{$bpi-z-modal};
+  --bpi-z-popover: #{$bpi-z-popover};
+  --bpi-z-tooltip: #{$bpi-z-tooltip};
+  --bpi-z-toast: #{$bpi-z-toast};
+
+  --bpi-transition-fast: #{$bpi-transition-fast};
+  --bpi-transition-normal: #{$bpi-transition-normal};
+  --bpi-transition-slow: #{$bpi-transition-slow};
+
+  --bpi-focus-ring-width: #{$bpi-focus-ring-width};
+  --bpi-focus-ring-offset: #{$bpi-focus-ring-offset};
+  --bpi-focus-ring-color: #{$bpi-focus-ring-color};
+}

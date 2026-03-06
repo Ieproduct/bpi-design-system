@@ -1,0 +1,73 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// SearchBar Component — BEM
+// ============================================================
+
+.bpi-search-bar {
+  display: flex;
+  align-items: center;
+  gap: $bpi-space-2;
+  width: 100%;
+  padding: $bpi-space-2 $bpi-space-3;
+  font-family: $bpi-font-family-sans;
+  background-color: $bpi-bg-primary;
+  border: 1px solid $bpi-border-default;
+  border-radius: $bpi-radius-md;
+  transition: border-color $bpi-transition-fast,
+              box-shadow $bpi-transition-fast;
+
+  &:focus-within {
+    border-color: $bpi-border-focus;
+    box-shadow: 0 0 0 $bpi-focus-ring-width $bpi-focus-ring-color;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    color: $bpi-text-muted;
+    flex-shrink: 0;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    padding: 0;
+
+    &::placeholder {
+      color: $bpi-text-muted;
+    }
+  }
+
+  &__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: $bpi-text-muted;
+    border-radius: $bpi-radius-sm;
+    transition: color $bpi-transition-fast;
+
+    &:hover {
+      color: $bpi-text-primary;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
