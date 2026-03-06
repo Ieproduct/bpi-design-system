@@ -1,0 +1,71 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Tooltip Component — BEM
+// ============================================================
+
+.bpi-tooltip {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    display: inline-block;
+  }
+
+  &__content {
+    position: absolute;
+    background-color: $bpi-gray-900;
+    color: $bpi-white;
+    padding: $bpi-space-2 $bpi-space-3;
+    border-radius: $bpi-radius-sm;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-normal;
+    white-space: nowrap;
+    z-index: $bpi-z-tooltip;
+    pointer-events: none;
+    transition: opacity $bpi-transition-fast;
+    box-shadow: $bpi-shadow-md;
+  }
+
+  // --- Position variants ---
+  &--top {
+    .bpi-tooltip__content {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: $bpi-space-2;
+    }
+  }
+
+  &--bottom {
+    .bpi-tooltip__content {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: $bpi-space-2;
+    }
+  }
+
+  &--left {
+    .bpi-tooltip__content {
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-right: $bpi-space-2;
+      white-space: normal;
+      max-width: 200px;
+    }
+  }
+
+  &--right {
+    .bpi-tooltip__content {
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: $bpi-space-2;
+      white-space: normal;
+      max-width: 200px;
+    }
+  }
+}

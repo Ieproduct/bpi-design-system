@@ -1,0 +1,92 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Drawer Component — BEM
+// ============================================================
+
+.bpi-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  pointer-events: none;
+  z-index: $bpi-z-modal;
+
+  &--open {
+    pointer-events: auto;
+
+    .bpi-drawer__backdrop {
+      opacity: 1;
+    }
+
+    .bpi-drawer__content {
+      transform: translateX(0);
+    }
+
+    &.bpi-drawer--right {
+      .bpi-drawer__content {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity $bpi-transition-normal;
+    z-index: $bpi-z-modal-backdrop;
+  }
+
+  &__content {
+    position: relative;
+    background-color: $bpi-white;
+    box-shadow: $bpi-shadow-lg;
+    overflow-y: auto;
+    z-index: $bpi-z-modal;
+    font-family: $bpi-font-family-sans;
+    transition: transform $bpi-transition-normal;
+  }
+
+  // --- Position variants ---
+  &--left {
+    justify-content: flex-start;
+
+    .bpi-drawer__content {
+      transform: translateX(-100%);
+    }
+  }
+
+  &--right {
+    justify-content: flex-end;
+
+    .bpi-drawer__content {
+      transform: translateX(100%);
+    }
+  }
+
+  // --- Size variants ---
+  &--sm {
+    .bpi-drawer__content {
+      width: 300px;
+    }
+  }
+
+  &--md {
+    .bpi-drawer__content {
+      width: 400px;
+    }
+  }
+
+  &--lg {
+    .bpi-drawer__content {
+      width: 500px;
+    }
+  }
+}

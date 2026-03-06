@@ -1,0 +1,55 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Skeleton Component — BEM
+// ============================================================
+
+.bpi-skeleton {
+  background-color: $bpi-gray-200;
+
+  &--text {
+    border-radius: $bpi-radius-sm;
+  }
+
+  &--circular {
+    border-radius: $bpi-radius-full;
+  }
+
+  &--rectangular {
+    border-radius: $bpi-radius-md;
+  }
+
+  // --- Animations ---
+  &--pulse {
+    animation: bpi-skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &--wave {
+    animation: bpi-skeleton-wave 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    background: linear-gradient(
+      90deg,
+      $bpi-gray-200 0%,
+      $bpi-gray-100 50%,
+      $bpi-gray-200 100%
+    );
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes bpi-skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bpi-skeleton-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -1,0 +1,103 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Accordion Component — BEM
+// ============================================================
+
+.bpi-accordion {
+  border: 1px solid $bpi-border-default;
+  border-radius: $bpi-radius-md;
+  overflow: hidden;
+  font-family: $bpi-font-family-sans;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $bpi-space-4 $bpi-space-6;
+    background-color: $bpi-white;
+    border: none;
+    cursor: pointer;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-medium;
+    color: $bpi-text-primary;
+    transition: all $bpi-transition-fast;
+
+    &:hover {
+      background-color: $bpi-bg-secondary;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid $bpi-focus-ring-color;
+      outline-offset: -$bpi-focus-ring-offset;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    margin-left: $bpi-space-3;
+    color: $bpi-text-secondary;
+    transition: transform $bpi-transition-normal;
+  }
+
+  &--open {
+    .bpi-accordion__trigger {
+      background-color: $bpi-bg-secondary;
+    }
+
+    .bpi-accordion__icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    max-height: 1000px;
+    overflow: hidden;
+    animation: bpi-accordion-expand $bpi-transition-normal ease-out;
+  }
+
+  &__body {
+    padding: $bpi-space-4 $bpi-space-6;
+    border-top: 1px solid $bpi-border-default;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    line-height: $bpi-line-height-normal;
+  }
+
+  &:not(.bpi-accordion--open) {
+    .bpi-accordion__content {
+      max-height: 0;
+      animation: bpi-accordion-collapse $bpi-transition-normal ease-out;
+      overflow: hidden;
+    }
+  }
+}
+
+@keyframes bpi-accordion-expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+@keyframes bpi-accordion-collapse {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}

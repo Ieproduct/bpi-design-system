@@ -1,0 +1,112 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Autocomplete Component — BEM
+// ============================================================
+
+.bpi-autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: $bpi-space-2;
+  width: 100%;
+  font-family: $bpi-font-family-sans;
+
+  &__label {
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-medium;
+    color: $bpi-text-primary;
+    user-select: none;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $bpi-space-3 $bpi-space-4;
+    padding-right: $bpi-space-10;
+    background-color: $bpi-white;
+    border: 1px solid $bpi-border-default;
+    border-radius: $bpi-radius-md;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    transition: all $bpi-transition-fast;
+
+    &:hover:not(:disabled) {
+      border-color: $bpi-border-strong;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $bpi-border-focus;
+      box-shadow: 0 0 0 $bpi-focus-ring-width rgba(30, 64, 175, 0.1);
+    }
+
+    &:disabled {
+      background-color: $bpi-bg-secondary;
+      color: $bpi-text-muted;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &::placeholder {
+      color: $bpi-text-muted;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: $bpi-space-3;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: $bpi-text-secondary;
+  }
+
+  &__listbox {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: $bpi-white;
+    border: 1px solid $bpi-border-default;
+    border-top: none;
+    border-radius: 0 0 $bpi-radius-md $bpi-radius-md;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: $bpi-z-dropdown;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $bpi-transition-fast;
+  }
+
+  &__listbox--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__option {
+    padding: $bpi-space-3 $bpi-space-4;
+    cursor: pointer;
+    transition: background-color $bpi-transition-fast;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+
+    &:hover {
+      background-color: $bpi-bg-secondary;
+    }
+  }
+
+  &__no-results {
+    padding: $bpi-space-4;
+    text-align: center;
+    color: $bpi-text-muted;
+    font-size: $bpi-font-size-sm;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+  }
+}

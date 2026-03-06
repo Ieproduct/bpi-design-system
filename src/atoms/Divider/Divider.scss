@@ -1,0 +1,53 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Divider Component — BEM
+// ============================================================
+
+.bpi-divider {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  &--horizontal {
+    width: 100%;
+    height: 1px;
+    background-color: $bpi-border-default;
+
+    &.bpi-divider--full {
+      // No margins
+    }
+
+    &.bpi-divider--inset {
+      margin-left: $bpi-space-4;
+      margin-right: 0;
+    }
+
+    &.bpi-divider--middle {
+      margin-left: $bpi-space-4;
+      margin-right: $bpi-space-4;
+    }
+  }
+
+  &--vertical {
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    vertical-align: middle;
+    background-color: $bpi-border-default;
+
+    &.bpi-divider--full {
+      // No margins
+    }
+
+    &.bpi-divider--inset {
+      margin-top: $bpi-space-4;
+      margin-bottom: 0;
+    }
+
+    &.bpi-divider--middle {
+      margin-top: $bpi-space-4;
+      margin-bottom: $bpi-space-4;
+    }
+  }
+}

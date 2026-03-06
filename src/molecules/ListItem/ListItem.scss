@@ -1,0 +1,56 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// ListItem Component — BEM
+// ============================================================
+
+.bpi-list-item {
+  display: flex;
+  align-items: center;
+  gap: $bpi-space-4;
+  padding: var(--item-padding, $bpi-space-4);
+  border-bottom: 1px solid transparent;
+  transition: background-color $bpi-transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bpi-bg-secondary;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $bpi-bg-secondary;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: $bpi-text-secondary;
+  }
+
+  &__content {
+    flex: 1;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    line-height: $bpi-line-height-normal;
+
+    strong {
+      font-weight: $bpi-font-weight-semibold;
+    }
+  }
+
+  &__action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--divider {
+    border-bottom-color: $bpi-border-default;
+  }
+}

@@ -1,0 +1,36 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Menu Component — BEM
+// ============================================================
+
+.bpi-menu {
+  position: relative;
+  display: inline-block;
+
+  &__content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $bpi-white;
+    border-radius: $bpi-radius-md;
+    border: 1px solid $bpi-border-default;
+    box-shadow: $bpi-shadow-md;
+    min-width: 200px;
+    z-index: $bpi-z-dropdown;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all $bpi-transition-fast;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  &--open {
+    .bpi-menu__content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+}

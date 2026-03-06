@@ -1,0 +1,182 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// DatePicker Component — BEM
+// ============================================================
+
+.bpi-date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: $bpi-space-2;
+  width: 100%;
+  font-family: $bpi-font-family-sans;
+
+  &__label {
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-medium;
+    color: $bpi-text-primary;
+    user-select: none;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $bpi-space-3 $bpi-space-4;
+    padding-right: $bpi-space-10;
+    background-color: $bpi-white;
+    border: 1px solid $bpi-border-default;
+    border-radius: $bpi-radius-md;
+    font-family: $bpi-font-family-sans;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    cursor: pointer;
+    transition: all $bpi-transition-fast;
+
+    &:hover:not(:disabled) {
+      border-color: $bpi-border-strong;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $bpi-border-focus;
+      box-shadow: 0 0 0 $bpi-focus-ring-width rgba(30, 64, 175, 0.1);
+    }
+
+    &:disabled {
+      background-color: $bpi-bg-secondary;
+      color: $bpi-text-muted;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: $bpi-space-3;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: $bpi-text-secondary;
+  }
+
+  &__calendar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $bpi-white;
+    border: 1px solid $bpi-border-default;
+    border-radius: $bpi-radius-md;
+    box-shadow: $bpi-shadow-md;
+    z-index: $bpi-z-dropdown;
+    margin-top: $bpi-space-2;
+    width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $bpi-transition-fast;
+    pointer-events: none;
+  }
+
+  &__calendar--open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $bpi-space-4;
+    border-bottom: 1px solid $bpi-border-default;
+  }
+
+  &__prev,
+  &__next {
+    background: none;
+    border: none;
+    font-size: $bpi-font-size-lg;
+    cursor: pointer;
+    color: $bpi-text-primary;
+    padding: $bpi-space-2;
+    transition: color $bpi-transition-fast;
+
+    &:hover {
+      color: $bpi-primary;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid $bpi-focus-ring-color;
+      outline-offset: $bpi-focus-ring-offset;
+      border-radius: $bpi-radius-sm;
+    }
+  }
+
+  &__month-year {
+    font-weight: $bpi-font-weight-semibold;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    text-align: center;
+  }
+
+  &__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: $bpi-space-2 $bpi-space-3;
+    border-bottom: 1px solid $bpi-border-default;
+    font-size: $bpi-font-size-xs;
+    font-weight: $bpi-font-weight-semibold;
+    color: $bpi-text-secondary;
+    text-align: center;
+  }
+
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $bpi-space-2;
+    padding: $bpi-space-3;
+  }
+
+  &__day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $bpi-radius-sm;
+    font-size: $bpi-font-size-sm;
+    color: $bpi-text-primary;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all $bpi-transition-fast;
+
+    &:hover:not(.bpi-date-picker__day--other):not(.bpi-date-picker__day--disabled) {
+      background-color: $bpi-bg-secondary;
+      color: $bpi-primary;
+    }
+
+    &--selected {
+      background-color: $bpi-primary;
+      color: $bpi-white;
+      font-weight: $bpi-font-weight-semibold;
+    }
+
+    &--other {
+      color: $bpi-text-muted;
+      cursor: default;
+    }
+
+    &--disabled {
+      color: $bpi-text-muted;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid $bpi-focus-ring-color;
+      outline-offset: $bpi-focus-ring-offset;
+    }
+  }
+}

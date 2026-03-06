@@ -1,0 +1,74 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Tabs Component — BEM
+// ============================================================
+
+.bpi-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: $bpi-font-family-sans;
+
+  &__list {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid $bpi-border-default;
+  }
+
+  &__tab {
+    padding: $bpi-space-4 $bpi-space-6;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: $bpi-font-size-sm;
+    font-weight: $bpi-font-weight-medium;
+    color: $bpi-text-secondary;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all $bpi-transition-fast;
+    position: relative;
+
+    &:hover:not(:disabled) {
+      color: $bpi-text-primary;
+      background-color: $bpi-bg-secondary;
+    }
+
+    &--active {
+      color: $bpi-primary;
+      border-bottom-color: $bpi-primary;
+    }
+
+    &:disabled {
+      color: $bpi-text-muted;
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid $bpi-focus-ring-color;
+      outline-offset: $bpi-focus-ring-offset;
+    }
+  }
+
+  &__content {
+    padding: $bpi-space-6 0;
+  }
+
+  &__panel {
+    display: none;
+    animation: bpi-tabs-fade-in $bpi-transition-fast;
+
+    &--active {
+      display: block;
+    }
+  }
+}
+
+@keyframes bpi-tabs-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

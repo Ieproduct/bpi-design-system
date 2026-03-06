@@ -1,0 +1,92 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Alert Component — BEM
+// ============================================================
+
+.bpi-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: $bpi-space-3;
+  padding: $bpi-space-4;
+  border-radius: $bpi-radius-md;
+  font-family: $bpi-font-family-sans;
+  font-size: $bpi-font-size-sm;
+  border: 1px solid;
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $bpi-space-1;
+  }
+
+  &__title {
+    font-weight: $bpi-font-weight-semibold;
+    margin: 0;
+  }
+
+  &__message {
+    margin: 0;
+    line-height: $bpi-line-height-normal;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    transition: opacity $bpi-transition-fast;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid $bpi-focus-ring-color;
+      outline-offset: $bpi-focus-ring-offset;
+    }
+  }
+
+  // --- Variants ---
+  &--success {
+    background-color: $bpi-success-light;
+    border-color: $bpi-success;
+    color: $bpi-success-dark;
+  }
+
+  &--error {
+    background-color: $bpi-danger-light;
+    border-color: $bpi-danger;
+    color: $bpi-danger-dark;
+  }
+
+  &--warning {
+    background-color: $bpi-warning-light;
+    border-color: $bpi-warning;
+    color: $bpi-warning-dark;
+  }
+
+  &--info {
+    background-color: $bpi-info-light;
+    border-color: $bpi-info;
+    color: $bpi-info-dark;
+  }
+}

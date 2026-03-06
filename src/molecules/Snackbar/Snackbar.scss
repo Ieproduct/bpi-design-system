@@ -1,0 +1,104 @@
+@use '../../../tokens' as *;
+
+// ============================================================
+// Snackbar Component — BEM
+// ============================================================
+
+.bpi-snackbar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $bpi-space-4;
+  padding: $bpi-space-4 $bpi-space-6;
+  background-color: $bpi-gray-900;
+  color: $bpi-white;
+  border-radius: $bpi-radius-md;
+  box-shadow: $bpi-shadow-lg;
+  z-index: $bpi-z-toast;
+  font-family: $bpi-font-family-sans;
+  font-size: $bpi-font-size-sm;
+  max-width: 90%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all $bpi-transition-normal;
+  pointer-events: none;
+
+  &--open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  // --- Position variants ---
+  &--bottom {
+    bottom: $bpi-space-6;
+    left: $bpi-space-6;
+    right: auto;
+  }
+
+  &--top {
+    top: $bpi-space-6;
+    left: $bpi-space-6;
+    right: auto;
+    transform: translateY(-20px);
+
+    &.bpi-snackbar--open {
+      transform: translateY(0);
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: $bpi-space-3;
+    flex: 1;
+  }
+
+  &__message {
+    line-height: $bpi-line-height-normal;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    transition: opacity $bpi-transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: $bpi-focus-ring-width solid rgba(255, 255, 255, 0.5);
+      outline-offset: $bpi-focus-ring-offset;
+    }
+  }
+
+  // --- Color variants ---
+  &--success {
+    background-color: $bpi-success;
+  }
+
+  &--error {
+    background-color: $bpi-danger;
+  }
+
+  &--warning {
+    background-color: $bpi-warning;
+  }
+
+  &--info {
+    background-color: $bpi-info;
+  }
+}

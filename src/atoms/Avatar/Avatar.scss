@@ -1,0 +1,58 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Avatar Component — BEM
+// ============================================================
+
+.bpi-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: $bpi-font-family-sans;
+  font-weight: $bpi-font-weight-semibold;
+  background-color: $bpi-primary-light;
+  color: $bpi-primary-dark;
+  border-radius: $bpi-radius-full;
+  overflow: hidden;
+
+  &--sm {
+    width: 32px;
+    height: 32px;
+    font-size: $bpi-font-size-xs;
+  }
+
+  &--md {
+    width: 40px;
+    height: 40px;
+    font-size: $bpi-font-size-sm;
+  }
+
+  &--lg {
+    width: 56px;
+    height: 56px;
+    font-size: $bpi-font-size-base;
+  }
+
+  &--xl {
+    width: 72px;
+    height: 72px;
+    font-size: $bpi-font-size-lg;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__initials {
+    display: block;
+    text-align: center;
+  }
+
+  &__icon {
+    width: 60%;
+    height: 60%;
+  }
+}
