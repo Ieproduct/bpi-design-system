@@ -27,6 +27,11 @@
 @use 'atoms/Radio/Radio';
 @use 'atoms/Switch/Switch';
 @use 'atoms/Slider/Slider';
+@use 'atoms/Table/Table';
+@use 'atoms/TableHead/TableHead';
+@use 'atoms/TableBody/TableBody';
+@use 'atoms/TableRow/TableRow';
+@use 'atoms/TableCell/TableCell';
 
 // --- Molecules ---
 @use 'molecules/FormField/FormField';

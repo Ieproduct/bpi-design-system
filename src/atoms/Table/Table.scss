@@ -1,0 +1,126 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// Table Component — BEM
+// ============================================================
+
+.bpi-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  font-family: $bpi-font-family-sans;
+  border-radius: $bpi-radius-lg;
+
+  // --- Size: Small ---
+  &--sm .bpi-table {
+    font-size: $bpi-font-size-xs;
+
+    th,
+    td {
+      padding: 6px $bpi-space-3;
+    }
+  }
+
+  // --- Size: Medium (default) ---
+  &--md .bpi-table {
+    font-size: $bpi-font-size-sm;
+
+    th,
+    td {
+      padding: $bpi-space-3 $bpi-space-4;
+    }
+  }
+
+  // --- Size: Large ---
+  &--lg .bpi-table {
+    font-size: $bpi-font-size-base;
+
+    th,
+    td {
+      padding: $bpi-space-4 $bpi-space-5;
+    }
+  }
+
+  // --- Striped: alternate row colors ---
+  &--striped {
+    .bpi-table tbody tr:nth-child(odd) {
+      background-color: $bpi-bg-secondary;
+    }
+  }
+
+  // --- Hover: highlight row on hover ---
+  &--hover {
+    .bpi-table tbody tr {
+      transition: background-color $bpi-transition-fast;
+
+      &:hover {
+        background-color: $bpi-bg-tertiary;
+      }
+    }
+  }
+
+  // --- Bordered: all cell borders ---
+  &--bordered {
+    border: 1px solid $bpi-border-default;
+    border-radius: $bpi-radius-lg;
+    overflow: hidden;
+
+    .bpi-table {
+      th,
+      td {
+        border: 1px solid $bpi-border-default;
+      }
+    }
+  }
+
+  // --- Sticky Header: fix header at top ---
+  &--sticky {
+    max-height: 400px;
+    overflow-y: auto;
+
+    .bpi-table {
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+.bpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: $bpi-bg-primary;
+
+  // --- Header ---
+  thead {
+    background-color: $bpi-bg-secondary;
+  }
+
+  th {
+    text-align: left;
+    vertical-align: middle;
+    font-weight: $bpi-font-weight-semibold;
+    color: $bpi-text-secondary;
+    font-size: $bpi-font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $bpi-tracking-wide;
+    white-space: nowrap;
+    user-select: none;
+    border-bottom: 1px solid $bpi-border-default;
+    padding: $bpi-space-3 $bpi-space-4;
+  }
+
+  // --- Body ---
+  tbody tr {
+    border-bottom: 1px solid $bpi-border-default;
+  }
+
+  td {
+    text-align: left;
+    vertical-align: middle;
+    color: $bpi-text-primary;
+    border-bottom: 1px solid $bpi-border-default;
+    padding: $bpi-space-3 $bpi-space-4;
+  }
+}

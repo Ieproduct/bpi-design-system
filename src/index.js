@@ -23,6 +23,11 @@ export { Checkbox } from './atoms/Checkbox/Checkbox.js';
 export { Radio } from './atoms/Radio/Radio.js';
 export { Switch } from './atoms/Switch/Switch.js';
 export { Slider } from './atoms/Slider/Slider.js';
+export { Table } from './atoms/Table/Table.js';
+export { TableHead } from './atoms/TableHead/TableHead.js';
+export { TableBody } from './atoms/TableBody/TableBody.js';
+export { TableRow } from './atoms/TableRow/TableRow.js';
+export { TableCell } from './atoms/TableCell/TableCell.js';
 
 // Molecules
 export { FormField } from './molecules/FormField/FormField.js';

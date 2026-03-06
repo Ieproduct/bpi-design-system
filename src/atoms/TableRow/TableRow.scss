@@ -1,0 +1,22 @@
+@use '../../tokens' as *;
+
+// ============================================================
+// TableRow Component — BEM
+// ============================================================
+
+.bpi-tr {
+  display: table-row;
+  transition: background-color $bpi-transition-fast;
+
+  &:hover {
+    background-color: $bpi-bg-secondary;
+  }
+
+  &--selected {
+    background-color: $bpi-primary-light;
+
+    &:hover {
+      background-color: $bpi-primary-light;
+    }
+  }
+}

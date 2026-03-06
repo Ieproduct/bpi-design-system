@@ -71,6 +71,11 @@ const components = [
   { name: 'Radio',            placeholder: '__RADIO_CSS__',            scss: 'atoms/Radio/Radio.scss',                       js: 'atoms/Radio/Radio.js' },
   { name: 'Switch',           placeholder: '__SWITCH_CSS__',           scss: 'atoms/Switch/Switch.scss',                     js: 'atoms/Switch/Switch.js' },
   { name: 'Slider',           placeholder: '__SLIDER_CSS__',           scss: 'atoms/Slider/Slider.scss',                     js: 'atoms/Slider/Slider.js' },
+  { name: 'Table',            placeholder: '__TABLE_CSS__',            scss: 'atoms/Table/Table.scss',                       js: 'atoms/Table/Table.js' },
+  { name: 'TableHead',        placeholder: '__TABLEHEAD_CSS__',        scss: 'atoms/TableHead/TableHead.scss',               js: 'atoms/TableHead/TableHead.js' },
+  { name: 'TableBody',        placeholder: '__TABLEBODY_CSS__',        scss: 'atoms/TableBody/TableBody.scss',               js: 'atoms/TableBody/TableBody.js' },
+  { name: 'TableRow',         placeholder: '__TABLEROW_CSS__',         scss: 'atoms/TableRow/TableRow.scss',                 js: 'atoms/TableRow/TableRow.js' },
+  { name: 'TableCell',        placeholder: '__TABLECELL_CSS__',        scss: 'atoms/TableCell/TableCell.scss',               js: 'atoms/TableCell/TableCell.js' },
   // --- Molecules ---
   { name: 'FormField',        placeholder: '__FORMFIELD_CSS__',        scss: 'molecules/FormField/FormField.scss',           js: 'molecules/FormField/FormField.js' },
   { name: 'SearchBar',        placeholder: '__SEARCHBAR_CSS__',        scss: 'molecules/SearchBar/SearchBar.scss',           js: 'molecules/SearchBar/SearchBar.js' },
