@@ -74,7 +74,7 @@ export const brandColors: ColorToken[] = [
   },
   {
     name: 'Secondary',
-    value: '#7C3AED',
+    value: '#262626',
     description: 'Secondary brand color for supporting actions',
   },
   {
@@ -98,11 +98,11 @@ export const semanticColors: SemanticColor[] = [
   },
   {
     name: 'Secondary',
-    lighter: '#F5F3FF',
-    light: '#C4B5FD',
-    main: '#7C3AED',
-    dark: '#5B21B6',
-    darker: '#381355',
+    lighter: '#F5F5F5',
+    light: '#A3A3A3',
+    main: '#262626',
+    dark: '#1A1A1A',
+    darker: '#0D0D0D',
     contrast: '#FFFFFF',
     description: 'For secondary actions and supporting elements',
   },
