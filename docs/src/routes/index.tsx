@@ -5,116 +5,169 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  const features = [
+  const baseUrl = 'https://ieproduct.github.io/bpi-design-system'
+
+  const tokenPages = [
     {
-      icon: '⚙️',
-      title: 'Web Components',
-      description:
-        'Built with web standards. Works with any framework or vanilla JavaScript.',
+      label: 'Colors',
+      path: '/tokens/colors',
+      desc: 'Brand colors, semantic colors (primary, secondary, success, danger, warning, info), background, text, and full 50–950 palette for 22 color families.',
     },
     {
-      icon: '🎯',
-      title: 'Framework Agnostic',
-      description:
-        'Use BPI components in React, Vue, Angular, Svelte, or any web environment.',
+      label: 'Typography',
+      path: '/tokens/typography',
+      desc: 'Font families, font sizes (xs–3xl), font weights (light–bold), and heading/body type scale with CSS classes.',
     },
     {
-      icon: '🎨',
-      title: 'Design Tokens',
-      description:
-        'Consistent colors, spacing, typography, and more across your applications.',
+      label: 'Spacing',
+      path: '/tokens/spacing',
+      desc: 'Spacing scale from 4px to 64px with CSS variables --spacing-{step}.',
     },
     {
-      icon: '📘',
-      title: 'TypeScript Support',
-      description:
-        'Full type safety and excellent IDE support for all components and utilities.',
+      label: 'Misc',
+      path: '/tokens/misc',
+      desc: 'Border radius, box shadows, z-index scale, and transition durations.',
     },
   ]
 
   return (
-    <div className="space-y-20">
-      {/* Hero Section */}
-      <section className="text-center py-12 lg:py-20">
-        <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-[var(--color-text-primary)]">
-          BPI Design System
-        </h1>
-        <p className="text-xl lg:text-2xl text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-          A modern, accessible design system and component library built for developers and designers.
+    <div className="space-y-12">
+      {/* ── AI-readable header ── */}
+      <section>
+        <h1 className="text-4xl font-bold text-[var(--color-text-primary)] mb-3">BPI Design System</h1>
+        <div className="w-16 h-0.5 bg-[var(--color-text-primary)] mb-6" />
+        <p className="text-[var(--color-text-secondary)] text-lg max-w-3xl">
+          Design token reference for BPI projects. This site is the single source of truth for colors,
+          typography, spacing, and other visual tokens. AI agents and developers should read values from
+          these pages to keep designs consistent across all projects, regardless of framework.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/components/button"
-            className="px-8 py-3 bg-[var(--color-primary)] text-white rounded-lg font-semibold hover:opacity-90 transition-opacity inline-block"
-          >
-            Browse Components
-          </Link>
-          <Link
-            to="/getting-started"
-            className="px-8 py-3 border-2 border-[var(--color-primary)] text-[var(--color-primary)] rounded-lg font-semibold hover:bg-[var(--color-primary)] hover:text-white transition-colors inline-block"
-          >
-            Getting Started
-          </Link>
-        </div>
       </section>
 
-      {/* Quick Start Section */}
-      <section className="space-y-6">
-        <div>
-          <h2 className="text-3xl font-bold mb-4 text-[var(--color-text-primary)]">Quick Start</h2>
-          <p className="text-[var(--color-text-secondary)] mb-4">
-            Get up and running with BPI Design System in minutes using the CDN:
+      {/* ── How to use ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">How to use this reference</h2>
+        <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-4 text-sm text-[var(--color-text-primary)]">
+          <p><strong>For AI agents:</strong> Read the token pages below to get exact CSS variable names and hex values.
+          When building UI for any BPI project, always reference these tokens instead of hard-coding colors or sizes.
+          Every token has a CSS variable (e.g. <code className="text-xs font-mono text-blue-600">--color-primary-main</code>) and a raw value (e.g. <code className="text-xs font-mono text-blue-600">#E32321</code>).
           </p>
-        </div>
-        <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 overflow-auto">
-          <pre className="text-sm text-[var(--color-text-primary)]">
-            <code>{`import { Button, Input, Card } from '@bpi-design/components';
-
-<Button variant="primary">Click me</Button>
-<Input placeholder="Enter text" />
-<Card title="Welcome">
-  <p>Your content here</p>
-</Card>`}</code>
-          </pre>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="space-y-8">
-        <div>
-          <h2 className="text-3xl font-bold mb-4 text-[var(--color-text-primary)]">Features</h2>
-          <p className="text-[var(--color-text-secondary)]">
-            Everything you need to build beautiful, accessible interfaces.
+          <p><strong>For developers:</strong> Import the design system CSS and use the CSS variables in your code.
+          The tokens are framework-agnostic — they work with React, Vue, Angular, Svelte, plain HTML, or any other technology.
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="bg-[var(--color-surface-variant)] rounded-lg p-6 hover:shadow-lg transition-shadow"
-            >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-                {feature.title}
-              </h3>
-              <p className="text-[var(--color-text-secondary)]">{feature.description}</p>
-            </div>
-          ))}
+          <p><strong>When updating:</strong> Edit the token data in <code className="text-xs font-mono text-blue-600">docs/src/data/tokens.ts</code>, push to <code className="text-xs font-mono text-blue-600">main</code>, and GitHub Actions will auto-deploy.</p>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="bg-[var(--color-primary)] text-white rounded-lg p-12 text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-        <p className="text-lg mb-8 opacity-90">
-          Explore our components library and see how BPI can accelerate your development.
-        </p>
-        <Link
-          to="/components/button"
-          className="inline-block px-8 py-3 bg-white text-[var(--color-primary)] rounded-lg font-semibold hover:opacity-90 transition-opacity"
-        >
-          View All Components
-        </Link>
+      {/* ── Token reference links ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Token Reference</h2>
+        <p className="text-[var(--color-text-secondary)]">Each page contains tables with Swatch, CSS Variable, and Hex value — click any value to copy.</p>
+
+        <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
+          <table className="w-full">
+            <thead>
+              <tr className="text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)] bg-[var(--color-surface-variant)]">
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">Token Page</th>
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">URL</th>
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">Contents</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tokenPages.map((page) => (
+                <tr key={page.path} className="border-t border-[var(--color-border)] hover:bg-[var(--color-surface-variant)] transition-colors">
+                  <td className="px-4 py-3">
+                    <Link to={page.path} className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+                      {page.label}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-3">
+                    <code className="text-xs font-mono text-[var(--color-text-secondary)]">{baseUrl}{page.path}</code>
+                  </td>
+                  <td className="px-4 py-3 text-sm text-[var(--color-text-secondary)]">{page.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ── Quick reference ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Quick Reference — Key Tokens</h2>
+        <p className="text-[var(--color-text-secondary)]">Most commonly used tokens at a glance.</p>
+
+        <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
+          <table className="w-full">
+            <thead>
+              <tr className="text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)] bg-[var(--color-surface-variant)]">
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">Category</th>
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">CSS Variable</th>
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">Value</th>
+                <th className="px-4 py-2 border-b border-[var(--color-border)]">Usage</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              {[
+                ['Brand', '--color-primary-main', '#E32321', 'Primary buttons, links, key actions'],
+                ['Brand', '--color-secondary-main', '#262626', 'Secondary buttons, supporting UI'],
+                ['Brand', '--color-primary-lighter', '#FEF2F2', 'Light primary backgrounds, hover states'],
+                ['Success', '--color-success-main', '#16A34A', 'Success messages, confirmations'],
+                ['Danger', '--color-danger-main', '#DC2626', 'Error states, destructive actions'],
+                ['Warning', '--color-warning-main', '#D97706', 'Warning alerts, caution states'],
+                ['Info', '--color-info-main', '#0284C7', 'Info messages, help text'],
+                ['Background', '--color-bg-default', '#F8FAFC', 'Default page background'],
+                ['Background', '--color-bg-paper', '#FFFFFF', 'Cards, dialogs, elevated surfaces'],
+                ['Text', '--color-text-primary', '#0F172A', 'Headings, body text'],
+                ['Text', '--color-text-secondary', '#64748B', 'Supporting text, labels'],
+                ['Palette', '--color-blue-500', '#3b82f6', 'Example: blue from the 50–950 palette'],
+                ['Palette', '--color-red-500', '#ef4444', 'Example: red from the 50–950 palette'],
+                ['Spacing', '--spacing-4', '16px', 'Default spacing unit'],
+                ['Radius', '--radius-md', '6px', 'Default border radius'],
+              ].map(([cat, cssVar, value, usage], i) => (
+                <tr key={i} className="border-t border-[var(--color-border)] hover:bg-[var(--color-surface-variant)]">
+                  <td className="px-4 py-2 text-[var(--color-text-secondary)]">{cat}</td>
+                  <td className="px-4 py-2">
+                    <code className="text-xs font-mono text-blue-600 dark:text-blue-400">{cssVar}</code>
+                  </td>
+                  <td className="px-4 py-2 flex items-center gap-2">
+                    {cssVar.includes('color') && (
+                      <div style={{ backgroundColor: value }} className="w-4 h-4 rounded border border-[var(--color-border)] shrink-0" />
+                    )}
+                    <code className="text-xs font-mono text-[var(--color-text-secondary)]">{value}</code>
+                  </td>
+                  <td className="px-4 py-2 text-[var(--color-text-secondary)]">{usage}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ── CSS Variable naming convention ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">CSS Variable Naming Convention</h2>
+        <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-3 text-sm text-[var(--color-text-primary)]">
+          <div><code className="font-mono text-blue-600">--color-{'{'}name{'}'}-{'{'}shade{'}'}</code> — Semantic colors (e.g. <code className="font-mono">--color-primary-main</code>, <code className="font-mono">--color-danger-lighter</code>)</div>
+          <div><code className="font-mono text-blue-600">--color-{'{'}color{'}'}-{'{'}50-950{'}'}</code> — Palette colors (e.g. <code className="font-mono">--color-blue-500</code>, <code className="font-mono">--color-red-100</code>)</div>
+          <div><code className="font-mono text-blue-600">--color-bg-{'{'}name{'}'}</code> — Background colors (e.g. <code className="font-mono">--color-bg-default</code>, <code className="font-mono">--color-bg-paper</code>)</div>
+          <div><code className="font-mono text-blue-600">--color-text-{'{'}name{'}'}</code> — Text colors (e.g. <code className="font-mono">--color-text-primary</code>, <code className="font-mono">--color-text-secondary</code>)</div>
+          <div><code className="font-mono text-blue-600">--color-brand-{'{'}name{'}'}</code> — Brand colors (e.g. <code className="font-mono">--color-brand-primary</code>)</div>
+          <div><code className="font-mono text-blue-600">--spacing-{'{'}step{'}'}</code> — Spacing (e.g. <code className="font-mono">--spacing-4</code> = 16px)</div>
+          <div><code className="font-mono text-blue-600">--radius-{'{'}size{'}'}</code> — Border radius (e.g. <code className="font-mono">--radius-md</code> = 6px)</div>
+          <div><code className="font-mono text-blue-600">--shadow-{'{'}size{'}'}</code> — Box shadows (e.g. <code className="font-mono">--shadow-md</code>)</div>
+        </div>
+      </section>
+
+      {/* ── Source info ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Source &amp; Deployment</h2>
+        <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-2 text-sm text-[var(--color-text-primary)]">
+          <div><strong>Repository:</strong> <code className="font-mono text-blue-600">github.com/Ieproduct/bpi-design-system</code></div>
+          <div><strong>Token data:</strong> <code className="font-mono text-blue-600">docs/src/data/tokens.ts</code></div>
+          <div><strong>Docs site:</strong> <code className="font-mono text-blue-600">docs/</code> subfolder (Vite + React + TanStack Router)</div>
+          <div><strong>Deploy:</strong> Push to <code className="font-mono">main</code> → GitHub Actions auto-builds and deploys to GitHub Pages</div>
+          <div><strong>Live URL:</strong> <code className="font-mono text-blue-600">{baseUrl}</code></div>
+        </div>
       </section>
     </div>
   )
