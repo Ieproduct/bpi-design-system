@@ -15,9 +15,6 @@ import { Route as TokensTypographyRouteImport } from './routes/tokens/typography
 import { Route as TokensSpacingRouteImport } from './routes/tokens/spacing'
 import { Route as TokensMiscRouteImport } from './routes/tokens/misc'
 import { Route as TokensColorsRouteImport } from './routes/tokens/colors'
-import { Route as GettingStartedUsageRouteImport } from './routes/getting-started/usage'
-import { Route as GettingStartedInstallationRouteImport } from './routes/getting-started/installation'
-import { Route as GettingStartedCustomizationRouteImport } from './routes/getting-started/customization'
 import { Route as ComponentsTypographyRouteImport } from './routes/components/typography'
 import { Route as ComponentsTooltipRouteImport } from './routes/components/tooltip'
 import { Route as ComponentsTextFieldRouteImport } from './routes/components/text-field'
@@ -87,23 +84,6 @@ const TokensColorsRoute = TokensColorsRouteImport.update({
   path: '/tokens/colors',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GettingStartedUsageRoute = GettingStartedUsageRouteImport.update({
-  id: '/getting-started/usage',
-  path: '/getting-started/usage',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GettingStartedInstallationRoute =
-  GettingStartedInstallationRouteImport.update({
-    id: '/getting-started/installation',
-    path: '/getting-started/installation',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const GettingStartedCustomizationRoute =
-  GettingStartedCustomizationRouteImport.update({
-    id: '/getting-started/customization',
-    path: '/getting-started/customization',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ComponentsTypographyRoute = ComponentsTypographyRouteImport.update({
   id: '/components/typography',
   path: '/components/typography',
@@ -340,9 +320,6 @@ export interface FileRoutesByFullPath {
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
   '/components/typography': typeof ComponentsTypographyRoute
-  '/getting-started/customization': typeof GettingStartedCustomizationRoute
-  '/getting-started/installation': typeof GettingStartedInstallationRoute
-  '/getting-started/usage': typeof GettingStartedUsageRoute
   '/tokens/colors': typeof TokensColorsRoute
   '/tokens/misc': typeof TokensMiscRoute
   '/tokens/spacing': typeof TokensSpacingRoute
@@ -389,9 +366,6 @@ export interface FileRoutesByTo {
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
   '/components/typography': typeof ComponentsTypographyRoute
-  '/getting-started/customization': typeof GettingStartedCustomizationRoute
-  '/getting-started/installation': typeof GettingStartedInstallationRoute
-  '/getting-started/usage': typeof GettingStartedUsageRoute
   '/tokens/colors': typeof TokensColorsRoute
   '/tokens/misc': typeof TokensMiscRoute
   '/tokens/spacing': typeof TokensSpacingRoute
@@ -439,9 +413,6 @@ export interface FileRoutesById {
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
   '/components/typography': typeof ComponentsTypographyRoute
-  '/getting-started/customization': typeof GettingStartedCustomizationRoute
-  '/getting-started/installation': typeof GettingStartedInstallationRoute
-  '/getting-started/usage': typeof GettingStartedUsageRoute
   '/tokens/colors': typeof TokensColorsRoute
   '/tokens/misc': typeof TokensMiscRoute
   '/tokens/spacing': typeof TokensSpacingRoute
@@ -490,9 +461,6 @@ export interface FileRouteTypes {
     | '/components/text-field'
     | '/components/tooltip'
     | '/components/typography'
-    | '/getting-started/customization'
-    | '/getting-started/installation'
-    | '/getting-started/usage'
     | '/tokens/colors'
     | '/tokens/misc'
     | '/tokens/spacing'
@@ -539,9 +507,6 @@ export interface FileRouteTypes {
     | '/components/text-field'
     | '/components/tooltip'
     | '/components/typography'
-    | '/getting-started/customization'
-    | '/getting-started/installation'
-    | '/getting-started/usage'
     | '/tokens/colors'
     | '/tokens/misc'
     | '/tokens/spacing'
@@ -588,9 +553,6 @@ export interface FileRouteTypes {
     | '/components/text-field'
     | '/components/tooltip'
     | '/components/typography'
-    | '/getting-started/customization'
-    | '/getting-started/installation'
-    | '/getting-started/usage'
     | '/tokens/colors'
     | '/tokens/misc'
     | '/tokens/spacing'
@@ -638,9 +600,6 @@ export interface RootRouteChildren {
   ComponentsTextFieldRoute: typeof ComponentsTextFieldRoute
   ComponentsTooltipRoute: typeof ComponentsTooltipRoute
   ComponentsTypographyRoute: typeof ComponentsTypographyRoute
-  GettingStartedCustomizationRoute: typeof GettingStartedCustomizationRoute
-  GettingStartedInstallationRoute: typeof GettingStartedInstallationRoute
-  GettingStartedUsageRoute: typeof GettingStartedUsageRoute
   TokensColorsRoute: typeof TokensColorsRoute
   TokensMiscRoute: typeof TokensMiscRoute
   TokensSpacingRoute: typeof TokensSpacingRoute
@@ -689,27 +648,6 @@ declare module '@tanstack/react-router' {
       path: '/tokens/colors'
       fullPath: '/tokens/colors'
       preLoaderRoute: typeof TokensColorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/getting-started/usage': {
-      id: '/getting-started/usage'
-      path: '/getting-started/usage'
-      fullPath: '/getting-started/usage'
-      preLoaderRoute: typeof GettingStartedUsageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/getting-started/installation': {
-      id: '/getting-started/installation'
-      path: '/getting-started/installation'
-      fullPath: '/getting-started/installation'
-      preLoaderRoute: typeof GettingStartedInstallationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/getting-started/customization': {
-      id: '/getting-started/customization'
-      path: '/getting-started/customization'
-      fullPath: '/getting-started/customization'
-      preLoaderRoute: typeof GettingStartedCustomizationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/typography': {
@@ -1022,9 +960,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsTextFieldRoute: ComponentsTextFieldRoute,
   ComponentsTooltipRoute: ComponentsTooltipRoute,
   ComponentsTypographyRoute: ComponentsTypographyRoute,
-  GettingStartedCustomizationRoute: GettingStartedCustomizationRoute,
-  GettingStartedInstallationRoute: GettingStartedInstallationRoute,
-  GettingStartedUsageRoute: GettingStartedUsageRoute,
   TokensColorsRoute: TokensColorsRoute,
   TokensMiscRoute: TokensMiscRoute,
   TokensSpacingRoute: TokensSpacingRoute,

@@ -1,15 +1,22 @@
 #!/usr/bin/env node
 
 /**
- * BPI Design System — MCP Server
+ * BPI Design System — MCP Server v2.0
  *
- * Serves design tokens (colors, typography, spacing, etc.) to AI agents
+ * Serves design tokens AND component specifications to AI agents
  * via the Model Context Protocol (MCP).
  *
- * Usage:
- *   node mcp/index.js          # stdio transport (for Claude, Cursor, etc.)
+ * Tools:
+ *   - list_categories     → list token categories
+ *   - get_tokens           → get tokens by category
+ *   - get_color            → get a specific semantic color
+ *   - search_tokens        → search tokens by keyword
+ *   - list_components      → list all component specs
+ *   - get_component_spec   → get full spec for a component
+ *   - search_specs         → search component specs by keyword
+ *   - get_css_snippet      → generate CSS from spec + tokens
  *
- * Add to your claude_desktop_config.json or .mcp.json:
+ * Setup (claude_desktop_config.json / .mcp.json):
  *   {
  *     "mcpServers": {
  *       "bpi-design": {
@@ -24,7 +31,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
-// ─── Token Data ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  TOKEN DATA
+// ═══════════════════════════════════════════════════════════════════
 
 const BRAND_COLORS = {
   primary:   { variable: "--color-brand-primary",   hex: "#E32321", usage: "Primary brand color" },
@@ -113,12 +122,12 @@ const TEXT_COLORS = {
 };
 
 const SURFACE_TOKENS = {
-  surface:         { variable: "--color-surface",         light: "#F8FAFC", dark: "#0F172A" },
-  "surface-variant": { variable: "--color-surface-variant", light: "#F1F5F9", dark: "#1E293B" },
-  "surface-hover":   { variable: "--color-surface-hover",   light: "#E2E8F0", dark: "#334155" },
-  border:          { variable: "--color-border",          light: "#E2E8F0", dark: "#334155" },
-  "border-strong":   { variable: "--color-border-strong",   light: "#CBD5E1", dark: "#475569" },
-  sidebar:         { variable: "--color-sidebar",         light: "#F8FAFC", dark: "#0B1120" },
+  surface:           { variable: "--color-surface",           light: "#F8FAFC", dark: "#0F172A" },
+  "surface-variant": { variable: "--color-surface-variant",   light: "#F1F5F9", dark: "#1E293B" },
+  "surface-hover":   { variable: "--color-surface-hover",     light: "#E2E8F0", dark: "#334155" },
+  border:            { variable: "--color-border",            light: "#E2E8F0", dark: "#334155" },
+  "border-strong":   { variable: "--color-border-strong",     light: "#CBD5E1", dark: "#475569" },
+  sidebar:           { variable: "--color-sidebar",           light: "#F8FAFC", dark: "#0B1120" },
 };
 
 const TYPOGRAPHY = {
@@ -129,44 +138,31 @@ const TYPOGRAPHY = {
     thai:    { variable: "--font-thai",    value: 'Sarabun, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' },
   },
   sizes: {
-    xs:   { variable: "--text-xs",   value: "12px" },
-    sm:   { variable: "--text-sm",   value: "14px" },
-    base: { variable: "--text-base", value: "16px" },
-    lg:   { variable: "--text-lg",   value: "18px" },
-    xl:   { variable: "--text-xl",   value: "20px" },
-    "2xl": { variable: "--text-2xl",  value: "24px" },
-    "3xl": { variable: "--text-3xl",  value: "30px" },
+    xs: { variable: "--text-xs", value: "12px" }, sm: { variable: "--text-sm", value: "14px" },
+    base: { variable: "--text-base", value: "16px" }, lg: { variable: "--text-lg", value: "18px" },
+    xl: { variable: "--text-xl", value: "20px" }, "2xl": { variable: "--text-2xl", value: "24px" },
+    "3xl": { variable: "--text-3xl", value: "30px" },
   },
   weights: {
-    light:    { variable: "--font-light",    value: "300" },
-    normal:   { variable: "--font-normal",   value: "400" },
-    medium:   { variable: "--font-medium",   value: "500" },
-    semibold: { variable: "--font-semibold", value: "600" },
-    bold:     { variable: "--font-bold",     value: "700" },
+    light: { variable: "--font-light", value: "300" }, normal: { variable: "--font-normal", value: "400" },
+    medium: { variable: "--font-medium", value: "500" }, semibold: { variable: "--font-semibold", value: "600" },
+    bold: { variable: "--font-bold", value: "700" },
   },
 };
 
 const SPACING = {
-  1:  { variable: "--spacing-1",  value: "4px" },
-  2:  { variable: "--spacing-2",  value: "8px" },
-  3:  { variable: "--spacing-3",  value: "12px" },
-  4:  { variable: "--spacing-4",  value: "16px" },
-  5:  { variable: "--spacing-5",  value: "20px" },
-  6:  { variable: "--spacing-6",  value: "24px" },
-  8:  { variable: "--spacing-8",  value: "32px" },
-  10: { variable: "--spacing-10", value: "40px" },
-  12: { variable: "--spacing-12", value: "48px" },
-  14: { variable: "--spacing-14", value: "56px" },
+  1: { variable: "--spacing-1", value: "4px" }, 2: { variable: "--spacing-2", value: "8px" },
+  3: { variable: "--spacing-3", value: "12px" }, 4: { variable: "--spacing-4", value: "16px" },
+  5: { variable: "--spacing-5", value: "20px" }, 6: { variable: "--spacing-6", value: "24px" },
+  8: { variable: "--spacing-8", value: "32px" }, 10: { variable: "--spacing-10", value: "40px" },
+  12: { variable: "--spacing-12", value: "48px" }, 14: { variable: "--spacing-14", value: "56px" },
   16: { variable: "--spacing-16", value: "64px" },
 };
 
 const BORDER_RADIUS = {
-  none: { variable: "--radius-none", value: "0px" },
-  sm:   { variable: "--radius-sm",   value: "4px" },
-  md:   { variable: "--radius-md",   value: "6px" },
-  lg:   { variable: "--radius-lg",   value: "8px" },
-  xl:   { variable: "--radius-xl",   value: "12px" },
-  "2xl": { variable: "--radius-2xl",  value: "16px" },
+  none: { variable: "--radius-none", value: "0px" }, sm: { variable: "--radius-sm", value: "4px" },
+  md: { variable: "--radius-md", value: "6px" }, lg: { variable: "--radius-lg", value: "8px" },
+  xl: { variable: "--radius-xl", value: "12px" }, "2xl": { variable: "--radius-2xl", value: "16px" },
   full: { variable: "--radius-full", value: "9999px" },
 };
 
@@ -179,330 +175,675 @@ const BOX_SHADOWS = {
 };
 
 const Z_INDEX = {
-  dropdown:       { variable: "--z-dropdown",       value: 1000 },
-  sticky:         { variable: "--z-sticky",         value: 1020 },
-  fixed:          { variable: "--z-fixed",          value: 1030 },
-  "modal-backdrop": { variable: "--z-modal-backdrop", value: 1040 },
-  modal:          { variable: "--z-modal",          value: 1050 },
-  popover:        { variable: "--z-popover",        value: 1060 },
-  tooltip:        { variable: "--z-tooltip",        value: 1070 },
-  toast:          { variable: "--z-toast",          value: 1080 },
+  dropdown: { variable: "--z-dropdown", value: 1000 }, sticky: { variable: "--z-sticky", value: 1020 },
+  fixed: { variable: "--z-fixed", value: 1030 }, "modal-backdrop": { variable: "--z-modal-backdrop", value: 1040 },
+  modal: { variable: "--z-modal", value: 1050 }, popover: { variable: "--z-popover", value: 1060 },
+  tooltip: { variable: "--z-tooltip", value: 1070 }, toast: { variable: "--z-toast", value: 1080 },
 };
 
-const CATEGORIES = [
+const TOKEN_CATEGORIES = [
   "brand-colors", "semantic-colors", "background-colors", "text-colors",
-  "surface-tokens", "typography", "spacing", "border-radius", "box-shadows", "z-index"
+  "surface-tokens", "typography", "spacing", "border-radius", "box-shadows", "z-index",
 ];
 
-// ─── Helper ────────────────────────────────────────────────────────────────
-
 function getCategoryData(category) {
-  switch (category) {
-    case "brand-colors":      return BRAND_COLORS;
-    case "semantic-colors":   return SEMANTIC_COLORS;
-    case "background-colors": return BACKGROUND_COLORS;
-    case "text-colors":       return TEXT_COLORS;
-    case "surface-tokens":    return SURFACE_TOKENS;
-    case "typography":        return TYPOGRAPHY;
-    case "spacing":           return SPACING;
-    case "border-radius":     return BORDER_RADIUS;
-    case "box-shadows":       return BOX_SHADOWS;
-    case "z-index":           return Z_INDEX;
-    default:                  return null;
-  }
+  const map = {
+    "brand-colors": BRAND_COLORS, "semantic-colors": SEMANTIC_COLORS,
+    "background-colors": BACKGROUND_COLORS, "text-colors": TEXT_COLORS,
+    "surface-tokens": SURFACE_TOKENS, "typography": TYPOGRAPHY,
+    "spacing": SPACING, "border-radius": BORDER_RADIUS,
+    "box-shadows": BOX_SHADOWS, "z-index": Z_INDEX,
+  };
+  return map[category] || null;
 }
 
-// ─── MCP Server ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+//  COMPONENT SPEC DATA
+// ═══════════════════════════════════════════════════════════════════
+
+const COMPONENT_SPECS = {
+  button: {
+    name: "Button", category: "atom",
+    description: "Interactive element that triggers actions",
+    sizes: [
+      { name: "sm", height: "32px", padding: "spacing-1 spacing-3", fontSize: "text-xs", iconSize: "16px" },
+      { name: "md", height: "40px", padding: "spacing-2 spacing-4", fontSize: "text-sm", iconSize: "20px" },
+      { name: "lg", height: "48px", padding: "spacing-3 spacing-6", fontSize: "text-base", iconSize: "24px" },
+    ],
+    variants: [
+      { name: "contained", bg: "primary-main", text: "primary-contrast", border: "none" },
+      { name: "outlined", bg: "transparent", text: "primary-main", border: "1px solid primary-main" },
+      { name: "text", bg: "transparent", text: "primary-main", border: "none" },
+      { name: "danger", bg: "danger-main", text: "danger-contrast", border: "none" },
+      { name: "secondary", bg: "secondary-main", text: "secondary-contrast", border: "none" },
+    ],
+    states: [
+      { name: "hover", opacity: "0.9", cursor: "pointer" },
+      { name: "active", opacity: "0.8", transform: "scale(0.98)" },
+      { name: "disabled", opacity: "0.5", cursor: "not-allowed" },
+      { name: "focus", outline: "2px solid primary-light", outlineOffset: "2px" },
+    ],
+    defaults: { size: "md", variant: "contained", radius: "radius-md" },
+    a11y: { role: "button", minTouchTarget: "44px", focusVisible: true },
+  },
+  input: {
+    name: "Input", category: "atom",
+    description: "Single-line text input field",
+    sizes: [
+      { name: "sm", height: "32px", padding: "spacing-1 spacing-2", fontSize: "text-xs" },
+      { name: "md", height: "40px", padding: "spacing-2 spacing-3", fontSize: "text-sm" },
+      { name: "lg", height: "48px", padding: "spacing-3 spacing-4", fontSize: "text-base" },
+    ],
+    variants: [
+      { name: "outlined", bg: "bg-paper", border: "1px solid border" },
+      { name: "filled", bg: "surface-variant", border: "none" },
+    ],
+    states: [
+      { name: "focus", borderColor: "primary-main", shadow: "0 0 0 3px primary-lighter" },
+      { name: "error", borderColor: "danger-main", shadow: "0 0 0 3px danger-lighter" },
+      { name: "disabled", opacity: "0.5", bg: "surface-variant" },
+    ],
+    defaults: { size: "md", variant: "outlined", radius: "radius-md" },
+    a11y: { role: "textbox", labelRequired: true },
+  },
+  card: {
+    name: "Card", category: "molecule",
+    description: "Container for grouping related content",
+    variants: [
+      { name: "elevated", bg: "bg-paper", shadow: "shadow-md", border: "none" },
+      { name: "outlined", bg: "bg-paper", shadow: "none", border: "1px solid border" },
+      { name: "filled", bg: "surface-variant", shadow: "none", border: "none" },
+    ],
+    elements: [
+      { name: "header", padding: "spacing-4 spacing-6", borderBottom: "1px solid border" },
+      { name: "body", padding: "spacing-4 spacing-6" },
+      { name: "footer", padding: "spacing-4 spacing-6", borderTop: "1px solid border" },
+    ],
+    defaults: { variant: "elevated", radius: "radius-lg" },
+  },
+  dialog: {
+    name: "Dialog", category: "molecule",
+    description: "Modal overlay for focused interactions",
+    sizes: [
+      { name: "sm", width: "400px", maxHeight: "80vh" },
+      { name: "md", width: "560px", maxHeight: "80vh" },
+      { name: "lg", width: "720px", maxHeight: "80vh" },
+      { name: "fullscreen", width: "100vw", maxHeight: "100vh" },
+    ],
+    elements: [
+      { name: "overlay", bg: "rgba(0,0,0,0.5)", zIndex: "z-modal-backdrop" },
+      { name: "container", bg: "bg-paper", shadow: "shadow-xl", zIndex: "z-modal" },
+      { name: "header", padding: "spacing-4 spacing-6", fontSize: "text-lg", fontWeight: "font-semibold" },
+      { name: "body", padding: "spacing-4 spacing-6" },
+      { name: "footer", padding: "spacing-4 spacing-6", gap: "spacing-3" },
+    ],
+    defaults: { size: "md", radius: "radius-xl" },
+    a11y: { role: "dialog", ariaModal: true, focusTrap: true, escClose: true },
+  },
+  badge: {
+    name: "Badge", category: "atom",
+    description: "Small label for status or count",
+    sizes: [
+      { name: "sm", height: "20px", padding: "0 spacing-1", fontSize: "10px" },
+      { name: "md", height: "24px", padding: "0 spacing-2", fontSize: "text-xs" },
+    ],
+    variants: [
+      { name: "primary", bg: "primary-lighter", text: "primary-main" },
+      { name: "success", bg: "success-lighter", text: "success-dark" },
+      { name: "danger", bg: "danger-lighter", text: "danger-dark" },
+      { name: "warning", bg: "warning-lighter", text: "warning-dark" },
+      { name: "info", bg: "info-lighter", text: "info-dark" },
+      { name: "neutral", bg: "surface-variant", text: "text-secondary" },
+    ],
+    defaults: { size: "md", variant: "primary", radius: "radius-full" },
+  },
+  checkbox: {
+    name: "Checkbox", category: "atom",
+    description: "Toggle selection control",
+    sizes: [
+      { name: "sm", box: "16px", fontSize: "text-xs" },
+      { name: "md", box: "20px", fontSize: "text-sm" },
+    ],
+    states: [
+      { name: "checked", bg: "primary-main", border: "primary-main", icon: "white checkmark" },
+      { name: "unchecked", bg: "transparent", border: "border-strong" },
+      { name: "indeterminate", bg: "primary-main", border: "primary-main", icon: "white minus" },
+      { name: "disabled", opacity: "0.5" },
+    ],
+    defaults: { size: "md", radius: "radius-sm" },
+    a11y: { role: "checkbox", minTouchTarget: "44px" },
+  },
+  switch: {
+    name: "Switch", category: "atom",
+    description: "Toggle between on and off",
+    sizes: [
+      { name: "sm", track: "32x18", thumb: "14px" },
+      { name: "md", track: "44x24", thumb: "20px" },
+    ],
+    states: [
+      { name: "on", trackBg: "primary-main", thumbPosition: "right" },
+      { name: "off", trackBg: "border-strong", thumbPosition: "left" },
+      { name: "disabled", opacity: "0.5" },
+    ],
+    defaults: { size: "md" },
+    a11y: { role: "switch", minTouchTarget: "44px" },
+  },
+  tabs: {
+    name: "Tabs", category: "molecule",
+    description: "Navigation between content sections",
+    variants: [
+      { name: "underline", indicator: "2px bottom border primary-main" },
+      { name: "contained", activeBg: "bg-paper", inactiveBg: "transparent" },
+      { name: "pills", activeBg: "primary-main", activeText: "primary-contrast", radius: "radius-full" },
+    ],
+    elements: [
+      { name: "tab", padding: "spacing-2 spacing-4", fontSize: "text-sm", fontWeight: "font-medium" },
+      { name: "panel", padding: "spacing-4" },
+    ],
+    defaults: { variant: "underline" },
+    a11y: { role: "tablist", arrowNavigation: true },
+  },
+  avatar: {
+    name: "Avatar", category: "atom",
+    description: "User profile image or initials",
+    sizes: [
+      { name: "xs", size: "24px", fontSize: "10px" },
+      { name: "sm", size: "32px", fontSize: "text-xs" },
+      { name: "md", size: "40px", fontSize: "text-sm" },
+      { name: "lg", size: "48px", fontSize: "text-base" },
+      { name: "xl", size: "64px", fontSize: "text-xl" },
+    ],
+    variants: [
+      { name: "image", overflow: "hidden", objectFit: "cover" },
+      { name: "initials", bg: "primary-lighter", text: "primary-main", fontWeight: "font-semibold" },
+      { name: "icon", bg: "surface-variant", iconColor: "text-secondary" },
+    ],
+    defaults: { size: "md", radius: "radius-full" },
+  },
+  alert: {
+    name: "Alert", category: "atom",
+    description: "Contextual feedback message",
+    variants: [
+      { name: "success", bg: "success-lighter", border: "success-light", text: "success-dark", icon: "check-circle" },
+      { name: "danger", bg: "danger-lighter", border: "danger-light", text: "danger-dark", icon: "x-circle" },
+      { name: "warning", bg: "warning-lighter", border: "warning-light", text: "warning-dark", icon: "alert-triangle" },
+      { name: "info", bg: "info-lighter", border: "info-light", text: "info-dark", icon: "info" },
+    ],
+    elements: [
+      { name: "container", padding: "spacing-3 spacing-4", radius: "radius-md", borderWidth: "1px" },
+      { name: "icon", size: "20px", marginRight: "spacing-3" },
+      { name: "title", fontWeight: "font-semibold", fontSize: "text-sm" },
+      { name: "description", fontSize: "text-sm", opacity: "0.9" },
+    ],
+    defaults: { variant: "info", dismissible: false },
+    a11y: { role: "alert", ariaLive: "polite" },
+  },
+  select: {
+    name: "Select", category: "atom",
+    description: "Dropdown selection control",
+    sizes: [
+      { name: "sm", height: "32px", fontSize: "text-xs" },
+      { name: "md", height: "40px", fontSize: "text-sm" },
+      { name: "lg", height: "48px", fontSize: "text-base" },
+    ],
+    defaults: { size: "md", radius: "radius-md" },
+    a11y: { role: "listbox", keyboardNavigation: true },
+  },
+  tooltip: {
+    name: "Tooltip", category: "atom",
+    description: "Contextual information on hover",
+    defaults: { bg: "secondary-main", text: "secondary-contrast", fontSize: "text-xs", padding: "spacing-1 spacing-2", radius: "radius-sm", zIndex: "z-tooltip", maxWidth: "240px" },
+    a11y: { role: "tooltip", delay: "300ms" },
+  },
+  accordion: {
+    name: "Accordion", category: "molecule",
+    description: "Collapsible content sections",
+    elements: [
+      { name: "header", padding: "spacing-4", fontWeight: "font-medium", cursor: "pointer" },
+      { name: "content", padding: "spacing-4", borderTop: "1px solid border" },
+      { name: "icon", size: "20px", transition: "transform 200ms" },
+    ],
+    defaults: { radius: "radius-md", border: "1px solid border" },
+    a11y: { role: "region", ariaExpanded: true },
+  },
+  "data-table": {
+    name: "DataTable", category: "organism",
+    description: "Data display with sorting, filtering, pagination",
+    elements: [
+      { name: "header-cell", padding: "spacing-3 spacing-4", fontWeight: "font-semibold", fontSize: "text-xs", textTransform: "uppercase", bg: "surface-variant" },
+      { name: "body-cell", padding: "spacing-3 spacing-4", fontSize: "text-sm", borderBottom: "1px solid border" },
+      { name: "row-hover", bg: "surface-hover" },
+      { name: "row-selected", bg: "primary-lighter" },
+    ],
+    defaults: { radius: "radius-lg", border: "1px solid border" },
+    a11y: { role: "table", ariaSort: true },
+  },
+  navbar: {
+    name: "Navbar", category: "organism",
+    description: "Top navigation bar",
+    defaults: { height: "64px", bg: "bg-paper", borderBottom: "1px solid border", padding: "0 spacing-6", zIndex: "z-sticky" },
+  },
+  sidebar: {
+    name: "Sidebar", category: "organism",
+    description: "Side navigation panel",
+    defaults: { width: "260px", bg: "sidebar", borderRight: "1px solid border", padding: "spacing-4" },
+  },
+  pagination: {
+    name: "Pagination", category: "molecule",
+    description: "Page navigation control",
+    elements: [
+      { name: "button", size: "36px", radius: "radius-md", fontSize: "text-sm" },
+      { name: "active", bg: "primary-main", text: "primary-contrast" },
+      { name: "inactive", bg: "transparent", text: "text-primary" },
+    ],
+    defaults: { gap: "spacing-1" },
+    a11y: { role: "navigation", ariaLabel: "Pagination" },
+  },
+  drawer: {
+    name: "Drawer", category: "molecule",
+    description: "Slide-in panel from edge",
+    sizes: [
+      { name: "sm", width: "320px" },
+      { name: "md", width: "400px" },
+      { name: "lg", width: "560px" },
+    ],
+    defaults: { size: "md", bg: "bg-paper", shadow: "shadow-xl", zIndex: "z-modal" },
+    a11y: { role: "dialog", focusTrap: true, escClose: true },
+  },
+  snackbar: {
+    name: "Snackbar", category: "molecule",
+    description: "Brief notification message",
+    defaults: { bg: "secondary-main", text: "secondary-contrast", padding: "spacing-3 spacing-4", radius: "radius-md", shadow: "shadow-lg", zIndex: "z-toast", maxWidth: "400px" },
+    a11y: { role: "status", ariaLive: "polite", autoHide: "5000ms" },
+  },
+  menu: {
+    name: "Menu", category: "molecule",
+    description: "Dropdown list of actions",
+    elements: [
+      { name: "container", bg: "bg-paper", shadow: "shadow-lg", radius: "radius-md", border: "1px solid border", zIndex: "z-popover", minWidth: "180px" },
+      { name: "item", padding: "spacing-2 spacing-3", fontSize: "text-sm", hoverBg: "surface-hover" },
+      { name: "divider", height: "1px", bg: "border", margin: "spacing-1 0" },
+    ],
+    a11y: { role: "menu", keyboardNavigation: true },
+  },
+  breadcrumbs: {
+    name: "Breadcrumbs", category: "molecule",
+    description: "Navigation hierarchy indicator",
+    elements: [
+      { name: "item", fontSize: "text-sm", color: "text-secondary" },
+      { name: "active", color: "text-primary", fontWeight: "font-medium" },
+      { name: "separator", margin: "0 spacing-2", color: "text-disabled" },
+    ],
+    a11y: { role: "navigation", ariaLabel: "Breadcrumb" },
+  },
+  divider: {
+    name: "Divider", category: "atom",
+    description: "Visual separator between content",
+    variants: [
+      { name: "horizontal", height: "1px", width: "100%", bg: "border" },
+      { name: "vertical", width: "1px", height: "100%", bg: "border" },
+    ],
+    defaults: { variant: "horizontal" },
+  },
+  skeleton: {
+    name: "Skeleton", category: "atom",
+    description: "Loading placeholder",
+    variants: [
+      { name: "text", height: "1em", radius: "radius-sm" },
+      { name: "circular", radius: "radius-full" },
+      { name: "rectangular", radius: "radius-md" },
+    ],
+    defaults: { bg: "surface-variant", animation: "pulse 1.5s ease-in-out infinite" },
+  },
+  slider: {
+    name: "Slider", category: "atom",
+    description: "Range value selector",
+    elements: [
+      { name: "track", height: "4px", bg: "border", radius: "radius-full" },
+      { name: "fill", height: "4px", bg: "primary-main", radius: "radius-full" },
+      { name: "thumb", size: "20px", bg: "primary-main", radius: "radius-full", shadow: "shadow-sm" },
+    ],
+    a11y: { role: "slider", minTouchTarget: "44px" },
+  },
+  "circular-progress": {
+    name: "CircularProgress", category: "atom",
+    description: "Circular loading indicator",
+    sizes: [
+      { name: "sm", size: "24px", strokeWidth: "3px" },
+      { name: "md", size: "40px", strokeWidth: "4px" },
+      { name: "lg", size: "56px", strokeWidth: "5px" },
+    ],
+    defaults: { color: "primary-main", trackColor: "border" },
+  },
+  "linear-progress": {
+    name: "LinearProgress", category: "atom",
+    description: "Linear loading bar",
+    defaults: { height: "4px", bg: "border", fillColor: "primary-main", radius: "radius-full" },
+  },
+  chip: {
+    name: "Chip", category: "atom",
+    description: "Compact element for tags/filters",
+    sizes: [
+      { name: "sm", height: "24px", fontSize: "text-xs", padding: "0 spacing-2" },
+      { name: "md", height: "32px", fontSize: "text-sm", padding: "0 spacing-3" },
+    ],
+    variants: [
+      { name: "filled", bg: "surface-variant", text: "text-primary" },
+      { name: "outlined", bg: "transparent", text: "text-primary", border: "1px solid border" },
+    ],
+    defaults: { size: "md", variant: "filled", radius: "radius-full" },
+  },
+  "search-bar": {
+    name: "SearchBar", category: "molecule",
+    description: "Search input with icon",
+    defaults: { height: "40px", radius: "radius-md", bg: "surface-variant", iconSize: "20px", padding: "spacing-2 spacing-3" },
+  },
+  "form-field": {
+    name: "FormField", category: "molecule",
+    description: "Label + input + helper/error text wrapper",
+    elements: [
+      { name: "label", fontSize: "text-sm", fontWeight: "font-medium", color: "text-primary", marginBottom: "spacing-1" },
+      { name: "helper", fontSize: "text-xs", color: "text-secondary", marginTop: "spacing-1" },
+      { name: "error", fontSize: "text-xs", color: "danger-main", marginTop: "spacing-1" },
+    ],
+    defaults: { gap: "spacing-1" },
+  },
+  autocomplete: {
+    name: "Autocomplete", category: "molecule",
+    description: "Input with suggestion dropdown",
+    defaults: { dropdownMaxHeight: "240px", dropdownShadow: "shadow-lg", dropdownRadius: "radius-md" },
+    a11y: { role: "combobox", ariaExpanded: true, ariaAutocomplete: "list" },
+  },
+  "date-picker": {
+    name: "DatePicker", category: "molecule",
+    description: "Calendar-based date selection",
+    defaults: { calendarWidth: "300px", cellSize: "36px", radius: "radius-md", shadow: "shadow-lg" },
+    a11y: { keyboardNavigation: true, ariaLabel: "Choose date" },
+  },
+  list: {
+    name: "List", category: "molecule",
+    description: "Vertical list of items",
+    elements: [
+      { name: "item", padding: "spacing-2 spacing-4", fontSize: "text-sm", hoverBg: "surface-hover" },
+      { name: "divider", height: "1px", bg: "border" },
+    ],
+    a11y: { role: "list" },
+  },
+  typography: {
+    name: "Typography", category: "atom",
+    description: "Text display component",
+    variants: [
+      { name: "h1", fontSize: "text-3xl", fontWeight: "font-bold", lineHeight: "1.2" },
+      { name: "h2", fontSize: "text-2xl", fontWeight: "font-bold", lineHeight: "1.3" },
+      { name: "h3", fontSize: "text-xl", fontWeight: "font-semibold", lineHeight: "1.4" },
+      { name: "h4", fontSize: "text-lg", fontWeight: "font-semibold", lineHeight: "1.4" },
+      { name: "body1", fontSize: "text-base", fontWeight: "font-normal", lineHeight: "1.6" },
+      { name: "body2", fontSize: "text-sm", fontWeight: "font-normal", lineHeight: "1.5" },
+      { name: "caption", fontSize: "text-xs", fontWeight: "font-normal", lineHeight: "1.4", color: "text-secondary" },
+    ],
+  },
+  icon: {
+    name: "Icon", category: "atom",
+    description: "Scalable icon display",
+    sizes: [
+      { name: "xs", size: "16px" }, { name: "sm", size: "20px" },
+      { name: "md", size: "24px" }, { name: "lg", size: "32px" },
+    ],
+    defaults: { size: "md", color: "currentColor" },
+  },
+  stack: {
+    name: "Stack", category: "atom",
+    description: "Flex layout helper",
+    defaults: { direction: "column", gap: "spacing-2", align: "stretch" },
+  },
+  box: {
+    name: "Box", category: "atom",
+    description: "Generic container with design token props",
+    defaults: { display: "block" },
+  },
+  "text-field": {
+    name: "TextField", category: "atom",
+    description: "Full text field with label, input, and helper",
+    sizes: [
+      { name: "sm", height: "32px", fontSize: "text-xs" },
+      { name: "md", height: "40px", fontSize: "text-sm" },
+      { name: "lg", height: "48px", fontSize: "text-base" },
+    ],
+    defaults: { size: "md", variant: "outlined", radius: "radius-md" },
+  },
+  radio: {
+    name: "Radio", category: "atom",
+    description: "Single-select radio button",
+    defaults: { size: "20px", checkedColor: "primary-main", uncheckedBorder: "border-strong" },
+    a11y: { role: "radio", minTouchTarget: "44px" },
+  },
+};
+
+const COMPONENT_IDS = Object.keys(COMPONENT_SPECS);
+
+// ═══════════════════════════════════════════════════════════════════
+//  MCP SERVER
+// ═══════════════════════════════════════════════════════════════════
 
 const server = new McpServer({
-  name: "bpi-design-tokens",
-  version: "1.0.0",
+  name: "bpi-design-system",
+  version: "2.0.0",
 });
 
-// Tool: list categories
+// ── Token Tools ──────────────────────────────────────────────────
+
 server.tool(
   "list_categories",
   "List all available design token categories",
   {},
   async () => ({
-    content: [{
-      type: "text",
-      text: JSON.stringify({
-        categories: CATEGORIES,
-        docs: "https://ieproduct.github.io/bpi-design-system/",
-        usage: 'Use get_tokens(category) to fetch tokens for a specific category.',
-      }, null, 2),
-    }],
+    content: [{ type: "text", text: JSON.stringify({ categories: TOKEN_CATEGORIES, docs: "https://ieproduct.github.io/bpi-design-system/" }, null, 2) }],
   })
 );
 
-// Tool: get tokens by category
 server.tool(
   "get_tokens",
-  "Get all design tokens for a specific category. Categories: brand-colors, semantic-colors, background-colors, text-colors, surface-tokens, typography, spacing, border-radius, box-shadows, z-index",
-  {
-    category: z.enum(CATEGORIES).describe("Token category to retrieve"),
-    mode: z.enum(["light", "dark"]).optional().describe("Color mode (light or dark). Default: both"),
-  },
+  "Get all design tokens for a specific category",
+  { category: z.enum(TOKEN_CATEGORIES).describe("Token category"), mode: z.enum(["light", "dark"]).optional().describe("Color mode filter") },
   async ({ category, mode }) => {
     const data = getCategoryData(category);
-    if (!data) {
-      return { content: [{ type: "text", text: `Unknown category: ${category}` }] };
-    }
-
+    if (!data) return { content: [{ type: "text", text: `Unknown category: ${category}` }] };
     let result = data;
-
-    // If mode is specified and data has light/dark values, filter
     if (mode && category === "semantic-colors") {
       result = {};
       for (const [name, color] of Object.entries(data)) {
-        result[name] = {
-          description: color.description,
-          shades: {},
-        };
+        result[name] = { description: color.description, shades: {} };
         for (const [shade, vals] of Object.entries(color.shades)) {
-          result[name].shades[shade] = {
-            variable: vals.variable,
-            hex: vals[mode],
-          };
+          result[name].shades[shade] = { variable: vals.variable, hex: vals[mode] };
         }
       }
     }
-
-    return {
-      content: [{
-        type: "text",
-        text: JSON.stringify({
-          category,
-          ...(mode ? { mode } : {}),
-          tokens: result,
-          tip: "Use CSS variables like var(--color-primary-main) — never hard-code hex values.",
-        }, null, 2),
-      }],
-    };
+    return { content: [{ type: "text", text: JSON.stringify({ category, ...(mode ? { mode } : {}), tokens: result }, null, 2) }] };
   }
 );
 
-// Tool: get a specific color
 server.tool(
   "get_color",
-  "Get a specific semantic color with all its shades (lighter, light, main, dark, darker, contrast) for both light and dark mode",
-  {
-    name: z.enum(["primary", "secondary", "success", "danger", "warning", "info"]).describe("Semantic color name"),
-  },
+  "Get a specific semantic color with all shades for both light and dark mode",
+  { name: z.enum(["primary", "secondary", "success", "danger", "warning", "info"]).describe("Color name") },
   async ({ name }) => {
     const color = SEMANTIC_COLORS[name];
-    return {
-      content: [{
-        type: "text",
-        text: JSON.stringify({
-          name,
-          description: color.description,
-          shades: color.shades,
-          usage: `Use var(--color-${name}-main) for the primary shade. The variable auto-adapts between light/dark mode.`,
-        }, null, 2),
-      }],
-    };
+    return { content: [{ type: "text", text: JSON.stringify({ name, description: color.description, shades: color.shades, usage: `Use var(--color-${name}-main) for primary shade.` }, null, 2) }] };
   }
 );
 
-// Tool: search tokens
 server.tool(
   "search_tokens",
-  "Search design tokens by keyword across all categories. Example: search('primary'), search('shadow'), search('font')",
-  {
-    query: z.string().describe("Search keyword (e.g., 'primary', 'shadow', 'font', 'spacing')"),
-  },
+  "Search design tokens by keyword across all categories",
+  { query: z.string().describe("Search keyword (e.g., 'primary', 'shadow', 'font')") },
   async ({ query }) => {
     const q = query.toLowerCase();
     const results = [];
-
-    // Search all categories
-    for (const cat of CATEGORIES) {
+    for (const cat of TOKEN_CATEGORIES) {
       const data = getCategoryData(cat);
       const searchObj = (obj, path = "") => {
         for (const [key, val] of Object.entries(obj)) {
-          const currentPath = path ? `${path}.${key}` : key;
+          const p = path ? `${path}.${key}` : key;
           if (typeof val === "object" && val !== null && !Array.isArray(val)) {
-            // Check if this level has a 'variable' key (leaf node)
-            if (val.variable && val.variable.toLowerCase().includes(q)) {
-              results.push({ category: cat, key: currentPath, ...val });
-            } else if (key.toLowerCase().includes(q)) {
-              results.push({ category: cat, key: currentPath, data: val });
-            } else {
-              searchObj(val, currentPath);
-            }
+            if (val.variable && val.variable.toLowerCase().includes(q)) results.push({ category: cat, key: p, ...val });
+            else if (key.toLowerCase().includes(q)) results.push({ category: cat, key: p, data: val });
+            else searchObj(val, p);
           } else if (typeof val === "string" && val.toLowerCase().includes(q)) {
-            results.push({ category: cat, key: currentPath, value: val });
+            results.push({ category: cat, key: p, value: val });
           }
         }
       };
       searchObj(data);
     }
-
-    return {
-      content: [{
-        type: "text",
-        text: JSON.stringify({
-          query,
-          resultCount: results.length,
-          results: results.slice(0, 30), // cap at 30
-          docs: "https://ieproduct.github.io/bpi-design-system/",
-        }, null, 2),
-      }],
-    };
+    return { content: [{ type: "text", text: JSON.stringify({ query, resultCount: results.length, results: results.slice(0, 30) }, null, 2) }] };
   }
 );
 
-// Tool: get CSS snippet
+// ── Component Spec Tools ─────────────────────────────────────────
+
+server.tool(
+  "list_components",
+  "List all component specifications with their category (atom/molecule/organism)",
+  { category: z.enum(["all", "atom", "molecule", "organism"]).optional().describe("Filter by category. Default: all") },
+  async ({ category }) => {
+    const filter = category || "all";
+    const list = COMPONENT_IDS
+      .map(id => ({ id, name: COMPONENT_SPECS[id].name, category: COMPONENT_SPECS[id].category, description: COMPONENT_SPECS[id].description }))
+      .filter(c => filter === "all" || c.category === filter);
+    return { content: [{ type: "text", text: JSON.stringify({ filter, count: list.length, components: list, docs: "https://ieproduct.github.io/bpi-design-system/" }, null, 2) }] };
+  }
+);
+
+server.tool(
+  "get_component_spec",
+  "Get the full design specification for a component — sizes, variants, states, sub-elements, accessibility, defaults",
+  { id: z.enum(COMPONENT_IDS).describe("Component ID (e.g., 'button', 'card', 'data-table')") },
+  async ({ id }) => {
+    const spec = COMPONENT_SPECS[id];
+    return { content: [{ type: "text", text: JSON.stringify({ id, ...spec, docsUrl: `https://ieproduct.github.io/bpi-design-system/components/${id}` }, null, 2) }] };
+  }
+);
+
+server.tool(
+  "search_specs",
+  "Search component specifications by keyword",
+  { query: z.string().describe("Search keyword (e.g., 'modal', 'hover', 'focus', 'navigation')") },
+  async ({ query }) => {
+    const q = query.toLowerCase();
+    const results = [];
+    for (const id of COMPONENT_IDS) {
+      const spec = COMPONENT_SPECS[id];
+      const text = JSON.stringify(spec).toLowerCase();
+      if (text.includes(q)) {
+        results.push({ id, name: spec.name, category: spec.category, description: spec.description });
+      }
+    }
+    return { content: [{ type: "text", text: JSON.stringify({ query, resultCount: results.length, results }, null, 2) }] };
+  }
+);
+
+// ── CSS Snippet Tool ─────────────────────────────────────────────
+
 server.tool(
   "get_css_snippet",
-  "Generate a ready-to-use CSS snippet for common UI patterns using BPI design tokens",
+  "Generate ready-to-use CSS for a component based on its spec and BPI tokens",
   {
-    pattern: z.enum(["button-primary", "button-secondary", "card", "alert-danger", "alert-success", "alert-warning", "alert-info", "input", "badge"])
-      .describe("UI pattern to generate CSS for"),
+    component: z.enum(COMPONENT_IDS).describe("Component to generate CSS for"),
+    variant: z.string().optional().describe("Specific variant (e.g., 'contained', 'outlined')"),
+    size: z.string().optional().describe("Specific size (e.g., 'sm', 'md', 'lg')"),
   },
-  async ({ pattern }) => {
-    const snippets = {
-      "button-primary": `.btn-primary {
-  background-color: var(--color-primary-main);
-  color: var(--color-primary-contrast);
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--radius-md);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-sm);
-  border: none;
-  cursor: pointer;
-  transition: background-color 150ms;
-}
-.btn-primary:hover {
-  background-color: var(--color-primary-dark);
-}`,
-      "button-secondary": `.btn-secondary {
-  background-color: var(--color-secondary-lighter);
-  color: var(--color-secondary-main);
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--radius-md);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-sm);
-  border: 1px solid var(--color-border);
-  cursor: pointer;
-  transition: background-color 150ms;
-}
-.btn-secondary:hover {
-  background-color: var(--color-secondary-light);
-  color: var(--color-secondary-contrast);
-}`,
-      "card": `.card {
-  background: var(--color-bg-paper);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-6);
-  box-shadow: var(--shadow-md);
-}
-.card-title {
-  color: var(--color-text-primary);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-lg);
-  margin-bottom: var(--spacing-2);
-}
-.card-body {
-  color: var(--color-text-secondary);
-  font-size: var(--text-base);
-}`,
-      "alert-danger": `.alert-danger {
-  background: var(--color-danger-lighter);
-  border: 1px solid var(--color-danger-light);
-  color: var(--color-danger-dark);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-md);
-}`,
-      "alert-success": `.alert-success {
-  background: var(--color-success-lighter);
-  border: 1px solid var(--color-success-light);
-  color: var(--color-success-dark);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-md);
-}`,
-      "alert-warning": `.alert-warning {
-  background: var(--color-warning-lighter);
-  border: 1px solid var(--color-warning-light);
-  color: var(--color-warning-dark);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-md);
-}`,
-      "alert-info": `.alert-info {
-  background: var(--color-info-lighter);
-  border: 1px solid var(--color-info-light);
-  color: var(--color-info-dark);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-md);
-}`,
-      "input": `.input {
-  background: var(--color-bg-paper);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-2) var(--spacing-3);
-  font-size: var(--text-base);
-  color: var(--color-text-primary);
-  transition: border-color 150ms;
-}
-.input:focus {
-  outline: none;
-  border-color: var(--color-primary-main);
-  box-shadow: 0 0 0 3px var(--color-primary-lighter);
-}
-.input::placeholder {
-  color: var(--color-text-disabled);
-}`,
-      "badge": `.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium);
-  background: var(--color-primary-lighter);
-  color: var(--color-primary-main);
-}`,
-    };
+  async ({ component, variant, size }) => {
+    const spec = COMPONENT_SPECS[component];
+    let css = `/* BPI Design System — ${spec.name} */\n`;
 
-    return {
-      content: [{
-        type: "text",
-        text: `/* BPI Design System — ${pattern} */\n${snippets[pattern]}`,
-      }],
-    };
+    // Base styles from defaults
+    if (spec.defaults) {
+      css += `.bpi-${component} {\n`;
+      for (const [key, val] of Object.entries(spec.defaults)) {
+        if (["size", "variant", "dismissible"].includes(key)) continue;
+        const cssVal = val.startsWith?.("radius-") ? `var(--${val})` :
+                       val.startsWith?.("spacing-") ? `var(--${val})` :
+                       val.startsWith?.("shadow-") ? `var(--${val})` :
+                       val.startsWith?.("z-") ? `var(--${val})` :
+                       val.startsWith?.("font-") ? `var(--${val})` :
+                       val.startsWith?.("text-") ? `var(--${val})` : val;
+        css += `  ${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${cssVal};\n`;
+      }
+      css += `}\n`;
+    }
+
+    // Size variant
+    const sizeSpec = size && spec.sizes?.find(s => s.name === size);
+    if (sizeSpec) {
+      css += `\n.bpi-${component}--${size} {\n`;
+      for (const [key, val] of Object.entries(sizeSpec)) {
+        if (key === "name") continue;
+        const cssVal = val.startsWith?.("spacing-") ? `var(--${val})` :
+                       val.startsWith?.("text-") ? `var(--${val})` : val;
+        css += `  ${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${cssVal};\n`;
+      }
+      css += `}\n`;
+    }
+
+    // Color variant
+    const variantSpec = variant && spec.variants?.find(v => v.name === variant);
+    if (variantSpec) {
+      css += `\n.bpi-${component}--${variant} {\n`;
+      for (const [key, val] of Object.entries(variantSpec)) {
+        if (key === "name") continue;
+        const cssKey = key === "bg" ? "background-color" : key === "text" ? "color" : key;
+        const cssVal = val.includes("-") && !val.includes("px") && !val.includes("solid") ? `var(--color-${val})` : val;
+        css += `  ${cssKey}: ${cssVal};\n`;
+      }
+      css += `}\n`;
+    }
+
+    // States
+    if (spec.states) {
+      for (const state of spec.states) {
+        css += `\n.bpi-${component}:${state.name === "focus" ? "focus-visible" : state.name} {\n`;
+        for (const [key, val] of Object.entries(state)) {
+          if (key === "name") continue;
+          const cssVal = val.includes?.("-") && !val.includes("px") && !val.includes("(") ? `var(--color-${val})` : val;
+          css += `  ${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${cssVal};\n`;
+        }
+        css += `}\n`;
+      }
+    }
+
+    return { content: [{ type: "text", text: css }] };
   }
 );
 
-// Resource: full token reference
+// ── Resource ─────────────────────────────────────────────────────
+
 server.resource(
-  "token-reference",
-  "bpi://tokens/reference",
+  "design-system-reference",
+  "bpi://design-system/reference",
   async (uri) => ({
     contents: [{
       uri: uri.href,
       mimeType: "text/plain",
-      text: `BPI Design System — Token Reference
+      text: `BPI Design System v2.0 — Design Tokens + Component Specs
 
 Documentation: https://ieproduct.github.io/bpi-design-system/
-CLAUDE.md viewer: https://ieproduct.github.io/bpi-design-system/claude-md
 
 RULES:
 - Always use CSS variables (var(--color-primary-main)) — never hard-code hex values
-- Dark mode activates via class="dark" on <html> — variables auto-swap
-- Tokens are framework-agnostic (React, Vue, Angular, Svelte, plain HTML)
+- Dark mode: class="dark" on <html> — variables auto-swap
+- Component specs are REFERENCE only — each team builds own implementation
+- Framework-agnostic: works with React, Vue, Angular, Svelte, plain HTML
 
-CATEGORIES: ${CATEGORIES.join(", ")}
+TOKEN CATEGORIES: ${TOKEN_CATEGORIES.join(", ")}
+COMPONENT SPECS: ${COMPONENT_IDS.length} components (atoms, molecules, organisms)
 
-Use the tools: list_categories, get_tokens, get_color, search_tokens, get_css_snippet
+Tools: list_categories, get_tokens, get_color, search_tokens, list_components, get_component_spec, search_specs, get_css_snippet
 `,
     }],
   })
 );
 
-// ─── Start Server ──────────────────────────────────────────────────────────
+// ── Start ────────────────────────────────────────────────────────
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

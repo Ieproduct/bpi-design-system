@@ -1,8 +1,9 @@
-# BPI Design System — AI Agent Reference
+# BPI Design System v2.0 — AI Agent Reference
 
-> **Design token reference for all BPI projects.**
+> **Design tokens + component specifications for all BPI projects.**
 > This file is the single source of truth for AI agents (Claude, Cursor, Copilot, etc.).
-> Always use CSS variables from this file — never hard-code colors, spacing, or sizes.
+> Always use CSS variables — never hard-code colors, spacing, or sizes.
+> Build components following the spec — each team implements their own.
 
 ---
 
@@ -13,15 +14,27 @@
 | Full documentation | https://ieproduct.github.io/bpi-design-system/ |
 | Token viewer & download | https://ieproduct.github.io/bpi-design-system/claude-md |
 | Token data source | `docs/src/data/tokens.ts` |
+| Component specs data | `docs/src/data/specs.ts` |
 | CSS variables file | `docs/src/styles/app.css` |
 | MCP Server | `mcp/index.js` (see setup below) |
 | Repository | https://github.com/Ieproduct/bpi-design-system |
 
 ---
 
+## Architecture
+
+BPI Design System is a **specification-only** package. It provides:
+
+1. **Design Tokens** — CSS custom properties for colors, typography, spacing, radius, shadows, z-index
+2. **Component Specs** — Structured specifications (sizes, variants, states, accessibility) for 37 components
+
+Each project team implements their own components using their preferred framework (React, Vue, Angular, Svelte, etc.) following these specs. There is no component library to install.
+
+---
+
 ## Option 1: MCP Server (Recommended)
 
-ใช้ MCP server เพื่อให้ AI query design tokens ได้โดยตรง ไม่ต้องอ่านไฟล์ทั้งหมด
+Use the MCP server to let AI query design tokens and component specs in real-time.
 
 ### Setup for Claude Desktop / Claude Code
 
@@ -47,7 +60,7 @@ Add to `.cursor/mcp.json` in your project:
   "mcpServers": {
     "bpi-design": {
       "command": "node",
-      "args": ["./node_modules/@bpi/design-system/mcp/index.js"]
+      "args": ["<path-to>/bpi-design-system/mcp/index.js"]
     }
   }
 }
@@ -55,35 +68,53 @@ Add to `.cursor/mcp.json` in your project:
 
 ### Available MCP Tools
 
+#### Token Tools
+
 | Tool | Description | Example |
 |------|-------------|---------|
 | `list_categories` | List all token categories | `list_categories()` |
 | `get_tokens` | Get all tokens in a category | `get_tokens(category: "semantic-colors")` |
 | `get_color` | Get a specific semantic color with all shades | `get_color(name: "primary")` |
 | `search_tokens` | Search tokens by keyword | `search_tokens(query: "shadow")` |
-| `get_css_snippet` | Get ready-to-use CSS for UI patterns | `get_css_snippet(pattern: "button-primary")` |
 
-### MCP CSS Snippet Patterns
+#### Component Spec Tools
 
-`button-primary`, `button-secondary`, `card`, `alert-danger`, `alert-success`, `alert-warning`, `alert-info`, `input`, `badge`
+| Tool | Description | Example |
+|------|-------------|---------|
+| `list_components` | List all component specs (filter by category) | `list_components(category: "atom")` |
+| `get_component_spec` | Get full spec for a component | `get_component_spec(id: "button")` |
+| `search_specs` | Search component specs by keyword | `search_specs(query: "padding")` |
+
+#### CSS Generation
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `get_css_snippet` | Generate CSS from spec + tokens | `get_css_snippet(component: "button", variant: "primary", size: "md")` |
+
+### Component Categories
+
+- **Atoms (21):** Alert, Avatar, Badge, Box, Button, Checkbox, Chip, CircularProgress, Divider, Icon, Input, LinearProgress, Radio, Select, Skeleton, Slider, Stack, Switch, TextField, Tooltip, Typography
+- **Molecules (14):** Accordion, Autocomplete, Breadcrumbs, Card, DatePicker, Dialog, Drawer, FormField, List, Menu, Pagination, SearchBar, Snackbar, Tabs
+- **Organisms (3):** DataTable, Navbar, Sidebar
 
 ---
 
 ## Option 2: Read from Documentation Website
 
-ถ้าไม่ได้ตั้ง MCP ให้ AI เปิดเว็บ docs อ่าน token ได้เลย
+If MCP is not set up, AI can fetch token and spec pages directly.
 
-**Full token reference:** https://ieproduct.github.io/bpi-design-system/
+**Full reference:** https://ieproduct.github.io/bpi-design-system/
 
 | Page | URL |
 |------|-----|
-| Colors (all palettes + semantic) | https://ieproduct.github.io/bpi-design-system/tokens/colors |
+| Colors (palettes + semantic) | https://ieproduct.github.io/bpi-design-system/tokens/colors |
 | Typography (families, sizes, weights) | https://ieproduct.github.io/bpi-design-system/tokens/typography |
 | Spacing (scale) | https://ieproduct.github.io/bpi-design-system/tokens/spacing |
 | Misc (radius, shadows, z-index) | https://ieproduct.github.io/bpi-design-system/tokens/misc |
+| Component specs | https://ieproduct.github.io/bpi-design-system/components/button (etc.) |
 | CLAUDE.md viewer + download | https://ieproduct.github.io/bpi-design-system/claude-md |
 
-> **AI instruction:** If you need token values, fetch the relevant page above and extract the CSS variables from the tables.
+> **AI instruction:** Fetch the relevant page and extract CSS variables and spec data from the tables.
 
 ---
 
@@ -91,9 +122,10 @@ Add to `.cursor/mcp.json` in your project:
 
 1. **Always use CSS variables** like `var(--color-primary-main)` — never hard-code hex values
 2. **Dark mode** activates via `class="dark"` on `<html>` — CSS variables auto-swap
-3. **Framework-agnostic** — works with React, Vue, Angular, Svelte, plain HTML
-4. **Toggle dark mode in JS:** `document.documentElement.classList.toggle('dark')`
-5. **Persist theme:** `localStorage.setItem('theme', 'dark' | 'light')`
+3. **Framework-agnostic** — use any framework, follow the component specs
+4. **Follow component specs** — use the specified sizes, variants, states, and accessibility rules
+5. **Toggle dark mode in JS:** `document.documentElement.classList.toggle('dark')`
+6. **Persist theme:** `localStorage.setItem('theme', 'dark' | 'light')`
 
 ---
 
@@ -142,16 +174,49 @@ Shades: `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`, `95
 
 ---
 
-## Quick Example
+## Component Spec Structure
+
+Each component spec includes:
+
+| Section | Description |
+|---------|-------------|
+| **Sizes** | Padding, font-size, border-radius per size (sm, md, lg) |
+| **Variants** | Background, text, border, hover colors per variant |
+| **States** | Default, hover, active, focus, disabled CSS properties |
+| **Elements** | Sub-parts of the component (label, icon, container, etc.) |
+| **Accessibility** | Keyboard interactions, ARIA roles, required attributes |
+| **Defaults** | Default size, variant, and other default values |
+
+### Example: Building a Button from Spec
 
 ```css
+/* Get spec via MCP: get_component_spec(id: "button") */
+
+.btn {
+  /* Size: md (default) */
+  padding: var(--spacing-2) var(--spacing-4);    /* 8px 16px */
+  font-size: var(--text-sm);                      /* 14px */
+  border-radius: var(--radius-md);                /* 6px */
+  font-weight: var(--font-semibold);              /* 600 */
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+/* Variant: primary */
 .btn-primary {
   background-color: var(--color-primary-main);
   color: var(--color-primary-contrast);
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--radius-md);
-  font-weight: var(--font-semibold);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-primary-main);
+  outline-offset: 2px;
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 ```
 
-> For full token values: use the MCP tools, or visit the [documentation website](https://ieproduct.github.io/bpi-design-system/).
+> For full token values and complete specs: use the MCP tools, or visit the [documentation website](https://ieproduct.github.io/bpi-design-system/).
