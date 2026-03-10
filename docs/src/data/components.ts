@@ -389,6 +389,61 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Basic Input',
+        description: 'Use .bpi-input with a size modifier on any <input> element.',
+        code: `<input class="bpi-input bpi-input--md" placeholder="Enter your name" />`,
+      },
+      {
+        title: 'Sizes',
+        description: 'Three sizes: sm, md, lg.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+  <input class="bpi-input bpi-input--sm" placeholder="Small input" />
+  <input class="bpi-input bpi-input--md" placeholder="Medium input" />
+  <input class="bpi-input bpi-input--lg" placeholder="Large input" />
+</div>`,
+      },
+      {
+        title: 'Error State',
+        description: 'Add .bpi-input--error for validation errors. Use .bpi-input__error for the message.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+  <div>
+    <input class="bpi-input bpi-input--md" placeholder="Valid input" />
+    <span class="bpi-input__hint">Looks good!</span>
+  </div>
+  <div>
+    <input class="bpi-input bpi-input--md bpi-input--error" placeholder="Invalid email" />
+    <span class="bpi-input__error">Please enter a valid email address</span>
+  </div>
+</div>`,
+      },
+      {
+        title: 'Disabled',
+        description: 'Use the disabled attribute or .bpi-input--disabled class.',
+        code: `<input class="bpi-input bpi-input--md" disabled value="Cannot edit this" />`,
+      },
+      {
+        title: 'Different Types',
+        description: 'Works with all HTML input types.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+  <input class="bpi-input bpi-input--md" type="email" placeholder="your@email.com" />
+  <input class="bpi-input bpi-input--md" type="password" placeholder="Enter password" />
+  <input class="bpi-input bpi-input--md" type="number" placeholder="0" />
+  <input class="bpi-input bpi-input--md" type="search" placeholder="Search..." />
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: '.bpi-input', description: 'Base input class (required)' },
+      { name: '.bpi-input--sm', description: 'Small size' },
+      { name: '.bpi-input--md', description: 'Medium size (default)' },
+      { name: '.bpi-input--lg', description: 'Large size' },
+      { name: '.bpi-input--error', description: 'Error / invalid state' },
+      { name: '.bpi-input--disabled', description: 'Disabled state (alternative to disabled attr)' },
+      { name: '.bpi-input__hint', description: 'Helper text below input' },
+      { name: '.bpi-input__error', description: 'Error message text below input' },
+    ],
   },
   {
     id: 'badge',
@@ -468,6 +523,39 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Badge Variants',
+        description: 'Use .bpi-badge with a color modifier.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+  <span class="bpi-badge bpi-badge--primary">Primary</span>
+  <span class="bpi-badge bpi-badge--success">Success</span>
+  <span class="bpi-badge bpi-badge--warning">Warning</span>
+  <span class="bpi-badge bpi-badge--danger">Danger</span>
+  <span class="bpi-badge bpi-badge--info">Info</span>
+  <span class="bpi-badge bpi-badge--neutral">Neutral</span>
+</div>`,
+      },
+      {
+        title: 'Dot Badges',
+        description: 'Add .bpi-badge--dot for a small colored dot before the text.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+  <span class="bpi-badge bpi-badge--success bpi-badge--dot">Active</span>
+  <span class="bpi-badge bpi-badge--warning bpi-badge--dot">Pending</span>
+  <span class="bpi-badge bpi-badge--danger bpi-badge--dot">Offline</span>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: '.bpi-badge', description: 'Base badge class (required)' },
+      { name: '.bpi-badge--primary', description: 'Primary color variant' },
+      { name: '.bpi-badge--success', description: 'Success / green variant' },
+      { name: '.bpi-badge--warning', description: 'Warning / yellow variant' },
+      { name: '.bpi-badge--danger', description: 'Danger / red variant' },
+      { name: '.bpi-badge--info', description: 'Info / blue variant' },
+      { name: '.bpi-badge--neutral', description: 'Neutral / gray variant' },
+      { name: '.bpi-badge--dot', description: 'Adds a colored dot before text' },
+    ],
   },
   {
     id: 'icon',
@@ -540,6 +628,25 @@ export const components: ComponentMetadata[] = [
   </div>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Basic Icons',
+        description: 'Icons rendered using Lucide icon class names.',
+        code: `<div style="display: flex; align-items: center; gap: 16px;">
+  <i class="bpi-icon" data-icon="home"></i>
+  <i class="bpi-icon" data-icon="search"></i>
+  <i class="bpi-icon" data-icon="settings"></i>
+  <i class="bpi-icon" data-icon="user"></i>
+  <i class="bpi-icon" data-icon="bell"></i>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-icon', description: 'Base icon element' },
+      { name: 'bpi-icon--sm', description: 'Small icon (16px)' },
+      { name: 'bpi-icon--md', description: 'Medium icon (20px)' },
+      { name: 'bpi-icon--lg', description: 'Large icon (24px)' },
     ],
   },
   {
@@ -678,6 +785,38 @@ export const components: ComponentMetadata[] = [
 </Stack>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Stack Layouts',
+        description: 'Flex-based stack layouts with different directions and spacing.',
+        code: `<div style="display: flex; flex-direction: column; gap: 24px;">
+  <div>
+    <p style="margin: 0 0 8px; font-weight: 600;">Row (horizontal)</p>
+    <div class="bpi-stack bpi-stack--row bpi-stack--spacing-3 bpi-stack--align-center">
+      <span class="bpi-chip bpi-chip--filled bpi-chip--primary"><span class="bpi-chip__content">Item 1</span></span>
+      <span class="bpi-chip bpi-chip--filled bpi-chip--success"><span class="bpi-chip__content">Item 2</span></span>
+      <span class="bpi-chip bpi-chip--filled bpi-chip--info"><span class="bpi-chip__content">Item 3</span></span>
+    </div>
+  </div>
+  <div>
+    <p style="margin: 0 0 8px; font-weight: 600;">Column (vertical)</p>
+    <div class="bpi-stack bpi-stack--column bpi-stack--spacing-2">
+      <span class="bpi-chip bpi-chip--outlined bpi-chip--primary"><span class="bpi-chip__content">Item A</span></span>
+      <span class="bpi-chip bpi-chip--outlined bpi-chip--primary"><span class="bpi-chip__content">Item B</span></span>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-stack', description: 'Base flex container' },
+      { name: 'bpi-stack--row', description: 'Horizontal direction' },
+      { name: 'bpi-stack--column', description: 'Vertical direction' },
+      { name: 'bpi-stack--spacing-{0-16}', description: 'Gap spacing (0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16)' },
+      { name: 'bpi-stack--align-start/center/end', description: 'Cross-axis alignment' },
+      { name: 'bpi-stack--justify-start/center/end/between', description: 'Main-axis alignment' },
+      { name: 'bpi-stack--wrap', description: 'Enable flex wrap' },
+    ],
   },
   {
     id: 'box',
@@ -785,6 +924,18 @@ export const components: ComponentMetadata[] = [
   </div>
 </Box>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Box Container',
+        description: 'Generic container used for layout and spacing.',
+        code: `<div class="bpi-box" style="padding: 24px; border: 1px solid var(--bpi-border-default, #e5e7eb); border-radius: 8px;">
+  <p style="margin: 0;">The Box component is a generic container for grouping content.</p>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-box', description: 'Generic block container' },
     ],
   },
   {
@@ -899,6 +1050,57 @@ export const components: ComponentMetadata[] = [
   <Typography variant="body1" color="#999">Muted gray text</Typography>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Heading Variants',
+        description: 'Responsive heading styles from h1 to h6.',
+        code: `<div style="display: flex; flex-direction: column; gap: 8px;">
+  <h1 class="bpi-typography bpi-typography--h1">Heading 1</h1>
+  <h2 class="bpi-typography bpi-typography--h2">Heading 2</h2>
+  <h3 class="bpi-typography bpi-typography--h3">Heading 3</h3>
+  <h4 class="bpi-typography bpi-typography--h4">Heading 4</h4>
+  <h5 class="bpi-typography bpi-typography--h5">Heading 5</h5>
+  <h6 class="bpi-typography bpi-typography--h6">Heading 6</h6>
+</div>`,
+      },
+      {
+        title: 'Body & Caption',
+        description: 'Body text and caption styles.',
+        code: `<div style="display: flex; flex-direction: column; gap: 8px;">
+  <p class="bpi-typography bpi-typography--body1">Body 1 — Regular paragraph text</p>
+  <p class="bpi-typography bpi-typography--body2">Body 2 — Smaller paragraph text</p>
+  <p class="bpi-typography bpi-typography--caption">Caption — Small descriptive text</p>
+  <p class="bpi-typography bpi-typography--text-helper">Helper — Smallest text for hints</p>
+</div>`,
+      },
+      {
+        title: 'Colors & Alignment',
+        description: 'Typography with color and alignment modifiers.',
+        code: `<div style="display: flex; flex-direction: column; gap: 8px;">
+  <p class="bpi-typography bpi-typography--body1 bpi-typography--color-primary">Primary color</p>
+  <p class="bpi-typography bpi-typography--body1 bpi-typography--color-success">Success color</p>
+  <p class="bpi-typography bpi-typography--body1 bpi-typography--color-danger">Danger color</p>
+  <p class="bpi-typography bpi-typography--body1 bpi-typography--align-center">Center aligned</p>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-typography', description: 'Base typography class' },
+      { name: 'bpi-typography--h1 to --h6', description: 'Heading variants (responsive)' },
+      { name: 'bpi-typography--title1 to --title3', description: 'Title variants' },
+      { name: 'bpi-typography--subtitle1 to --subtitle3', description: 'Subtitle variants' },
+      { name: 'bpi-typography--body1 to --body3', description: 'Body text variants' },
+      { name: 'bpi-typography--caption', description: 'Caption text' },
+      { name: 'bpi-typography--text-helper', description: 'Helper text' },
+      { name: 'bpi-typography--color-primary', description: 'Primary brand color' },
+      { name: 'bpi-typography--color-secondary', description: 'Secondary text color' },
+      { name: 'bpi-typography--color-success', description: 'Success color' },
+      { name: 'bpi-typography--color-danger', description: 'Danger color' },
+      { name: 'bpi-typography--align-left/center/right', description: 'Text alignment' },
+      { name: 'bpi-typography--weight-light/normal/bold', description: 'Font weight override' },
+      { name: 'bpi-typography--no-wrap', description: 'Text overflow ellipsis' },
+      { name: 'bpi-typography--gutter-bottom', description: 'Bottom margin spacing' },
     ],
   },
   {
@@ -1027,6 +1229,31 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Basic Text Fields',
+        description: 'Standard text fields with labels and hints.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
+  <div class="bpi-text-field">
+    <label class="bpi-text-field__label">Full Name</label>
+    <input class="bpi-input bpi-input--md" type="text" placeholder="Enter your name" />
+    <span class="bpi-text-field__hint">As shown on your ID</span>
+  </div>
+  <div class="bpi-text-field bpi-text-field--error">
+    <label class="bpi-text-field__label">Email</label>
+    <input class="bpi-input bpi-input--md bpi-input--error" type="email" value="invalid-email" />
+    <span class="bpi-text-field__error">Please enter a valid email address</span>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-text-field', description: 'Text field wrapper (label + input + hint)' },
+      { name: 'bpi-text-field--error', description: 'Error state' },
+      { name: 'bpi-text-field__label', description: 'Field label' },
+      { name: 'bpi-text-field__hint', description: 'Helper text below input' },
+      { name: 'bpi-text-field__error', description: 'Error message text' },
+    ],
   },
   {
     id: 'alert',
@@ -1140,6 +1367,65 @@ export const components: ComponentMetadata[] = [
 </Alert>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Alert Variants',
+        description: 'All four severity levels with icons and messages.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px;">
+  <div class="bpi-alert bpi-alert--success">
+    <span class="bpi-alert__icon">&#10004;</span>
+    <div class="bpi-alert__content">
+      <p class="bpi-alert__title">Success</p>
+      <p class="bpi-alert__message">Operation completed successfully!</p>
+    </div>
+  </div>
+  <div class="bpi-alert bpi-alert--info">
+    <span class="bpi-alert__icon">&#8505;</span>
+    <div class="bpi-alert__content">
+      <p class="bpi-alert__title">Info</p>
+      <p class="bpi-alert__message">Here is some helpful information.</p>
+    </div>
+  </div>
+  <div class="bpi-alert bpi-alert--warning">
+    <span class="bpi-alert__icon">&#9888;</span>
+    <div class="bpi-alert__content">
+      <p class="bpi-alert__title">Warning</p>
+      <p class="bpi-alert__message">Please review before proceeding.</p>
+    </div>
+  </div>
+  <div class="bpi-alert bpi-alert--error">
+    <span class="bpi-alert__icon">&#10060;</span>
+    <div class="bpi-alert__content">
+      <p class="bpi-alert__title">Error</p>
+      <p class="bpi-alert__message">Something went wrong. Please try again.</p>
+    </div>
+  </div>
+</div>`,
+      },
+      {
+        title: 'Closable Alert',
+        description: 'Alert with a close button for dismissing.',
+        code: `<div class="bpi-alert bpi-alert--warning">
+  <span class="bpi-alert__icon">&#9888;</span>
+  <div class="bpi-alert__content">
+    <p class="bpi-alert__message">Your session will expire in 5 minutes.</p>
+  </div>
+  <button class="bpi-alert__close" aria-label="Close">&times;</button>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-alert', description: 'Base alert container' },
+      { name: 'bpi-alert--success', description: 'Success severity (green)' },
+      { name: 'bpi-alert--info', description: 'Info severity (blue)' },
+      { name: 'bpi-alert--warning', description: 'Warning severity (yellow)' },
+      { name: 'bpi-alert--error', description: 'Error severity (red)' },
+      { name: 'bpi-alert__icon', description: 'Alert icon container' },
+      { name: 'bpi-alert__content', description: 'Content wrapper (title + message)' },
+      { name: 'bpi-alert__title', description: 'Alert title text' },
+      { name: 'bpi-alert__message', description: 'Alert message text' },
+      { name: 'bpi-alert__close', description: 'Close/dismiss button' },
+    ],
   },
   {
     id: 'skeleton',
@@ -1219,6 +1505,26 @@ export const components: ComponentMetadata[] = [
   <Skeleton variant="text" height={20} width="60%" />
 </Box>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Skeleton Shapes',
+        description: 'Different skeleton loading shapes and animations.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
+  <div class="bpi-skeleton bpi-skeleton--text bpi-skeleton--pulse" style="height: 16px; width: 80%;"></div>
+  <div class="bpi-skeleton bpi-skeleton--text bpi-skeleton--pulse" style="height: 16px; width: 60%;"></div>
+  <div class="bpi-skeleton bpi-skeleton--circular bpi-skeleton--wave" style="width: 48px; height: 48px;"></div>
+  <div class="bpi-skeleton bpi-skeleton--rectangular bpi-skeleton--wave" style="height: 120px; width: 100%;"></div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-skeleton', description: 'Base skeleton element' },
+      { name: 'bpi-skeleton--text', description: 'Text-shaped (small radius)' },
+      { name: 'bpi-skeleton--circular', description: 'Circle shape (full radius)' },
+      { name: 'bpi-skeleton--rectangular', description: 'Rectangle shape (medium radius)' },
+      { name: 'bpi-skeleton--pulse', description: 'Pulsing opacity animation' },
+      { name: 'bpi-skeleton--wave', description: 'Shimmer wave animation' },
     ],
   },
   {
@@ -1305,6 +1611,48 @@ export const components: ComponentMetadata[] = [
   <CircularProgress value={60} color="error" />
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Circular Progress Variants',
+        description: 'Circular progress indicators in different sizes and colors.',
+        code: `<div style="display: flex; align-items: center; gap: 24px;">
+  <div class="bpi-circular-progress bpi-circular-progress--sm bpi-circular-progress--primary">
+    <svg class="bpi-circular-progress__svg" viewBox="0 0 100 100">
+      <circle class="bpi-circular-progress__background" cx="50" cy="50" r="45" />
+      <circle class="bpi-circular-progress__track" cx="50" cy="50" r="45" style="stroke-dashoffset: 85;" />
+      <text class="bpi-circular-progress__text" x="50" y="50">70%</text>
+    </svg>
+  </div>
+  <div class="bpi-circular-progress bpi-circular-progress--md bpi-circular-progress--success">
+    <svg class="bpi-circular-progress__svg" viewBox="0 0 100 100">
+      <circle class="bpi-circular-progress__background" cx="50" cy="50" r="45" />
+      <circle class="bpi-circular-progress__track" cx="50" cy="50" r="45" style="stroke-dashoffset: 141;" />
+      <text class="bpi-circular-progress__text" x="50" y="50">50%</text>
+    </svg>
+  </div>
+  <div class="bpi-circular-progress bpi-circular-progress--lg bpi-circular-progress--danger bpi-circular-progress--indeterminate">
+    <svg class="bpi-circular-progress__svg" viewBox="0 0 100 100">
+      <circle class="bpi-circular-progress__background" cx="50" cy="50" r="45" />
+      <circle class="bpi-circular-progress__track" cx="50" cy="50" r="45" />
+    </svg>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-circular-progress', description: 'Base circular progress container' },
+      { name: 'bpi-circular-progress--sm', description: 'Small (40px)' },
+      { name: 'bpi-circular-progress--md', description: 'Medium (60px)' },
+      { name: 'bpi-circular-progress--lg', description: 'Large (80px)' },
+      { name: 'bpi-circular-progress--primary', description: 'Primary color' },
+      { name: 'bpi-circular-progress--success', description: 'Success color' },
+      { name: 'bpi-circular-progress--danger', description: 'Danger color' },
+      { name: 'bpi-circular-progress--indeterminate', description: 'Spinning animation' },
+      { name: 'bpi-circular-progress__svg', description: 'SVG element' },
+      { name: 'bpi-circular-progress__background', description: 'Background circle' },
+      { name: 'bpi-circular-progress__track', description: 'Progress track circle' },
+      { name: 'bpi-circular-progress__text', description: 'Center text value' },
     ],
   },
   {
@@ -1393,6 +1741,40 @@ export const components: ComponentMetadata[] = [
   <LinearProgress value={60} variant="determinate" color="error" />
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Linear Progress Variants',
+        description: 'Progress bars in different colors and states.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px;">
+  <div class="bpi-linear-progress bpi-linear-progress--primary">
+    <div class="bpi-linear-progress__bar" style="width: 70%;"></div>
+  </div>
+  <div class="bpi-linear-progress bpi-linear-progress--success">
+    <div class="bpi-linear-progress__bar" style="width: 100%;"></div>
+  </div>
+  <div class="bpi-linear-progress bpi-linear-progress--warning">
+    <div class="bpi-linear-progress__bar" style="width: 45%;"></div>
+  </div>
+  <div class="bpi-linear-progress bpi-linear-progress--danger">
+    <div class="bpi-linear-progress__bar" style="width: 25%;"></div>
+  </div>
+  <div class="bpi-linear-progress bpi-linear-progress--primary bpi-linear-progress--indeterminate">
+    <div class="bpi-linear-progress__bar"></div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-linear-progress', description: 'Base progress bar container' },
+      { name: 'bpi-linear-progress--primary', description: 'Primary color' },
+      { name: 'bpi-linear-progress--secondary', description: 'Secondary color' },
+      { name: 'bpi-linear-progress--success', description: 'Success color' },
+      { name: 'bpi-linear-progress--danger', description: 'Danger color' },
+      { name: 'bpi-linear-progress--warning', description: 'Warning color' },
+      { name: 'bpi-linear-progress--info', description: 'Info color' },
+      { name: 'bpi-linear-progress--indeterminate', description: 'Indeterminate animation' },
+      { name: 'bpi-linear-progress__bar', description: 'Progress bar fill' },
     ],
   },
   {
@@ -1485,6 +1867,35 @@ export const components: ComponentMetadata[] = [
   <div style="width: 36px; height: 36px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666; margin-left: -16px; border: 2px solid white;">+3</div>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Avatar Sizes',
+        description: 'Avatars in different sizes with images, initials, and icons.',
+        code: `<div style="display: flex; align-items: center; gap: 16px;">
+  <div class="bpi-avatar bpi-avatar--sm"><span class="bpi-avatar__initials">SM</span></div>
+  <div class="bpi-avatar bpi-avatar--md"><span class="bpi-avatar__initials">MD</span></div>
+  <div class="bpi-avatar bpi-avatar--lg"><span class="bpi-avatar__initials">LG</span></div>
+  <div class="bpi-avatar bpi-avatar--xl"><span class="bpi-avatar__initials">XL</span></div>
+</div>`,
+      },
+      {
+        title: 'Avatar with Image',
+        description: 'Avatar displaying a user profile image.',
+        code: `<div class="bpi-avatar bpi-avatar--lg">
+  <img class="bpi-avatar__img" src="https://i.pravatar.cc/150?img=3" alt="User avatar" />
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-avatar', description: 'Base avatar container (circular)' },
+      { name: 'bpi-avatar--sm', description: 'Small size (32px)' },
+      { name: 'bpi-avatar--md', description: 'Medium size (40px)' },
+      { name: 'bpi-avatar--lg', description: 'Large size (56px)' },
+      { name: 'bpi-avatar--xl', description: 'Extra large size (72px)' },
+      { name: 'bpi-avatar__img', description: 'Avatar image element' },
+      { name: 'bpi-avatar__initials', description: 'Text initials inside avatar' },
+      { name: 'bpi-avatar__icon', description: 'Icon inside avatar' },
     ],
   },
   {
@@ -1602,6 +2013,53 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Filled Chips',
+        description: 'Solid background chip variants for different statuses.',
+        code: `<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+  <span class="bpi-chip bpi-chip--filled bpi-chip--default"><span class="bpi-chip__content">Default</span></span>
+  <span class="bpi-chip bpi-chip--filled bpi-chip--primary"><span class="bpi-chip__content">Primary</span></span>
+  <span class="bpi-chip bpi-chip--filled bpi-chip--success"><span class="bpi-chip__content">Success</span></span>
+  <span class="bpi-chip bpi-chip--filled bpi-chip--danger"><span class="bpi-chip__content">Danger</span></span>
+  <span class="bpi-chip bpi-chip--filled bpi-chip--warning"><span class="bpi-chip__content">Warning</span></span>
+  <span class="bpi-chip bpi-chip--filled bpi-chip--info"><span class="bpi-chip__content">Info</span></span>
+</div>`,
+      },
+      {
+        title: 'Outlined Chips',
+        description: 'Border-only chip variants.',
+        code: `<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+  <span class="bpi-chip bpi-chip--outlined bpi-chip--default"><span class="bpi-chip__content">Default</span></span>
+  <span class="bpi-chip bpi-chip--outlined bpi-chip--primary"><span class="bpi-chip__content">Primary</span></span>
+  <span class="bpi-chip bpi-chip--outlined bpi-chip--success"><span class="bpi-chip__content">Success</span></span>
+  <span class="bpi-chip bpi-chip--outlined bpi-chip--danger"><span class="bpi-chip__content">Danger</span></span>
+</div>`,
+      },
+      {
+        title: 'Deletable Chip',
+        description: 'Chip with a delete/remove button.',
+        code: `<span class="bpi-chip bpi-chip--filled bpi-chip--primary">
+  <span class="bpi-chip__content">Removable</span>
+  <button class="bpi-chip__delete" aria-label="Remove">&times;</button>
+</span>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-chip', description: 'Base chip container' },
+      { name: 'bpi-chip--sm', description: 'Small chip' },
+      { name: 'bpi-chip--md', description: 'Medium chip (default)' },
+      { name: 'bpi-chip--filled', description: 'Solid background variant' },
+      { name: 'bpi-chip--outlined', description: 'Border-only variant' },
+      { name: 'bpi-chip--default', description: 'Default color' },
+      { name: 'bpi-chip--primary', description: 'Primary color' },
+      { name: 'bpi-chip--success', description: 'Success color' },
+      { name: 'bpi-chip--danger', description: 'Danger color' },
+      { name: 'bpi-chip--warning', description: 'Warning color' },
+      { name: 'bpi-chip--info', description: 'Info color' },
+      { name: 'bpi-chip__content', description: 'Chip text content' },
+      { name: 'bpi-chip__delete', description: 'Delete/remove button' },
+    ],
   },
   {
     id: 'tooltip',
@@ -1700,6 +2158,39 @@ export const components: ComponentMetadata[] = [
 </Tooltip>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Tooltip Positions',
+        description: 'Tooltips showing in different positions. Hover over buttons to see tooltips.',
+        code: `<div style="display: flex; gap: 24px; padding: 40px;">
+  <div class="bpi-tooltip bpi-tooltip--top" style="--show: 1;">
+    <button class="bpi-btn bpi-btn--outline bpi-btn--sm bpi-tooltip__trigger">Top</button>
+    <div class="bpi-tooltip__content">Tooltip on top</div>
+  </div>
+  <div class="bpi-tooltip bpi-tooltip--bottom" style="--show: 1;">
+    <button class="bpi-btn bpi-btn--outline bpi-btn--sm bpi-tooltip__trigger">Bottom</button>
+    <div class="bpi-tooltip__content">Tooltip on bottom</div>
+  </div>
+  <div class="bpi-tooltip bpi-tooltip--left" style="--show: 1;">
+    <button class="bpi-btn bpi-btn--outline bpi-btn--sm bpi-tooltip__trigger">Left</button>
+    <div class="bpi-tooltip__content">Tooltip on left</div>
+  </div>
+  <div class="bpi-tooltip bpi-tooltip--right" style="--show: 1;">
+    <button class="bpi-btn bpi-btn--outline bpi-btn--sm bpi-tooltip__trigger">Right</button>
+    <div class="bpi-tooltip__content">Tooltip on right</div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-tooltip', description: 'Base tooltip wrapper' },
+      { name: 'bpi-tooltip--top', description: 'Tooltip appears above' },
+      { name: 'bpi-tooltip--bottom', description: 'Tooltip appears below' },
+      { name: 'bpi-tooltip--left', description: 'Tooltip appears to the left' },
+      { name: 'bpi-tooltip--right', description: 'Tooltip appears to the right' },
+      { name: 'bpi-tooltip__trigger', description: 'Element that triggers tooltip' },
+      { name: 'bpi-tooltip__content', description: 'Tooltip content box' },
+    ],
   },
   {
     id: 'divider',
@@ -1779,6 +2270,38 @@ export const components: ComponentMetadata[] = [
   </div>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Horizontal Dividers',
+        description: 'Different horizontal divider variants.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px;">
+  <p style="margin: 0;">Content above full divider</p>
+  <hr class="bpi-divider bpi-divider--horizontal bpi-divider--full" />
+  <p style="margin: 0;">Content above inset divider</p>
+  <hr class="bpi-divider bpi-divider--horizontal bpi-divider--inset" />
+  <p style="margin: 0;">Content above middle divider</p>
+  <hr class="bpi-divider bpi-divider--horizontal bpi-divider--middle" />
+  <p style="margin: 0;">Content below</p>
+</div>`,
+      },
+      {
+        title: 'Vertical Divider',
+        description: 'Vertical divider between inline elements.',
+        code: `<div style="display: flex; align-items: center; gap: 16px; height: 40px;">
+  <span>Left</span>
+  <span class="bpi-divider bpi-divider--vertical bpi-divider--full" style="height: 24px;"></span>
+  <span>Right</span>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-divider', description: 'Base divider element' },
+      { name: 'bpi-divider--horizontal', description: 'Horizontal divider' },
+      { name: 'bpi-divider--vertical', description: 'Vertical divider' },
+      { name: 'bpi-divider--full', description: 'Full width/height (no margin)' },
+      { name: 'bpi-divider--inset', description: 'Inset from one side' },
+      { name: 'bpi-divider--middle', description: 'Inset from both sides' },
     ],
   },
   {
@@ -1877,6 +2400,41 @@ export const components: ComponentMetadata[] = [
 </fieldset>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Checkbox States',
+        description: 'Checkboxes in various states: unchecked, checked, and disabled.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px;">
+  <label class="bpi-checkbox">
+    <input type="checkbox" class="bpi-checkbox__input" />
+    <span class="bpi-checkbox__checkmark"></span>
+    <span class="bpi-checkbox__label">Unchecked</span>
+  </label>
+  <label class="bpi-checkbox">
+    <input type="checkbox" class="bpi-checkbox__input" checked />
+    <span class="bpi-checkbox__checkmark"></span>
+    <span class="bpi-checkbox__label">Checked</span>
+  </label>
+  <label class="bpi-checkbox">
+    <input type="checkbox" class="bpi-checkbox__input" disabled />
+    <span class="bpi-checkbox__checkmark"></span>
+    <span class="bpi-checkbox__label">Disabled</span>
+  </label>
+  <label class="bpi-checkbox">
+    <input type="checkbox" class="bpi-checkbox__input" checked disabled />
+    <span class="bpi-checkbox__checkmark"></span>
+    <span class="bpi-checkbox__label">Checked Disabled</span>
+  </label>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-checkbox', description: 'Base checkbox wrapper (use on label)' },
+      { name: 'bpi-checkbox__input', description: 'Hidden native checkbox input' },
+      { name: 'bpi-checkbox__checkmark', description: 'Visual checkmark indicator' },
+      { name: 'bpi-checkbox__label', description: 'Checkbox label text' },
+      { name: 'bpi-checkbox--indeterminate', description: 'Indeterminate/mixed state' },
+    ],
   },
   {
     id: 'radio',
@@ -1972,6 +2530,35 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Radio Group',
+        description: 'Radio buttons in a group with different states.',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px;">
+  <label class="bpi-radio">
+    <input type="radio" name="demo" class="bpi-radio__input" checked />
+    <span class="bpi-radio__circle"></span>
+    <span class="bpi-radio__label">Option A (selected)</span>
+  </label>
+  <label class="bpi-radio">
+    <input type="radio" name="demo" class="bpi-radio__input" />
+    <span class="bpi-radio__circle"></span>
+    <span class="bpi-radio__label">Option B</span>
+  </label>
+  <label class="bpi-radio">
+    <input type="radio" name="demo" class="bpi-radio__input" disabled />
+    <span class="bpi-radio__circle"></span>
+    <span class="bpi-radio__label">Option C (disabled)</span>
+  </label>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-radio', description: 'Base radio wrapper (use on label)' },
+      { name: 'bpi-radio__input', description: 'Hidden native radio input' },
+      { name: 'bpi-radio__circle', description: 'Visual radio circle indicator' },
+      { name: 'bpi-radio__label', description: 'Radio label text' },
+    ],
   },
   {
     id: 'switch',
@@ -2058,6 +2645,38 @@ export const components: ComponentMetadata[] = [
   <Switch size="lg" />
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Switch Sizes and States',
+        description: 'Toggle switches in different sizes and states.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px;">
+  <label class="bpi-switch bpi-switch--sm">
+    <input type="checkbox" class="bpi-switch__input" />
+    <span class="bpi-switch__track"><span class="bpi-switch__thumb"></span></span>
+    <span class="bpi-switch__label">Small switch</span>
+  </label>
+  <label class="bpi-switch bpi-switch--md">
+    <input type="checkbox" class="bpi-switch__input" checked />
+    <span class="bpi-switch__track"><span class="bpi-switch__thumb"></span></span>
+    <span class="bpi-switch__label">Medium switch (on)</span>
+  </label>
+  <label class="bpi-switch bpi-switch--md">
+    <input type="checkbox" class="bpi-switch__input" disabled />
+    <span class="bpi-switch__track"><span class="bpi-switch__thumb"></span></span>
+    <span class="bpi-switch__label">Disabled switch</span>
+  </label>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-switch', description: 'Base switch wrapper (use on label)' },
+      { name: 'bpi-switch--sm', description: 'Small switch' },
+      { name: 'bpi-switch--md', description: 'Medium switch' },
+      { name: 'bpi-switch__input', description: 'Hidden native checkbox input' },
+      { name: 'bpi-switch__track', description: 'Switch track/rail background' },
+      { name: 'bpi-switch__thumb', description: 'Switch toggle thumb/knob' },
+      { name: 'bpi-switch__label', description: 'Switch label text' },
     ],
   },
   {
@@ -2153,6 +2772,38 @@ export const components: ComponentMetadata[] = [
   </div>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Basic Slider',
+        description: 'Range slider with label and value display.',
+        code: `<div class="bpi-slider">
+  <label class="bpi-slider__label">Volume</label>
+  <div class="bpi-slider__wrapper">
+    <input type="range" class="bpi-slider__input" min="0" max="100" value="60" />
+    <span class="bpi-slider__value">60</span>
+  </div>
+</div>`,
+      },
+      {
+        title: 'Disabled Slider',
+        description: 'Slider in disabled state.',
+        code: `<div class="bpi-slider bpi-slider--disabled">
+  <label class="bpi-slider__label">Brightness</label>
+  <div class="bpi-slider__wrapper">
+    <input type="range" class="bpi-slider__input" min="0" max="100" value="30" disabled />
+    <span class="bpi-slider__value">30</span>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-slider', description: 'Base slider container' },
+      { name: 'bpi-slider--disabled', description: 'Disabled state' },
+      { name: 'bpi-slider__label', description: 'Slider label text' },
+      { name: 'bpi-slider__wrapper', description: 'Wrapper for input and value' },
+      { name: 'bpi-slider__input', description: 'Native range input' },
+      { name: 'bpi-slider__value', description: 'Current value display' },
     ],
   },
   {
@@ -2411,6 +3062,71 @@ export const components: ComponentMetadata[] = [
 </Table>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Basic Table',
+        description: 'Standard data table with headers and rows.',
+        code: `<div class="bpi-table-wrapper">
+  <table class="bpi-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Alice Johnson</td>
+        <td>Developer</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--success bpi-chip--sm"><span class="bpi-chip__content">Active</span></span></td>
+      </tr>
+      <tr>
+        <td>Bob Smith</td>
+        <td>Designer</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--warning bpi-chip--sm"><span class="bpi-chip__content">Away</span></span></td>
+      </tr>
+      <tr>
+        <td>Carol Williams</td>
+        <td>Manager</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--danger bpi-chip--sm"><span class="bpi-chip__content">Offline</span></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+      },
+      {
+        title: 'Striped Table',
+        description: 'Table with alternating row backgrounds.',
+        code: `<div class="bpi-table-wrapper">
+  <table class="bpi-table bpi-table--striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>001</td><td>Widget A</td><td>$19.99</td></tr>
+      <tr><td>002</td><td>Widget B</td><td>$29.99</td></tr>
+      <tr><td>003</td><td>Widget C</td><td>$39.99</td></tr>
+      <tr><td>004</td><td>Widget D</td><td>$49.99</td></tr>
+    </tbody>
+  </table>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-table-wrapper', description: 'Scrollable table container' },
+      { name: 'bpi-table', description: 'Base table element' },
+      { name: 'bpi-table--striped', description: 'Alternating row backgrounds' },
+      { name: 'bpi-th--sortable', description: 'Sortable column header' },
+      { name: 'bpi-th--sorted', description: 'Currently sorted column' },
+      { name: 'bpi-th__sort-icon', description: 'Sort direction icon' },
+      { name: 'bpi-tr--selected', description: 'Selected/highlighted row' },
+      { name: 'bpi-table__empty', description: 'Empty state message' },
+    ],
   },
   // MOLECULES
   {
@@ -2612,6 +3328,47 @@ export const components: ComponentMetadata[] = [
 </Card>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Card Variants',
+        description: 'Flat and elevated card styles with header, body, and footer.',
+        code: `<div style="display: flex; gap: 24px; flex-wrap: wrap;">
+  <div class="bpi-card bpi-card--flat" style="width: 300px;">
+    <div class="bpi-card__header">
+      <h3 class="bpi-card__title">Flat Card</h3>
+    </div>
+    <div class="bpi-card__body">
+      <p style="margin: 0;">Card with a subtle border and no shadow.</p>
+    </div>
+    <div class="bpi-card__footer">
+      <button class="bpi-btn bpi-btn--outline bpi-btn--sm">Cancel</button>
+      <button class="bpi-btn bpi-btn--primary bpi-btn--sm">Save</button>
+    </div>
+  </div>
+  <div class="bpi-card bpi-card--elevated" style="width: 300px;">
+    <div class="bpi-card__header">
+      <h3 class="bpi-card__title">Elevated Card</h3>
+    </div>
+    <div class="bpi-card__body">
+      <p style="margin: 0;">Card with box shadow for depth.</p>
+    </div>
+    <div class="bpi-card__footer">
+      <button class="bpi-btn bpi-btn--primary bpi-btn--sm">Action</button>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-card', description: 'Base card container' },
+      { name: 'bpi-card--flat', description: 'Flat variant with border' },
+      { name: 'bpi-card--elevated', description: 'Elevated variant with shadow' },
+      { name: 'bpi-card__header', description: 'Card header section' },
+      { name: 'bpi-card__title', description: 'Card title text' },
+      { name: 'bpi-card__header-action', description: 'Header action buttons area' },
+      { name: 'bpi-card__body', description: 'Card body/content area' },
+      { name: 'bpi-card__footer', description: 'Card footer with actions' },
+    ],
   },
   {
     id: 'dialog',
@@ -2736,6 +3493,44 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Dialog Sizes',
+        description: 'Modal dialogs in small, medium, and large sizes. Add bpi-dialog--open to show.',
+        code: `<div style="position: relative; height: 300px; border: 1px dashed #ccc; border-radius: 8px; overflow: hidden;">
+  <div class="bpi-dialog bpi-dialog--md bpi-dialog--open" style="position: absolute;">
+    <div class="bpi-dialog__backdrop" style="position: absolute;"></div>
+    <div class="bpi-dialog__content">
+      <div class="bpi-dialog__header">
+        <h2 class="bpi-dialog__title">Confirm Action</h2>
+        <button class="bpi-dialog__close" aria-label="Close">&times;</button>
+      </div>
+      <div class="bpi-dialog__body">
+        <p style="margin: 0;">Are you sure you want to proceed? This action cannot be undone.</p>
+      </div>
+      <div class="bpi-dialog__footer">
+        <button class="bpi-btn bpi-btn--outline bpi-btn--sm">Cancel</button>
+        <button class="bpi-btn bpi-btn--danger bpi-btn--sm">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-dialog', description: 'Base dialog overlay container' },
+      { name: 'bpi-dialog--open', description: 'Visible/open state' },
+      { name: 'bpi-dialog--sm', description: 'Small dialog (max 400px)' },
+      { name: 'bpi-dialog--md', description: 'Medium dialog (max 600px)' },
+      { name: 'bpi-dialog--lg', description: 'Large dialog (max 800px)' },
+      { name: 'bpi-dialog__backdrop', description: 'Dark background overlay' },
+      { name: 'bpi-dialog__content', description: 'Dialog content container' },
+      { name: 'bpi-dialog__header', description: 'Header with title and close' },
+      { name: 'bpi-dialog__title', description: 'Dialog title text' },
+      { name: 'bpi-dialog__close', description: 'Close button' },
+      { name: 'bpi-dialog__body', description: 'Dialog body/content' },
+      { name: 'bpi-dialog__footer', description: 'Footer with action buttons' },
+    ],
   },
   {
     id: 'snackbar',
@@ -2829,6 +3624,39 @@ export const components: ComponentMetadata[] = [
 </div>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Snackbar Variants',
+        description: 'Toast-style notifications in different colors. Static demo (normally fixed position).',
+        code: `<div style="display: flex; flex-direction: column; gap: 12px;">
+  <div class="bpi-snackbar bpi-snackbar--open" style="position: relative; transform: none; opacity: 1; pointer-events: auto;">
+    <div class="bpi-snackbar__content"><span class="bpi-snackbar__message">Default snackbar message</span></div>
+    <button class="bpi-snackbar__close">&times;</button>
+  </div>
+  <div class="bpi-snackbar bpi-snackbar--success bpi-snackbar--open" style="position: relative; transform: none; opacity: 1; pointer-events: auto;">
+    <div class="bpi-snackbar__content"><span class="bpi-snackbar__message">Success! Changes saved.</span></div>
+    <button class="bpi-snackbar__close">&times;</button>
+  </div>
+  <div class="bpi-snackbar bpi-snackbar--error bpi-snackbar--open" style="position: relative; transform: none; opacity: 1; pointer-events: auto;">
+    <div class="bpi-snackbar__content"><span class="bpi-snackbar__message">Error! Something went wrong.</span></div>
+    <button class="bpi-snackbar__close">&times;</button>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-snackbar', description: 'Base snackbar (fixed position)' },
+      { name: 'bpi-snackbar--open', description: 'Visible state' },
+      { name: 'bpi-snackbar--bottom', description: 'Bottom-left position' },
+      { name: 'bpi-snackbar--top', description: 'Top-left position' },
+      { name: 'bpi-snackbar--success', description: 'Success color' },
+      { name: 'bpi-snackbar--error', description: 'Error/danger color' },
+      { name: 'bpi-snackbar--warning', description: 'Warning color' },
+      { name: 'bpi-snackbar--info', description: 'Info color' },
+      { name: 'bpi-snackbar__content', description: 'Content wrapper' },
+      { name: 'bpi-snackbar__message', description: 'Message text' },
+      { name: 'bpi-snackbar__close', description: 'Close button' },
+    ],
   },
   {
     id: 'tabs',
@@ -2915,6 +3743,34 @@ export const components: ComponentMetadata[] = [
 </Tabs>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Basic Tabs',
+        description: 'Tab navigation with active state and content panels.',
+        code: `<div class="bpi-tabs">
+  <div class="bpi-tabs__list" role="tablist">
+    <button class="bpi-tabs__tab bpi-tabs__tab--active" role="tab">Overview</button>
+    <button class="bpi-tabs__tab" role="tab">Features</button>
+    <button class="bpi-tabs__tab" role="tab">Pricing</button>
+    <button class="bpi-tabs__tab" role="tab" disabled>Disabled</button>
+  </div>
+  <div class="bpi-tabs__content">
+    <div class="bpi-tabs__panel bpi-tabs__panel--active" role="tabpanel">
+      <p style="margin: 0;">Overview content goes here. This is the active panel.</p>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-tabs', description: 'Base tabs container' },
+      { name: 'bpi-tabs__list', description: 'Tab button list (use role=tablist)' },
+      { name: 'bpi-tabs__tab', description: 'Individual tab button' },
+      { name: 'bpi-tabs__tab--active', description: 'Active/selected tab' },
+      { name: 'bpi-tabs__content', description: 'Content panels wrapper' },
+      { name: 'bpi-tabs__panel', description: 'Tab content panel' },
+      { name: 'bpi-tabs__panel--active', description: 'Visible panel' },
+    ],
   },
   {
     id: 'breadcrumbs',
@@ -2964,6 +3820,26 @@ export const components: ComponentMetadata[] = [
   <BreadcrumbItem>Current Product</BreadcrumbItem>
 </Breadcrumbs>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Basic Breadcrumbs',
+        description: 'Navigation breadcrumbs with links and current page.',
+        code: `<nav class="bpi-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="bpi-breadcrumbs__list">
+    <li><a href="#">Home</a></li>
+    <li><span class="bpi-breadcrumbs__separator">/</span></li>
+    <li><a href="#">Products</a></li>
+    <li><span class="bpi-breadcrumbs__separator">/</span></li>
+    <li><span aria-current="page">Widget Pro</span></li>
+  </ol>
+</nav>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-breadcrumbs', description: 'Base breadcrumbs container' },
+      { name: 'bpi-breadcrumbs__list', description: 'Ordered list of items' },
+      { name: 'bpi-breadcrumbs__separator', description: 'Separator between items' },
     ],
   },
   {
@@ -3029,6 +3905,32 @@ export const components: ComponentMetadata[] = [
         description: 'Compact pagination for space-constrained layouts.',
         code: `<Pagination total="80" page="1" pageSize="10" compact />`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Basic Pagination',
+        description: 'Page navigation with prev/next and page numbers.',
+        code: `<nav class="bpi-pagination" aria-label="Pagination">
+  <button class="bpi-pagination__button bpi-pagination__prev" disabled>&laquo; Prev</button>
+  <div class="bpi-pagination__pages">
+    <button class="bpi-pagination__button bpi-pagination__button--active">1</button>
+    <button class="bpi-pagination__button">2</button>
+    <button class="bpi-pagination__button">3</button>
+    <span class="bpi-pagination__ellipsis">...</span>
+    <button class="bpi-pagination__button">10</button>
+  </div>
+  <button class="bpi-pagination__button bpi-pagination__next">Next &raquo;</button>
+</nav>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-pagination', description: 'Base pagination container' },
+      { name: 'bpi-pagination__button', description: 'Page button' },
+      { name: 'bpi-pagination__button--active', description: 'Current page button' },
+      { name: 'bpi-pagination__pages', description: 'Page numbers wrapper' },
+      { name: 'bpi-pagination__prev', description: 'Previous page button' },
+      { name: 'bpi-pagination__next', description: 'Next page button' },
+      { name: 'bpi-pagination__ellipsis', description: 'Ellipsis between pages' },
     ],
   },
   {
@@ -3118,6 +4020,26 @@ export const components: ComponentMetadata[] = [
   </Menu>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Dropdown Menu',
+        description: 'Dropdown menu with items. Add bpi-menu--open to show.',
+        code: `<div class="bpi-menu bpi-menu--open" style="display: inline-block;">
+  <button class="bpi-btn bpi-btn--outline bpi-btn--sm">Options &#9662;</button>
+  <div class="bpi-menu__content" style="position: relative; opacity: 1; visibility: visible; transform: none;">
+    <div class="bpi-menu__item">Edit</div>
+    <div class="bpi-menu__item">Duplicate</div>
+    <div class="bpi-menu__item" style="color: var(--bpi-danger, #dc2626);">Delete</div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-menu', description: 'Base menu wrapper' },
+      { name: 'bpi-menu--open', description: 'Visible/open state' },
+      { name: 'bpi-menu__content', description: 'Dropdown content container' },
+      { name: 'bpi-menu__item', description: 'Menu item (from MenuItem SCSS)' },
     ],
   },
   {
@@ -3223,6 +4145,57 @@ export const components: ComponentMetadata[] = [
   <option value="tag4">Svelte</option>
 </Select>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Select Variants',
+        description: 'Select dropdowns in outlined and filled styles.',
+        code: `<div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+  <div class="bpi-select bpi-select--outlined">
+    <label class="bpi-select__label">Country</label>
+    <div class="bpi-select__wrapper">
+      <div class="bpi-select__input" tabindex="0">
+        <span class="bpi-select__value">Thailand</span>
+        <span class="bpi-select__arrow">&#9662;</span>
+      </div>
+    </div>
+  </div>
+  <div class="bpi-select bpi-select--filled">
+    <label class="bpi-select__label">Category</label>
+    <div class="bpi-select__wrapper">
+      <div class="bpi-select__input" tabindex="0">
+        <span class="bpi-select__value">Select an option</span>
+        <span class="bpi-select__arrow">&#9662;</span>
+      </div>
+    </div>
+  </div>
+  <div class="bpi-select bpi-select--error">
+    <label class="bpi-select__label">Required Field</label>
+    <div class="bpi-select__wrapper">
+      <div class="bpi-select__input" tabindex="0">
+        <span class="bpi-select__value">-</span>
+        <span class="bpi-select__arrow">&#9662;</span>
+      </div>
+    </div>
+    <span class="bpi-select__error">This field is required</span>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-select', description: 'Base select wrapper' },
+      { name: 'bpi-select--outlined', description: 'Outlined variant' },
+      { name: 'bpi-select--filled', description: 'Filled background variant' },
+      { name: 'bpi-select--error', description: 'Error state' },
+      { name: 'bpi-select--disabled', description: 'Disabled state' },
+      { name: 'bpi-select__label', description: 'Select label' },
+      { name: 'bpi-select__input', description: 'Trigger button element' },
+      { name: 'bpi-select__value', description: 'Selected value text' },
+      { name: 'bpi-select__arrow', description: 'Dropdown arrow icon' },
+      { name: 'bpi-select__listbox', description: 'Options dropdown container' },
+      { name: 'bpi-select__option', description: 'Individual option' },
+      { name: 'bpi-select__option--selected', description: 'Selected option' },
+      { name: 'bpi-select__error', description: 'Error message text' },
     ],
   },
   {
@@ -3461,6 +4434,46 @@ export const components: ComponentMetadata[] = [
 </Accordion>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Accordion Items',
+        description: 'Expandable accordion sections. Add bpi-accordion--open to expand.',
+        code: `<div style="display: flex; flex-direction: column; gap: 0;">
+  <div class="bpi-accordion bpi-accordion--open">
+    <button class="bpi-accordion__trigger">
+      <span class="bpi-accordion__title">What is BPI Design System?</span>
+      <span class="bpi-accordion__icon">&#9650;</span>
+    </button>
+    <div class="bpi-accordion__content">
+      <div class="bpi-accordion__body">
+        A CSS-first component library that works with any frontend framework.
+      </div>
+    </div>
+  </div>
+  <div class="bpi-accordion">
+    <button class="bpi-accordion__trigger">
+      <span class="bpi-accordion__title">How do I install it?</span>
+      <span class="bpi-accordion__icon">&#9660;</span>
+    </button>
+  </div>
+  <div class="bpi-accordion">
+    <button class="bpi-accordion__trigger">
+      <span class="bpi-accordion__title">Does it support dark mode?</span>
+      <span class="bpi-accordion__icon">&#9660;</span>
+    </button>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-accordion', description: 'Base accordion item' },
+      { name: 'bpi-accordion--open', description: 'Expanded state' },
+      { name: 'bpi-accordion__trigger', description: 'Clickable header button' },
+      { name: 'bpi-accordion__title', description: 'Accordion title text' },
+      { name: 'bpi-accordion__icon', description: 'Expand/collapse icon' },
+      { name: 'bpi-accordion__content', description: 'Collapsible content wrapper' },
+      { name: 'bpi-accordion__body', description: 'Content body with padding' },
+    ],
   },
   {
     id: 'drawer',
@@ -3571,6 +4584,38 @@ export const components: ComponentMetadata[] = [
   </Drawer>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Drawer',
+        description: 'Slide-out panel from left or right. Add bpi-drawer--open to show.',
+        code: `<div style="position: relative; height: 250px; border: 1px dashed #ccc; border-radius: 8px; overflow: hidden;">
+  <div class="bpi-drawer bpi-drawer--left bpi-drawer--md bpi-drawer--open" style="position: absolute;">
+    <div class="bpi-drawer__backdrop" style="position: absolute;"></div>
+    <div class="bpi-drawer__content" style="height: 100%;">
+      <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+        <h3 style="margin: 0;">Menu</h3>
+      </div>
+      <div style="padding: 16px;">
+        <p style="margin: 0 0 8px;">Dashboard</p>
+        <p style="margin: 0 0 8px;">Settings</p>
+        <p style="margin: 0;">Profile</p>
+      </div>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-drawer', description: 'Base drawer overlay' },
+      { name: 'bpi-drawer--open', description: 'Visible/open state' },
+      { name: 'bpi-drawer--left', description: 'Slide from left' },
+      { name: 'bpi-drawer--right', description: 'Slide from right' },
+      { name: 'bpi-drawer--sm', description: 'Small width (300px)' },
+      { name: 'bpi-drawer--md', description: 'Medium width (400px)' },
+      { name: 'bpi-drawer--lg', description: 'Large width (500px)' },
+      { name: 'bpi-drawer__backdrop', description: 'Dark background overlay' },
+      { name: 'bpi-drawer__content', description: 'Drawer content panel' },
     ],
   },
   {
@@ -4010,6 +5055,75 @@ export const components: ComponentMetadata[] = [
 </DataTable>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Data Table with Sorting and Pagination',
+        description: 'Full-featured data table with sortable columns, selected rows, and pagination.',
+        code: `<div class="bpi-table-wrapper">
+  <table class="bpi-table">
+    <thead>
+      <tr>
+        <th class="bpi-th--sortable bpi-th--sorted">
+          Name <span class="bpi-th__sort-icon">&#9650;</span>
+        </th>
+        <th class="bpi-th--sortable">
+          Department <span class="bpi-th__sort-icon">&#9650;</span>
+        </th>
+        <th>Status</th>
+        <th class="bpi-th--sortable">
+          Joined <span class="bpi-th__sort-icon">&#9650;</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bpi-tr--selected">
+        <td>Alice Johnson</td>
+        <td>Engineering</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--success bpi-chip--sm"><span class="bpi-chip__content">Active</span></span></td>
+        <td>Jan 15, 2024</td>
+      </tr>
+      <tr>
+        <td>Bob Smith</td>
+        <td>Design</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--warning bpi-chip--sm"><span class="bpi-chip__content">Away</span></span></td>
+        <td>Mar 22, 2024</td>
+      </tr>
+      <tr>
+        <td>Carol Williams</td>
+        <td>Marketing</td>
+        <td><span class="bpi-chip bpi-chip--filled bpi-chip--danger bpi-chip--sm"><span class="bpi-chip__content">Offline</span></span></td>
+        <td>Jun 01, 2024</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="bpi-pagination">
+    <span class="bpi-pagination__info">Showing 1-3 of 25</span>
+    <div class="bpi-pagination__buttons">
+      <button class="bpi-pagination__btn" disabled>&laquo;</button>
+      <button class="bpi-pagination__btn bpi-pagination__btn--active">1</button>
+      <button class="bpi-pagination__btn">2</button>
+      <button class="bpi-pagination__btn">3</button>
+      <button class="bpi-pagination__btn">&raquo;</button>
+    </div>
+  </div>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-table-wrapper', description: 'Scrollable table container' },
+      { name: 'bpi-table', description: 'Base table' },
+      { name: 'bpi-table--striped', description: 'Alternating row colors' },
+      { name: 'bpi-th--sortable', description: 'Sortable column header' },
+      { name: 'bpi-th--sorted', description: 'Active sort column' },
+      { name: 'bpi-th__sort-icon', description: 'Sort direction indicator' },
+      { name: 'bpi-tr--selected', description: 'Selected/highlighted row' },
+      { name: 'bpi-table__empty', description: 'Empty state message' },
+      { name: 'bpi-pagination', description: 'DataTable pagination bar' },
+      { name: 'bpi-pagination__info', description: 'Row count info text' },
+      { name: 'bpi-pagination__buttons', description: 'Page buttons container' },
+      { name: 'bpi-pagination__btn', description: 'Page navigation button' },
+      { name: 'bpi-pagination__btn--active', description: 'Current page button' },
+    ],
   },
   {
     id: 'navbar',
@@ -4052,6 +5166,35 @@ export const components: ComponentMetadata[] = [
 </Navbar>`,
       },
     ],
+    cssExamples: [
+      {
+        title: 'Basic Navbar',
+        description: 'Top navigation bar with brand, nav links, and action buttons.',
+        code: `<nav class="bpi-navbar">
+  <a class="bpi-navbar__brand" href="#">
+    <strong>BPI</strong> App
+  </a>
+  <ul class="bpi-navbar__nav">
+    <li><a class="bpi-navbar__link bpi-navbar__link--active" href="#">Dashboard</a></li>
+    <li><a class="bpi-navbar__link" href="#">Projects</a></li>
+    <li><a class="bpi-navbar__link" href="#">Reports</a></li>
+    <li><a class="bpi-navbar__link" href="#">Settings</a></li>
+  </ul>
+  <div class="bpi-navbar__actions">
+    <button class="bpi-btn bpi-btn--ghost bpi-btn--sm">&#128276;</button>
+    <div class="bpi-avatar bpi-avatar--sm"><span class="bpi-avatar__initials">JD</span></div>
+  </div>
+</nav>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-navbar', description: 'Base navbar container' },
+      { name: 'bpi-navbar__brand', description: 'Brand/logo area' },
+      { name: 'bpi-navbar__nav', description: 'Navigation links list' },
+      { name: 'bpi-navbar__link', description: 'Navigation link' },
+      { name: 'bpi-navbar__link--active', description: 'Active/current link' },
+      { name: 'bpi-navbar__actions', description: 'Right-side action buttons' },
+    ],
   },
   {
     id: 'sidebar',
@@ -4091,6 +5234,75 @@ export const components: ComponentMetadata[] = [
   <SidebarItem icon="settings" label="Settings" href="/settings" />
 </Sidebar>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Sidebar Navigation',
+        description: 'Vertical sidebar with sections and navigation items.',
+        code: `<aside class="bpi-sidebar" style="height: 350px;">
+  <div class="bpi-sidebar__header">
+    <strong>BPI App</strong>
+  </div>
+  <div class="bpi-sidebar__content">
+    <div class="bpi-sidebar__section">
+      <div class="bpi-sidebar__section-title">Main</div>
+      <a class="bpi-sidebar__item bpi-sidebar__item--active" href="#">
+        <span class="bpi-sidebar__item-icon">&#127968;</span> Dashboard
+      </a>
+      <a class="bpi-sidebar__item" href="#">
+        <span class="bpi-sidebar__item-icon">&#128196;</span> Projects
+      </a>
+      <a class="bpi-sidebar__item" href="#">
+        <span class="bpi-sidebar__item-icon">&#128202;</span> Analytics
+      </a>
+    </div>
+    <div class="bpi-sidebar__section">
+      <div class="bpi-sidebar__section-title">Settings</div>
+      <a class="bpi-sidebar__item" href="#">
+        <span class="bpi-sidebar__item-icon">&#9881;</span> Preferences
+      </a>
+      <a class="bpi-sidebar__item" href="#">
+        <span class="bpi-sidebar__item-icon">&#128100;</span> Profile
+      </a>
+    </div>
+  </div>
+  <div class="bpi-sidebar__footer">
+    <span style="font-size: 12px; color: #888;">v1.0.0</span>
+  </div>
+</aside>`,
+      },
+      {
+        title: 'Collapsed Sidebar',
+        description: 'Narrow collapsed sidebar showing only icons.',
+        code: `<aside class="bpi-sidebar bpi-sidebar--collapsed" style="height: 200px;">
+  <div class="bpi-sidebar__header" style="justify-content: center;">
+    <strong>B</strong>
+  </div>
+  <div class="bpi-sidebar__content">
+    <a class="bpi-sidebar__item bpi-sidebar__item--active" href="#" style="justify-content: center;">
+      <span class="bpi-sidebar__item-icon">&#127968;</span>
+    </a>
+    <a class="bpi-sidebar__item" href="#" style="justify-content: center;">
+      <span class="bpi-sidebar__item-icon">&#128196;</span>
+    </a>
+    <a class="bpi-sidebar__item" href="#" style="justify-content: center;">
+      <span class="bpi-sidebar__item-icon">&#9881;</span>
+    </a>
+  </div>
+</aside>`,
+      },
+    ],
+    cssClasses: [
+      { name: 'bpi-sidebar', description: 'Base sidebar container (260px wide)' },
+      { name: 'bpi-sidebar--collapsed', description: 'Collapsed narrow state (64px)' },
+      { name: 'bpi-sidebar__header', description: 'Top header area' },
+      { name: 'bpi-sidebar__content', description: 'Scrollable content area' },
+      { name: 'bpi-sidebar__section', description: 'Grouped nav section' },
+      { name: 'bpi-sidebar__section-title', description: 'Section title label' },
+      { name: 'bpi-sidebar__item', description: 'Navigation item/link' },
+      { name: 'bpi-sidebar__item--active', description: 'Active/selected item' },
+      { name: 'bpi-sidebar__item-icon', description: 'Item icon' },
+      { name: 'bpi-sidebar__footer', description: 'Bottom footer area' },
     ],
   },
 ];
