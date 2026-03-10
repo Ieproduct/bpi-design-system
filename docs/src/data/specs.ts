@@ -1,27 +1,46 @@
 // ============================================================
-// BPI Design System — Component Specifications
-// Each team reads these specs and implements components themselves.
-// Specs reference design tokens (colors, spacing, typography, misc).
+// BPI Design System — Component Specifications (Atoms)
+//
+// TOKEN REFERENCE CONVENTION:
+// All token references use the actual CSS custom property names
+// with the --bpi- prefix. Example: --bpi-space-2 = 8px
+//
+// TOKEN CHEAT SHEET:
+//   Spacing:     --bpi-space-{1,2,3,4,5,6,8,10,12,16}  → 4–64px
+//   Font Size:   --bpi-font-size-{xs,sm,base,lg,xl,2xl,3xl}  → 12–30px
+//   Font Weight: --bpi-font-weight-{light,normal,medium,semibold,bold}  → 300–700
+//   Font Family: --bpi-font-family-{sans,mono}
+//   Line Height: --bpi-line-height-{tight,normal,relaxed}  → 1.25, 1.5, 1.75
+//   Radius:      --bpi-radius-{none,sm,md,lg,xl,2xl,full}  → 0–9999px
+//   Shadow:      --bpi-shadow-{xs,sm,md,lg,xl}
+//   Z-Index:     --bpi-z-{dropdown,sticky,fixed,modal-backdrop,modal,popover,tooltip,toast}
+//   Transition:  --bpi-transition-{fast,normal,slow}  → 150ms, 250ms, 350ms
+//   Focus Ring:  --bpi-focus-ring-{width,offset,color}
+//   Colors:      --bpi-{primary,secondary,success,danger,warning,info} + shades
+//   Text:        --bpi-text-{primary,secondary,muted,disabled,inverse}
+//   Background:  --bpi-bg-{default,primary,secondary,tertiary}
+//   Border:      --bpi-border-{default,strong,focus}
+//   Surface:     --bpi-surface-{card,variant,hover}
 // ============================================================
 
 // --- Interfaces ---
 
 export interface SizeSpec {
   name: string;
-  padding: string;       // e.g. "space-2 space-4" (vertical horizontal)
-  fontSize: string;      // token ref e.g. "font-size-sm"
-  borderRadius: string;  // token ref e.g. "radius-md"
-  minHeight?: string;
+  height?: string;
+  padding?: string;
+  fontSize?: string;
+  borderRadius?: string;
   extra?: Record<string, string>;
 }
 
 export interface VariantSpec {
   name: string;
-  background: string;
-  text: string;
+  background?: string;
+  text?: string;
   border?: string;
   hoverBg?: string;
-  activeBg?: string;
+  [key: string]: string | undefined;
 }
 
 export interface StateSpec {
@@ -31,78 +50,33 @@ export interface StateSpec {
   transition?: string;
 }
 
-export interface A11ySpec {
-  role?: string;
-  keyboard?: string[];
-  ariaProps?: string[];
-}
-
-export interface SubElement {
+export interface ElementSpec {
   name: string;
   description: string;
   styles: Record<string, string>;
 }
 
+export interface A11ySpec {
+  role?: string;
+  keyboard?: string[];
+  ariaProps?: string[];
+  [key: string]: unknown;
+}
+
 export interface ComponentSpec {
   id: string;
   name: string;
-  nameTh?: string;
-  category: 'atom' | 'molecule' | 'organism';
+  category: 'atom';
   description: string;
-  anatomy: string;
+  anatomy?: string;
   sizes?: SizeSpec[];
   variants?: VariantSpec[];
   states?: StateSpec[];
-  elements?: SubElement[];
-  a11y?: A11ySpec;
+  elements?: ElementSpec[];
   defaults?: Record<string, string>;
+  a11y?: A11ySpec;
   notes?: string[];
 }
-
-// --- Helpers for token display ---
-
-export const tokenValues: Record<string, string> = {
-  // Spacing
-  'space-1': '4px', 'space-2': '8px', 'space-3': '12px', 'space-4': '16px',
-  'space-5': '20px', 'space-6': '24px', 'space-8': '32px', 'space-10': '40px',
-  'space-12': '48px', 'space-16': '64px',
-  // Font sizes
-  'font-size-xs': '12px', 'font-size-sm': '14px', 'font-size-base': '16px',
-  'font-size-lg': '18px', 'font-size-xl': '20px', 'font-size-2xl': '24px', 'font-size-3xl': '30px',
-  // Font weights
-  'font-light': '300', 'font-normal': '400', 'font-medium': '500',
-  'font-semibold': '600', 'font-bold': '700',
-  // Border radius
-  'radius-none': '0', 'radius-sm': '4px', 'radius-md': '6px',
-  'radius-lg': '8px', 'radius-xl': '12px', 'radius-2xl': '16px', 'radius-full': '9999px',
-  // Transitions
-  'transition-fast': '150ms ease', 'transition-normal': '250ms ease', 'transition-slow': '350ms ease',
-  // Z-index
-  'z-dropdown': '1000', 'z-sticky': '1020', 'z-fixed': '1030',
-  'z-modal-backdrop': '1040', 'z-modal': '1050', 'z-popover': '1060', 'z-tooltip': '1070',
-};
-
-// --- Color reference (semantic) ---
-export const colorTokens: Record<string, string> = {
-  'primary': '#E32321', 'primary-light': '#FCA5A5', 'primary-lighter': '#FEF2F2',
-  'primary-dark': '#B91C1C', 'primary-darker': '#7F1D1D', 'primary-contrast': '#FFFFFF',
-  'secondary': '#262626', 'secondary-light': '#A3A3A3', 'secondary-dark': '#171717',
-  'secondary-contrast': '#FFFFFF',
-  'success': '#16A34A', 'success-light': '#86EFAC', 'success-lighter': '#F0FDF4',
-  'success-dark': '#15803D', 'success-contrast': '#FFFFFF',
-  'danger': '#DC2626', 'danger-light': '#FCA5A5', 'danger-lighter': '#FEF2F2',
-  'danger-dark': '#B91C1C', 'danger-contrast': '#FFFFFF',
-  'warning': '#D97706', 'warning-light': '#FCD34D', 'warning-lighter': '#FFFBEB',
-  'warning-dark': '#B45309', 'warning-contrast': '#FFFFFF',
-  'info': '#0284C7', 'info-light': '#7DD3FC', 'info-lighter': '#F0F9FF',
-  'info-dark': '#0369A1', 'info-contrast': '#FFFFFF',
-  'text-primary': '#0F172A', 'text-secondary': '#64748B', 'text-muted': '#94A3B8',
-  'text-inverse': '#FFFFFF', 'text-disabled': '#94A3B8',
-  'bg-default': '#F8FAFC', 'bg-primary': '#FFFFFF', 'bg-secondary': '#F9FAFB',
-  'border-default': '#E5E7EB', 'border-strong': '#D1D5DB',
-  'surface-card': '#FFFFFF', 'surface-hover': '#F8FAFC',
-  'transparent': 'transparent', 'white': '#FFFFFF',
-};
 
 // ============================================================
 // ATOM SPECS
@@ -112,230 +86,300 @@ const buttonSpec: ComponentSpec = {
   id: 'button',
   name: 'Button',
   category: 'atom',
-  description: 'Interactive element that triggers actions when clicked.',
-  anatomy: 'Icon (optional) + Label + Icon (optional)',
-  defaults: { size: 'md', variant: 'primary' },
+  description: 'Interactive element that triggers actions.',
+  anatomy: 'Container + Label + Icon (optional)',
   sizes: [
-    { name: 'xs', padding: 'space-1 space-2 (4px 8px)', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-sm (4px)' },
-    { name: 'sm', padding: 'space-1 space-3 (4px 12px)', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-md (6px)' },
-    { name: 'md', padding: 'space-2 space-4 (8px 16px)', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-md (6px)' },
-    { name: 'lg', padding: 'space-3 space-6 (12px 24px)', fontSize: 'font-size-base (16px)', borderRadius: 'radius-md (6px)' },
+    { name: 'sm', height: '32px', padding: '--bpi-space-1 --bpi-space-3', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'md', height: '40px', padding: '--bpi-space-2 --bpi-space-4', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'lg', height: '48px', padding: '--bpi-space-3 --bpi-space-6', fontSize: '--bpi-font-size-base (16px)', borderRadius: '--bpi-radius-md (6px)' },
   ],
   variants: [
-    { name: 'primary', background: 'primary', text: 'primary-contrast', border: 'primary', hoverBg: 'primary-dark' },
-    { name: 'secondary', background: 'secondary', text: 'secondary-contrast', border: 'secondary', hoverBg: 'secondary-dark' },
-    { name: 'danger', background: 'danger', text: 'danger-contrast', border: 'danger', hoverBg: 'danger-dark' },
-    { name: 'success', background: 'success', text: 'success-contrast', border: 'success', hoverBg: 'success-dark' },
-    { name: 'warning', background: 'warning', text: 'warning-contrast', border: 'warning', hoverBg: 'warning-dark' },
-    { name: 'info', background: 'info', text: 'info-contrast', border: 'info', hoverBg: 'info-dark' },
-    { name: 'outline', background: 'transparent', text: 'primary', border: 'border-strong', hoverBg: 'bg-secondary' },
-    { name: 'ghost', background: 'transparent', text: 'text-secondary', border: 'transparent', hoverBg: 'bg-secondary' },
+    { name: 'contained', background: '--bpi-primary', text: '--bpi-primary-contrast', border: 'none' },
+    { name: 'outlined', background: 'transparent', text: '--bpi-primary', border: '1px solid --bpi-primary' },
+    { name: 'text', background: 'transparent', text: '--bpi-primary', border: 'none' },
+    { name: 'danger', background: '--bpi-danger', text: '--bpi-danger-contrast', border: 'none' },
+    { name: 'secondary', background: '--bpi-secondary', text: '--bpi-secondary-contrast', border: 'none' },
   ],
   states: [
-    { name: 'hover', description: 'Pointer hovering', css: { 'background': 'hoverBg token' }, transition: 'transition-fast (150ms)' },
-    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '2px solid focus-ring', 'outline-offset': '2px' } },
-    { name: 'active', description: 'Being pressed', css: { 'background': 'darker variant' } },
-    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'pointer-events': 'none', 'cursor': 'not-allowed' } },
-    { name: 'loading', description: 'Action in progress', css: { 'color': 'transparent', 'position': 'relative' }, transition: 'spinner 0.6s linear infinite' },
+    { name: 'hover', description: 'Pointer over button', css: { 'opacity': '0.9', 'cursor': 'pointer' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'active', description: 'Button pressed', css: { 'opacity': '0.8', 'transform': 'scale(0.98)' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color', 'outline-offset': '--bpi-focus-ring-offset' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed', 'pointer-events': 'none' } },
   ],
-  a11y: { role: 'button', keyboard: ['Enter / Space to activate'], ariaProps: ['aria-disabled', 'aria-label', 'aria-busy (loading)'] },
-  notes: [
-    'Display: inline-flex, center-aligned, gap 8px between icon and label',
-    'Font weight: medium (500)',
-    'Line height: tight (1.25)',
-    'Transition: background-color, border-color, color, box-shadow — 150ms ease',
-    'Block modifier: width 100%, justify-content center',
-  ],
+  defaults: { size: 'md', variant: 'contained' },
+  a11y: { role: 'button', keyboard: ['Enter/Space to activate'], ariaProps: ['aria-disabled'] },
+  notes: ['Font weight: --bpi-font-weight-semibold (600)', 'Min touch target: 44px', 'Icon size follows font-size of the size variant'],
 };
 
 const inputSpec: ComponentSpec = {
   id: 'input',
   name: 'Input',
   category: 'atom',
-  description: 'Single-line text input field for user data entry.',
-  anatomy: 'Input field + Hint text (optional) + Error text (optional)',
-  defaults: { size: 'md' },
+  description: 'Single-line text input field.',
+  anatomy: 'Container + Input element + Prefix/Suffix icon (optional)',
   sizes: [
-    { name: 'sm', padding: 'space-1 space-2 (4px 8px)', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-md (6px)' },
-    { name: 'md', padding: 'space-2 space-3 (8px 12px)', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-md (6px)' },
-    { name: 'lg', padding: 'space-3 space-4 (12px 16px)', fontSize: 'font-size-base (16px)', borderRadius: 'radius-md (6px)' },
+    { name: 'sm', height: '32px', padding: '--bpi-space-1 --bpi-space-2', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'md', height: '40px', padding: '--bpi-space-2 --bpi-space-3', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'lg', height: '48px', padding: '--bpi-space-3 --bpi-space-4', fontSize: '--bpi-font-size-base (16px)', borderRadius: '--bpi-radius-md (6px)' },
+  ],
+  variants: [
+    { name: 'outlined', background: '--bpi-bg-primary', text: '--bpi-text-primary', border: '1px solid --bpi-border-default' },
+    { name: 'filled', background: '--bpi-surface-variant', text: '--bpi-text-primary', border: 'none' },
   ],
   states: [
-    { name: 'default', description: 'Normal state', css: { 'border': '1px solid border-default', 'background': 'bg-primary', 'color': 'text-primary' } },
-    { name: 'focus', description: 'Input focused', css: { 'border-color': 'border-focus (primary)', 'box-shadow': '0 0 0 2px focus-ring' }, transition: 'transition-fast (150ms)' },
-    { name: 'error', description: 'Validation error', css: { 'border-color': 'danger', 'box-shadow': '0 0 0 2px rgba(danger, 0.3)' } },
-    { name: 'disabled', description: 'Not editable', css: { 'opacity': '0.5', 'background': 'bg-secondary', 'cursor': 'not-allowed' } },
+    { name: 'focus', description: 'Input is focused', css: { 'border-color': '--bpi-border-focus', 'box-shadow': '0 0 0 3px --bpi-primary-lighter' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'error', description: 'Validation failed', css: { 'border-color': '--bpi-danger', 'box-shadow': '0 0 0 3px --bpi-danger-lighter' } },
+    { name: 'disabled', description: 'Not editable', css: { 'opacity': '0.5', 'background': '--bpi-surface-variant', 'cursor': 'not-allowed' } },
+  ],
+  defaults: { size: 'md', variant: 'outlined' },
+  a11y: { role: 'textbox', keyboard: ['Tab to focus'], ariaProps: ['aria-invalid', 'aria-describedby'] },
+  notes: ['Placeholder color: --bpi-text-muted', 'Font weight: --bpi-font-weight-normal (400)'],
+};
+
+const textFieldSpec: ComponentSpec = {
+  id: 'text-field',
+  name: 'TextField',
+  category: 'atom',
+  description: 'Complete text field with label, input, and helper/error text.',
+  anatomy: 'Label + Input (same as Input atom) + Helper text / Error text',
+  sizes: [
+    { name: 'sm', height: '32px (input)', padding: '--bpi-space-1 --bpi-space-2', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'md', height: '40px (input)', padding: '--bpi-space-2 --bpi-space-3', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'lg', height: '48px (input)', padding: '--bpi-space-3 --bpi-space-4', fontSize: '--bpi-font-size-base (16px)', borderRadius: '--bpi-radius-md (6px)' },
   ],
   elements: [
-    { name: 'hint', description: 'Helper text below input', styles: { 'margin-top': '4px', 'font-size': '12px', 'color': 'text-muted' } },
-    { name: 'error', description: 'Error message below input', styles: { 'margin-top': '4px', 'font-size': '12px', 'color': 'danger' } },
+    { name: 'label', description: 'Field label above input', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'font-weight': '--bpi-font-weight-medium (500)', 'color': '--bpi-text-primary', 'margin-bottom': '--bpi-space-1 (4px)' } },
+    { name: 'helper', description: 'Hint text below input', styles: { 'font-size': '--bpi-font-size-xs (12px)', 'color': '--bpi-text-muted', 'margin-top': '--bpi-space-1 (4px)' } },
+    { name: 'error', description: 'Error message below input', styles: { 'font-size': '--bpi-font-size-xs (12px)', 'color': '--bpi-danger', 'margin-top': '--bpi-space-1 (4px)' } },
   ],
-  a11y: { role: 'textbox', keyboard: ['Tab to focus'], ariaProps: ['aria-invalid', 'aria-describedby (hint/error)'] },
-  notes: ['Placeholder color: text-muted', 'Font family: sans (Inter/Sarabun)', 'Width: 100% by default'],
+  defaults: { size: 'md', variant: 'outlined' },
+  a11y: { role: 'textbox', ariaProps: ['aria-labelledby', 'aria-describedby', 'aria-invalid'] },
+  notes: ['Required indicator: asterisk (*) in --bpi-danger color', 'Gap between label and input: --bpi-space-1 (4px)'],
 };
 
-const badgeSpec: ComponentSpec = {
-  id: 'badge',
-  name: 'Badge',
+const selectSpec: ComponentSpec = {
+  id: 'select',
+  name: 'Select',
   category: 'atom',
-  description: 'Small label for status, count, or category indication.',
-  anatomy: 'Dot (optional) + Label',
-  defaults: { variant: 'neutral' },
+  description: 'Dropdown selection control.',
+  anatomy: 'Container + Selected value + Dropdown icon + Options list',
   sizes: [
-    { name: 'default', padding: '2px space-2 (2px 8px)', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-full (9999px)' },
+    { name: 'sm', height: '32px', padding: '--bpi-space-1 --bpi-space-2', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'md', height: '40px', padding: '--bpi-space-2 --bpi-space-3', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (6px)' },
+    { name: 'lg', height: '48px', padding: '--bpi-space-3 --bpi-space-4', fontSize: '--bpi-font-size-base (16px)', borderRadius: '--bpi-radius-md (6px)' },
   ],
   variants: [
-    { name: 'primary', background: 'primary-light', text: 'primary-dark' },
-    { name: 'success', background: 'success-light', text: 'success-dark' },
-    { name: 'warning', background: 'warning-light', text: 'warning-dark' },
-    { name: 'danger', background: 'danger-light', text: 'danger-dark' },
-    { name: 'info', background: 'info-light', text: 'info-dark' },
-    { name: 'neutral', background: 'gray-100 (#F3F4F6)', text: 'gray-700 (#374151)' },
+    { name: 'outlined', background: '--bpi-bg-primary', text: '--bpi-text-primary', border: '1px solid --bpi-border-default' },
+    { name: 'filled', background: '--bpi-surface-variant', text: '--bpi-text-primary', border: 'none' },
   ],
-  notes: ['Display: inline-flex, center-aligned, gap 4px', 'Font weight: medium (500)', 'Line height: tight (1.25)', 'Dot modifier: 6px circle, currentColor'],
+  states: [
+    { name: 'focus', description: 'Select is focused', css: { 'border-color': '--bpi-border-focus', 'box-shadow': '0 0 0 3px --bpi-primary-lighter' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'open', description: 'Dropdown is visible', css: { 'border-color': '--bpi-border-focus' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
+  ],
+  defaults: { size: 'md', variant: 'outlined' },
+  a11y: { role: 'combobox', keyboard: ['Arrow keys to navigate', 'Enter to select', 'Escape to close'], ariaProps: ['aria-expanded', 'aria-activedescendant'] },
+  notes: ['Dropdown icon: 20px, color --bpi-text-secondary', 'Option hover: --bpi-surface-hover', 'Dropdown shadow: --bpi-shadow-lg', 'Dropdown z-index: --bpi-z-dropdown (1000)'],
 };
-
-const alertSpec: ComponentSpec = {
-  id: 'alert',
-  name: 'Alert',
-  category: 'atom',
-  description: 'Contextual feedback message for user actions or system status.',
-  anatomy: 'Icon + Content (Title + Message) + Close button (optional)',
-  variants: [
-    { name: 'success', background: 'success-lighter', text: 'success-dark', border: 'success' },
-    { name: 'error', background: 'danger-lighter', text: 'danger-dark', border: 'danger' },
-    { name: 'warning', background: 'warning-lighter', text: 'warning-dark', border: 'warning' },
-    { name: 'info', background: 'info-lighter', text: 'info-dark', border: 'info' },
-  ],
-  elements: [
-    { name: 'icon', description: 'Status icon', styles: { 'width': '20px', 'height': '20px', 'flex-shrink': '0' } },
-    { name: 'title', description: 'Alert heading', styles: { 'font-weight': '600', 'margin': '0' } },
-    { name: 'message', description: 'Alert body text', styles: { 'line-height': '1.5', 'margin': '0' } },
-    { name: 'close', description: 'Dismiss button', styles: { 'width': '24px', 'height': '24px', 'opacity': '0.6 → 1 on hover' } },
-  ],
-  notes: ['Display: flex, align-items flex-start, gap 12px', 'Padding: 16px', 'Border: 1px solid variant color', 'Border radius: radius-md (6px)', 'Font size: 14px'],
-};
-
-const chipSpec: ComponentSpec = {
-  id: 'chip',
-  name: 'Chip',
-  category: 'atom',
-  description: 'Compact element for tags, filters, or selections.',
-  anatomy: 'Label + Delete button (optional)',
-  defaults: { size: 'md', variant: 'default' },
-  sizes: [
-    { name: 'sm', padding: '2px space-2 (2px 8px)', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-full (9999px)' },
-    { name: 'md', padding: 'space-2 space-3 (8px 12px)', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-full (9999px)' },
-  ],
-  variants: [
-    { name: 'default (filled)', background: 'gray-100', text: 'text-primary' },
-    { name: 'primary (filled)', background: 'primary', text: 'white' },
-    { name: 'success (filled)', background: 'success', text: 'white' },
-    { name: 'danger (filled)', background: 'danger', text: 'white' },
-    { name: 'warning (filled)', background: 'warning', text: 'white' },
-    { name: 'info (filled)', background: 'info', text: 'white' },
-    { name: 'default (outlined)', background: 'transparent', text: 'text-primary', border: 'border-default' },
-    { name: 'primary (outlined)', background: 'transparent', text: 'primary', border: 'primary' },
-    { name: 'success (outlined)', background: 'transparent', text: 'success', border: 'success' },
-    { name: 'danger (outlined)', background: 'transparent', text: 'danger', border: 'danger' },
-  ],
-  notes: ['Display: inline-flex, center-aligned, gap 8px', 'Font weight: medium (500)', 'Border: 1px solid (transparent for filled, color for outlined)', 'Transition: all 150ms ease'],
-};
-
 const checkboxSpec: ComponentSpec = {
   id: 'checkbox',
   name: 'Checkbox',
   category: 'atom',
-  description: 'Toggle control for binary or multi-select choices.',
-  anatomy: 'Checkmark box + Label',
-  elements: [
-    { name: 'checkmark', description: 'Visual checkbox', styles: { 'width': '20px', 'height': '20px', 'border': '2px solid border-default', 'border-radius': '4px', 'background': 'white' } },
-    { name: 'label', description: 'Text label', styles: { 'font-size': '14px', 'color': 'text-primary', 'user-select': 'none' } },
+  description: 'Binary toggle for selecting options.',
+  anatomy: 'Box (indicator) + Label (optional)',
+  sizes: [
+    { name: 'sm', extra: { box: '16px', iconSize: '12px', gap: '--bpi-space-1 (4px)' } },
+    { name: 'md', extra: { box: '20px', iconSize: '14px', gap: '--bpi-space-2 (8px)' } },
+    { name: 'lg', extra: { box: '24px', iconSize: '16px', gap: '--bpi-space-2 (8px)' } },
   ],
   states: [
-    { name: 'unchecked', description: 'Default state', css: { 'background': 'white', 'border': 'border-default' } },
-    { name: 'checked', description: 'Selected', css: { 'background': 'primary', 'border': 'primary' } },
-    { name: 'indeterminate', description: 'Partial selection', css: { 'background': 'primary', 'indicator': 'horizontal line 8px × 2px' } },
-    { name: 'focus', description: 'Keyboard focus', css: { 'box-shadow': '0 0 0 2px focus-ring' } },
-    { name: 'disabled', description: 'Not interactive', css: { 'background': 'gray-100', 'border': 'border-default' } },
-    { name: 'disabled+checked', description: 'Disabled selected', css: { 'background': 'gray-400', 'border': 'gray-400' } },
+    { name: 'checked', description: 'Selected state', css: { 'background': '--bpi-primary', 'border-color': '--bpi-primary', 'color': '--bpi-primary-contrast' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'unchecked', description: 'Default state', css: { 'background': 'transparent', 'border': '2px solid --bpi-border-strong' } },
+    { name: 'indeterminate', description: 'Partial selection', css: { 'background': '--bpi-primary', 'border-color': '--bpi-primary' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color', 'outline-offset': '--bpi-focus-ring-offset' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
   ],
+  defaults: { size: 'md' },
   a11y: { role: 'checkbox', keyboard: ['Space to toggle'], ariaProps: ['aria-checked', 'aria-disabled'] },
-  notes: ['Display: inline-flex, center-aligned, gap 8px', 'Checkmark indicator: rotated border (8px tall, 4px wide, 45°)', 'Transition: all 150ms ease'],
+  notes: ['Border radius of box: --bpi-radius-sm (4px)', 'Label font: --bpi-font-size-sm (14px), --bpi-font-weight-normal (400)'],
 };
 
 const radioSpec: ComponentSpec = {
   id: 'radio',
   name: 'Radio',
   category: 'atom',
-  description: 'Single-select control within a group of options.',
-  anatomy: 'Radio circle + Label',
-  elements: [
-    { name: 'circle', description: 'Visual radio button', styles: { 'width': '20px', 'height': '20px', 'border': '2px solid border-default', 'border-radius': 'full (9999px)', 'background': 'white' } },
-    { name: 'label', description: 'Text label', styles: { 'font-size': '14px', 'color': 'text-primary' } },
+  description: 'Single selection from a group of options.',
+  anatomy: 'Circle (indicator) + Label (optional)',
+  sizes: [
+    { name: 'sm', extra: { circle: '16px', dotSize: '8px', gap: '--bpi-space-1 (4px)' } },
+    { name: 'md', extra: { circle: '20px', dotSize: '10px', gap: '--bpi-space-2 (8px)' } },
+    { name: 'lg', extra: { circle: '24px', dotSize: '12px', gap: '--bpi-space-2 (8px)' } },
   ],
   states: [
-    { name: 'unchecked', description: 'Default state', css: { 'background': 'white', 'border': 'border-default' } },
-    { name: 'checked', description: 'Selected', css: { 'border': 'primary', 'inner-dot': '10px circle, primary' } },
-    { name: 'focus', description: 'Keyboard focus', css: { 'box-shadow': '0 0 0 2px focus-ring' } },
+    { name: 'checked', description: 'Selected state', css: { 'border-color': '--bpi-primary', 'dot-color': '--bpi-primary' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'unchecked', description: 'Default state', css: { 'border': '2px solid --bpi-border-strong' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color', 'outline-offset': '--bpi-focus-ring-offset' } },
     { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
   ],
+  defaults: { size: 'md' },
   a11y: { role: 'radio', keyboard: ['Arrow keys to navigate group', 'Space to select'], ariaProps: ['aria-checked', 'aria-disabled'] },
-  notes: ['Display: inline-flex, center-aligned, gap 8px', 'Transition: all 150ms ease'],
+  notes: ['Always circular: border-radius --bpi-radius-full', 'Label font: --bpi-font-size-sm (14px)'],
 };
-
 const switchSpec: ComponentSpec = {
   id: 'switch',
   name: 'Switch',
   category: 'atom',
-  description: 'Toggle control for on/off states.',
-  anatomy: 'Track + Thumb + Label',
-  defaults: { size: 'md' },
+  description: 'Toggle between on and off states.',
+  anatomy: 'Track + Thumb + Label (optional)',
   sizes: [
-    { name: 'sm', padding: 'N/A', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-full', extra: { 'track': '40px × 20px', 'thumb': '16px circle', 'translate-x': '20px' } },
-    { name: 'md', padding: 'N/A', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-full', extra: { 'track': '48px × 24px', 'thumb': '20px circle', 'translate-x': '24px' } },
+    { name: 'sm', extra: { track: '32px × 18px', thumb: '14px', gap: '--bpi-space-2 (8px)' } },
+    { name: 'md', extra: { track: '40px × 22px', thumb: '18px', gap: '--bpi-space-2 (8px)' } },
+    { name: 'lg', extra: { track: '48px × 26px', thumb: '22px', gap: '--bpi-space-3 (12px)' } },
   ],
   states: [
-    { name: 'off', description: 'Default (unchecked)', css: { 'track-bg': 'gray-300', 'thumb-position': 'left 2px' } },
-    { name: 'on', description: 'Checked', css: { 'track-bg': 'primary', 'thumb-position': 'translateX (size-dependent)' } },
-    { name: 'focus', description: 'Keyboard focus', css: { 'track-shadow': '0 0 0 2px focus-ring' } },
-    { name: 'disabled', description: 'Not interactive', css: { 'track-bg': 'gray-200', 'thumb-bg': 'gray-400', 'cursor': 'not-allowed' } },
+    { name: 'on', description: 'Enabled state', css: { 'track-bg': '--bpi-primary', 'thumb-bg': '--bpi-primary-contrast' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'off', description: 'Disabled state', css: { 'track-bg': '--bpi-gray-300', 'thumb-bg': 'white' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color', 'outline-offset': '--bpi-focus-ring-offset' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
   ],
+  defaults: { size: 'md' },
   a11y: { role: 'switch', keyboard: ['Space to toggle'], ariaProps: ['aria-checked', 'aria-disabled'] },
-  notes: ['Display: inline-flex, gap 12px', 'Thumb: absolute positioned, white, shadow-sm', 'Track transition: background-color 150ms ease', 'Thumb transition: transform 150ms ease'],
+  notes: ['Track border-radius: --bpi-radius-full', 'Thumb border-radius: --bpi-radius-full', 'Thumb shadow: --bpi-shadow-sm'],
 };
 
+const sliderSpec: ComponentSpec = {
+  id: 'slider',
+  name: 'Slider',
+  category: 'atom',
+  description: 'Range selection control.',
+  anatomy: 'Track + Filled track + Thumb + Value label (optional)',
+  sizes: [
+    { name: 'sm', extra: { trackHeight: '4px', thumbSize: '16px' } },
+    { name: 'md', extra: { trackHeight: '6px', thumbSize: '20px' } },
+    { name: 'lg', extra: { trackHeight: '8px', thumbSize: '24px' } },
+  ],
+  states: [
+    { name: 'default', description: 'Normal state', css: { 'track-bg': '--bpi-gray-200', 'filled-bg': '--bpi-primary', 'thumb-bg': '--bpi-primary' } },
+    { name: 'hover', description: 'Pointer over thumb', css: { 'thumb-shadow': '--bpi-shadow-md' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'active', description: 'Dragging thumb', css: { 'thumb-scale': '1.15' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
+  ],
+  defaults: { size: 'md' },
+  a11y: { role: 'slider', keyboard: ['Arrow keys to adjust', 'Home/End for min/max'], ariaProps: ['aria-valuenow', 'aria-valuemin', 'aria-valuemax', 'aria-disabled'] },
+  notes: ['Track border-radius: --bpi-radius-full', 'Thumb border-radius: --bpi-radius-full', 'Thumb shadow: --bpi-shadow-sm'],
+};
+const badgeSpec: ComponentSpec = {
+  id: 'badge',
+  name: 'Badge',
+  category: 'atom',
+  description: 'Small status descriptor for UI elements.',
+  anatomy: 'Container + Label/Count',
+  sizes: [
+    { name: 'sm', height: '18px', padding: '0 --bpi-space-1', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-full' },
+    { name: 'md', height: '22px', padding: '0 --bpi-space-2', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-full' },
+    { name: 'lg', height: '26px', padding: '0 --bpi-space-2', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-full' },
+  ],
+  variants: [
+    { name: 'primary', background: '--bpi-primary', text: '--bpi-primary-contrast' },
+    { name: 'secondary', background: '--bpi-secondary', text: '--bpi-secondary-contrast' },
+    { name: 'success', background: '--bpi-success', text: '--bpi-success-contrast' },
+    { name: 'danger', background: '--bpi-danger', text: '--bpi-danger-contrast' },
+    { name: 'warning', background: '--bpi-warning', text: '--bpi-warning-contrast' },
+    { name: 'info', background: '--bpi-info', text: '--bpi-info-contrast' },
+    { name: 'outlined', background: 'transparent', text: '--bpi-text-primary', border: '1px solid --bpi-border-default' },
+  ],
+  defaults: { size: 'md', variant: 'primary' },
+  a11y: { ariaProps: ['aria-label for icon-only badges'] },
+  notes: ['Font weight: --bpi-font-weight-semibold (600)', 'Dot variant: 8px circle, no text'],
+};
+
+const chipSpec: ComponentSpec = {
+  id: 'chip',
+  name: 'Chip',
+  category: 'atom',
+  description: 'Compact interactive element for tags, filters, or selections.',
+  anatomy: 'Container + Label + Icon/Avatar (optional) + Remove button (optional)',
+  sizes: [
+    { name: 'sm', height: '24px', padding: '0 --bpi-space-2', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-full' },
+    { name: 'md', height: '32px', padding: '0 --bpi-space-3', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-full' },
+  ],
+  variants: [
+    { name: 'filled', background: '--bpi-surface-variant', text: '--bpi-text-primary', border: 'none' },
+    { name: 'outlined', background: 'transparent', text: '--bpi-text-primary', border: '1px solid --bpi-border-default' },
+  ],
+  states: [
+    { name: 'hover', description: 'Pointer over chip', css: { 'background': '--bpi-surface-hover' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'selected', description: 'Active filter/choice', css: { 'background': '--bpi-primary', 'color': '--bpi-primary-contrast' } },
+    { name: 'focus-visible', description: 'Keyboard focus', css: { 'outline': '--bpi-focus-ring-width solid --bpi-focus-ring-color' } },
+    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
+  ],
+  defaults: { size: 'md', variant: 'filled' },
+  a11y: { keyboard: ['Enter/Space to toggle or activate', 'Delete/Backspace to remove'], ariaProps: ['aria-selected', 'aria-disabled'] },
+  notes: ['Remove icon: 16px, --bpi-text-secondary', 'Gap between icon and label: --bpi-space-1 (4px)'],
+};
 const avatarSpec: ComponentSpec = {
   id: 'avatar',
   name: 'Avatar',
   category: 'atom',
-  description: 'User or entity visual representation.',
-  anatomy: 'Image | Initials | Icon',
-  defaults: { size: 'md' },
+  description: 'Visual representation of a user or entity.',
+  anatomy: 'Container + Image / Initials / Fallback icon',
   sizes: [
-    { name: 'sm', padding: 'N/A', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-full', extra: { 'width': '32px', 'height': '32px' } },
-    { name: 'md', padding: 'N/A', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-full', extra: { 'width': '40px', 'height': '40px' } },
-    { name: 'lg', padding: 'N/A', fontSize: 'font-size-base (16px)', borderRadius: 'radius-full', extra: { 'width': '56px', 'height': '56px' } },
-    { name: 'xl', padding: 'N/A', fontSize: 'font-size-lg (18px)', borderRadius: 'radius-full', extra: { 'width': '72px', 'height': '72px' } },
+    { name: 'sm', extra: { size: '32px', fontSize: '--bpi-font-size-xs (12px)' } },
+    { name: 'md', extra: { size: '40px', fontSize: '--bpi-font-size-sm (14px)' } },
+    { name: 'lg', extra: { size: '48px', fontSize: '--bpi-font-size-base (16px)' } },
+    { name: 'xl', extra: { size: '64px', fontSize: '--bpi-font-size-xl (20px)' } },
   ],
-  notes: ['Display: inline-flex, center-aligned', 'Background: primary-light, color: primary-dark (initials/icon fallback)', 'Image: object-fit cover, overflow hidden', 'Font weight: semibold (600)'],
+  variants: [
+    { name: 'circular', background: '--bpi-primary-lighter', text: '--bpi-primary' },
+    { name: 'rounded', background: '--bpi-primary-lighter', text: '--bpi-primary' },
+    { name: 'square', background: '--bpi-primary-lighter', text: '--bpi-primary' },
+  ],
+  defaults: { size: 'md', variant: 'circular' },
+  a11y: { ariaProps: ['alt text for image avatars', 'aria-label for initials'] },
+  notes: ['Circular: --bpi-radius-full', 'Rounded: --bpi-radius-lg (8px)', 'Square: --bpi-radius-md (6px)', 'Font weight for initials: --bpi-font-weight-semibold (600)', 'Object-fit: cover for images'],
 };
 
+const alertSpec: ComponentSpec = {
+  id: 'alert',
+  name: 'Alert',
+  category: 'atom',
+  description: 'Contextual feedback messages for user actions.',
+  anatomy: 'Container + Icon + Title (optional) + Message + Close button (optional)',
+  variants: [
+    { name: 'success', background: '--bpi-success-lighter', text: '--bpi-success-dark', border: '1px solid --bpi-success-light' },
+    { name: 'danger', background: '--bpi-danger-lighter', text: '--bpi-danger-dark', border: '1px solid --bpi-danger-light' },
+    { name: 'warning', background: '--bpi-warning-lighter', text: '--bpi-warning-dark', border: '1px solid --bpi-warning-light' },
+    { name: 'info', background: '--bpi-info-lighter', text: '--bpi-info-dark', border: '1px solid --bpi-info-light' },
+  ],
+  elements: [
+    { name: 'container', description: 'Outer wrapper', styles: { 'padding': '--bpi-space-3 --bpi-space-4', 'border-radius': '--bpi-radius-lg (8px)', 'gap': '--bpi-space-3 (12px)' } },
+    { name: 'icon', description: 'Status icon', styles: { 'size': '20px', 'flex-shrink': '0' } },
+    { name: 'title', description: 'Alert heading', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'font-weight': '--bpi-font-weight-semibold (600)' } },
+    { name: 'message', description: 'Alert body text', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'font-weight': '--bpi-font-weight-normal (400)' } },
+    { name: 'close', description: 'Dismiss button', styles: { 'size': '20px', 'cursor': 'pointer' } },
+  ],
+  defaults: { variant: 'info' },
+  a11y: { role: 'alert', ariaProps: ['aria-live=polite'] },
+  notes: ['Display: flex, align-items: flex-start', 'Close button color inherits variant text color'],
+};
 const tooltipSpec: ComponentSpec = {
   id: 'tooltip',
   name: 'Tooltip',
   category: 'atom',
-  description: 'Contextual overlay that appears on hover or focus.',
-  anatomy: 'Content + Arrow (optional)',
-  notes: [
-    'Background: gray-900 (#111827), Color: white',
-    'Padding: space-1 space-2 (4px 8px)',
-    'Font size: font-size-xs (12px)',
-    'Border radius: radius-sm (4px)',
-    'Z-index: z-tooltip (1070)',
-    'Box shadow: shadow-sm',
-    'Transition: opacity, transform — 150ms ease',
+  description: 'Informative popup that appears on hover or focus.',
+  anatomy: 'Container + Content text + Arrow',
+  elements: [
+    { name: 'container', description: 'Tooltip box', styles: { 'background': '--bpi-gray-800', 'color': '--bpi-text-inverse', 'padding': '--bpi-space-1 --bpi-space-2', 'border-radius': '--bpi-radius-sm (4px)', 'font-size': '--bpi-font-size-xs (12px)', 'max-width': '200px' } },
+    { name: 'arrow', description: 'Pointer triangle', styles: { 'size': '6px', 'color': '--bpi-gray-800' } },
   ],
+  states: [
+    { name: 'visible', description: 'Tooltip is shown', css: { 'opacity': '1' }, transition: '--bpi-transition-fast (150ms)' },
+    { name: 'hidden', description: 'Tooltip is hidden', css: { 'opacity': '0', 'pointer-events': 'none' } },
+  ],
+  defaults: { placement: 'top' },
+  a11y: { role: 'tooltip', keyboard: ['Escape to dismiss'], ariaProps: ['aria-describedby on trigger'] },
+  notes: ['Z-index: --bpi-z-tooltip (1070)', 'Shadow: --bpi-shadow-md', 'Placement: top, bottom, left, right', 'Delay: 200ms show, 0ms hide'],
 };
 
 const dividerSpec: ComponentSpec = {
@@ -343,176 +387,155 @@ const dividerSpec: ComponentSpec = {
   name: 'Divider',
   category: 'atom',
   description: 'Visual separator between content sections.',
-  anatomy: 'Line',
-  notes: [
-    'Border: 1px solid border-default',
-    'Horizontal: width 100%, margin space-4 0 (16px 0)',
-    'Vertical: height 100%, margin 0 space-4',
+  anatomy: 'Line (hr element or border)',
+  variants: [
+    { name: 'horizontal', background: '--bpi-border-default' },
+    { name: 'vertical', background: '--bpi-border-default' },
   ],
+  elements: [
+    { name: 'line', description: 'The divider line', styles: { 'background': '--bpi-border-default', 'height': '1px (horizontal)', 'width': '1px (vertical)' } },
+  ],
+  defaults: { variant: 'horizontal' },
+  a11y: { role: 'separator', ariaProps: ['aria-orientation'] },
+  notes: ['Margin: --bpi-space-4 (16px) when used between sections', 'With text: --bpi-font-size-xs (12px), --bpi-text-muted'],
 };
 
 const typographySpec: ComponentSpec = {
   id: 'typography',
   name: 'Typography',
   category: 'atom',
-  description: 'Text display with predefined styles for consistency.',
-  anatomy: 'Text content',
+  description: 'Text display component with predefined styles.',
+  anatomy: 'Text element (h1–h6, p, span)',
   sizes: [
-    { name: 'h1', padding: 'N/A', fontSize: 'font-size-3xl (30px)', borderRadius: 'N/A', extra: { 'font-weight': 'bold (700)', 'line-height': 'tight (1.25)', 'letter-spacing': 'tight (-0.025em)' } },
-    { name: 'h2', padding: 'N/A', fontSize: 'font-size-2xl (24px)', borderRadius: 'N/A', extra: { 'font-weight': 'semibold (600)', 'line-height': 'tight (1.25)' } },
-    { name: 'h3', padding: 'N/A', fontSize: 'font-size-xl (20px)', borderRadius: 'N/A', extra: { 'font-weight': 'semibold (600)', 'line-height': 'tight (1.25)' } },
-    { name: 'h4', padding: 'N/A', fontSize: 'font-size-lg (18px)', borderRadius: 'N/A', extra: { 'font-weight': 'semibold (600)', 'line-height': 'normal (1.5)' } },
-    { name: 'body1', padding: 'N/A', fontSize: 'font-size-base (16px)', borderRadius: 'N/A', extra: { 'font-weight': 'normal (400)', 'line-height': 'normal (1.5)' } },
-    { name: 'body2', padding: 'N/A', fontSize: 'font-size-sm (14px)', borderRadius: 'N/A', extra: { 'font-weight': 'normal (400)', 'line-height': 'normal (1.5)' } },
-    { name: 'caption', padding: 'N/A', fontSize: 'font-size-xs (12px)', borderRadius: 'N/A', extra: { 'font-weight': 'normal (400)', 'line-height': 'normal (1.5)', 'color': 'text-secondary' } },
-    { name: 'overline', padding: 'N/A', fontSize: 'font-size-xs (12px)', borderRadius: 'N/A', extra: { 'font-weight': 'medium (500)', 'text-transform': 'uppercase', 'letter-spacing': 'wide (0.025em)' } },
+    { name: 'h1', fontSize: '--bpi-font-size-3xl (30px)', extra: { fontWeight: '--bpi-font-weight-bold (700)', lineHeight: '--bpi-line-height-tight (1.25)' } },
+    { name: 'h2', fontSize: '--bpi-font-size-2xl (24px)', extra: { fontWeight: '--bpi-font-weight-bold (700)', lineHeight: '--bpi-line-height-tight (1.25)' } },
+    { name: 'h3', fontSize: '--bpi-font-size-xl (20px)', extra: { fontWeight: '--bpi-font-weight-semibold (600)', lineHeight: '--bpi-line-height-tight (1.25)' } },
+    { name: 'h4', fontSize: '--bpi-font-size-lg (18px)', extra: { fontWeight: '--bpi-font-weight-semibold (600)', lineHeight: '--bpi-line-height-normal (1.5)' } },
+    { name: 'body1', fontSize: '--bpi-font-size-base (16px)', extra: { fontWeight: '--bpi-font-weight-normal (400)', lineHeight: '--bpi-line-height-normal (1.5)' } },
+    { name: 'body2', fontSize: '--bpi-font-size-sm (14px)', extra: { fontWeight: '--bpi-font-weight-normal (400)', lineHeight: '--bpi-line-height-normal (1.5)' } },
+    { name: 'caption', fontSize: '--bpi-font-size-xs (12px)', extra: { fontWeight: '--bpi-font-weight-normal (400)', lineHeight: '--bpi-line-height-normal (1.5)' } },
+    { name: 'overline', fontSize: '--bpi-font-size-xs (12px)', extra: { fontWeight: '--bpi-font-weight-semibold (600)', lineHeight: '--bpi-line-height-normal (1.5)', textTransform: 'uppercase', letterSpacing: '0.08em' } },
   ],
-  notes: ['Font family: Inter (Latin), Sarabun (Thai)', 'Color: text-primary by default', 'Margin: 0 (reset)'],
+  variants: [
+    { name: 'default', text: '--bpi-text-primary' },
+    { name: 'secondary', text: '--bpi-text-secondary' },
+    { name: 'muted', text: '--bpi-text-muted' },
+    { name: 'danger', text: '--bpi-danger' },
+    { name: 'success', text: '--bpi-success' },
+  ],
+  defaults: { size: 'body1', variant: 'default' },
+  notes: ['Font family: --bpi-font-family-sans', 'Mono text: --bpi-font-family-mono'],
+};
+const iconSpec: ComponentSpec = {
+  id: 'icon',
+  name: 'Icon',
+  category: 'atom',
+  description: 'SVG icon display component.',
+  anatomy: 'SVG container',
+  sizes: [
+    { name: 'xs', extra: { size: '16px' } },
+    { name: 'sm', extra: { size: '20px' } },
+    { name: 'md', extra: { size: '24px' } },
+    { name: 'lg', extra: { size: '32px' } },
+    { name: 'xl', extra: { size: '48px' } },
+  ],
+  defaults: { size: 'md' },
+  a11y: { ariaProps: ['aria-hidden=true for decorative', 'aria-label for meaningful'] },
+  notes: ['Color inherits from parent (currentColor)', 'Stroke-width: 1.5–2px'],
 };
 
 const skeletonSpec: ComponentSpec = {
   id: 'skeleton',
   name: 'Skeleton',
   category: 'atom',
-  description: 'Loading placeholder that mimics content shape.',
-  anatomy: 'Animated placeholder block',
+  description: 'Placeholder loading animation.',
+  anatomy: 'Animated container',
   variants: [
-    { name: 'text', background: 'gray-200', text: 'N/A' },
-    { name: 'circular', background: 'gray-200', text: 'N/A' },
-    { name: 'rectangular', background: 'gray-200', text: 'N/A' },
+    { name: 'text', background: '--bpi-gray-200' },
+    { name: 'circular', background: '--bpi-gray-200' },
+    { name: 'rectangular', background: '--bpi-gray-200' },
   ],
-  notes: ['Background: gray-200 (#E5E7EB)', 'Animation: pulse (1.5s ease-in-out infinite)', 'Border radius: text=4px, circular=full, rectangular=8px'],
+  states: [
+    { name: 'loading', description: 'Pulse animation', css: { 'animation': 'pulse 1.5s ease-in-out infinite', 'background': '--bpi-gray-200 → --bpi-gray-100 → --bpi-gray-200' } },
+  ],
+  defaults: { variant: 'text' },
+  a11y: { ariaProps: ['aria-busy=true', 'aria-label=Loading'] },
+  notes: ['Text variant height: --bpi-font-size-base (16px)', 'Circular: --bpi-radius-full', 'Rectangular: --bpi-radius-md (6px)'],
 };
-
-const sliderSpec: ComponentSpec = {
-  id: 'slider',
-  name: 'Slider',
+const linearProgressSpec: ComponentSpec = {
+  id: 'linear-progress',
+  name: 'LinearProgress',
   category: 'atom',
-  description: 'Range input for selecting numeric values.',
-  anatomy: 'Track + Filled track + Thumb',
+  description: 'Horizontal progress indicator.',
+  anatomy: 'Track + Filled bar + Label (optional)',
+  variants: [
+    { name: 'primary', background: '--bpi-gray-200', hoverBg: '--bpi-primary' },
+    { name: 'success', background: '--bpi-gray-200', hoverBg: '--bpi-success' },
+    { name: 'danger', background: '--bpi-gray-200', hoverBg: '--bpi-danger' },
+    { name: 'warning', background: '--bpi-gray-200', hoverBg: '--bpi-warning' },
+  ],
   elements: [
-    { name: 'track', description: 'Background track', styles: { 'height': '4px', 'background': 'gray-200', 'border-radius': 'full' } },
-    { name: 'fill', description: 'Filled portion', styles: { 'height': '4px', 'background': 'primary', 'border-radius': 'full' } },
-    { name: 'thumb', description: 'Draggable handle', styles: { 'width': '20px', 'height': '20px', 'background': 'primary', 'border-radius': 'full', 'box-shadow': 'shadow-sm' } },
+    { name: 'track', description: 'Background bar', styles: { 'height': '6px', 'border-radius': '--bpi-radius-full', 'background': '--bpi-gray-200' } },
+    { name: 'bar', description: 'Filled progress', styles: { 'border-radius': '--bpi-radius-full', 'transition': '--bpi-transition-normal (250ms)' } },
+    { name: 'label', description: 'Percentage text', styles: { 'font-size': '--bpi-font-size-xs (12px)', 'color': '--bpi-text-secondary' } },
   ],
-  states: [
-    { name: 'hover', description: 'Thumb hovered', css: { 'transform': 'scale(1.1)' }, transition: 'transition-fast (150ms)' },
-    { name: 'active', description: 'Thumb being dragged', css: { 'transform': 'scale(1.2)' } },
-    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
-  ],
-  a11y: { role: 'slider', keyboard: ['Arrow keys to adjust value'], ariaProps: ['aria-valuemin', 'aria-valuemax', 'aria-valuenow'] },
+  defaults: { variant: 'primary' },
+  a11y: { role: 'progressbar', ariaProps: ['aria-valuenow', 'aria-valuemin=0', 'aria-valuemax=100'] },
+  notes: ['Indeterminate: animated sliding bar', 'Track sizes: 4px (sm), 6px (md), 8px (lg)'],
 };
 
-const selectSpec: ComponentSpec = {
-  id: 'select',
-  name: 'Select',
+const circularProgressSpec: ComponentSpec = {
+  id: 'circular-progress',
+  name: 'CircularProgress',
   category: 'atom',
-  description: 'Dropdown selection control for choosing from a list.',
-  anatomy: 'Trigger + Dropdown menu + Options',
-  defaults: { size: 'md' },
+  description: 'Circular progress/loading indicator.',
+  anatomy: 'SVG circle (track + arc) + Center label (optional)',
   sizes: [
-    { name: 'sm', padding: 'space-1 space-2 (4px 8px)', fontSize: 'font-size-xs (12px)', borderRadius: 'radius-md (6px)' },
-    { name: 'md', padding: 'space-2 space-3 (8px 12px)', fontSize: 'font-size-sm (14px)', borderRadius: 'radius-md (6px)' },
-    { name: 'lg', padding: 'space-3 space-4 (12px 16px)', fontSize: 'font-size-base (16px)', borderRadius: 'radius-md (6px)' },
+    { name: 'sm', extra: { size: '24px', strokeWidth: '3px' } },
+    { name: 'md', extra: { size: '40px', strokeWidth: '4px' } },
+    { name: 'lg', extra: { size: '56px', strokeWidth: '5px' } },
   ],
-  states: [
-    { name: 'default', description: 'Closed state', css: { 'border': '1px solid border-default', 'background': 'bg-primary' } },
-    { name: 'open', description: 'Dropdown visible', css: { 'border-color': 'primary', 'box-shadow': 'focus-ring' } },
-    { name: 'disabled', description: 'Not interactive', css: { 'opacity': '0.5', 'cursor': 'not-allowed' } },
+  variants: [
+    { name: 'primary', text: '--bpi-primary' },
+    { name: 'secondary', text: '--bpi-secondary' },
   ],
-  a11y: { role: 'listbox / combobox', keyboard: ['Arrow keys to navigate', 'Enter to select', 'Escape to close'], ariaProps: ['aria-expanded', 'aria-selected'] },
-  notes: ['Dropdown z-index: z-dropdown (1000)', 'Menu background: surface-card, shadow: shadow-lg', 'Option hover: bg-secondary', 'Option selected: bg primary-lighter, text primary'],
+  elements: [
+    { name: 'track', description: 'Background circle', styles: { 'stroke': '--bpi-gray-200' } },
+    { name: 'arc', description: 'Filled progress arc', styles: { 'stroke': 'variant color', 'transition': '--bpi-transition-normal (250ms)' } },
+    { name: 'label', description: 'Center text', styles: { 'font-size': '--bpi-font-size-xs (12px)', 'font-weight': '--bpi-font-weight-semibold (600)' } },
+  ],
+  defaults: { size: 'md', variant: 'primary' },
+  a11y: { role: 'progressbar', ariaProps: ['aria-valuenow', 'aria-valuemin=0', 'aria-valuemax=100'] },
+  notes: ['Indeterminate: rotating animation', 'Stroke-linecap: round'],
 };
-
-const textFieldSpec: ComponentSpec = {
-  id: 'text-field',
-  name: 'Text Field',
-  category: 'atom',
-  description: 'Labeled input with built-in label, hint, and error display.',
-  anatomy: 'Label + Input + Hint/Error text',
-  notes: [
-    'Combines Label + Input + Hint/Error in one component',
-    'Label: font-size 14px, font-weight medium (500), color text-primary, margin-bottom 4px',
-    'Input: same spec as Input atom',
-    'Required indicator: color danger',
-    'Gap between elements: 4px',
-  ],
-};
-
-const iconSpec: ComponentSpec = {
-  id: 'icon',
-  name: 'Icon',
-  category: 'atom',
-  description: 'SVG icon display with consistent sizing.',
-  anatomy: 'SVG element',
-  sizes: [
-    { name: 'sm', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '16px', 'height': '16px' } },
-    { name: 'md', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '20px', 'height': '20px' } },
-    { name: 'lg', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '24px', 'height': '24px' } },
-  ],
-  notes: ['Color: currentColor (inherits from parent)', 'Display: inline-block, vertical-align: middle', 'Fill: currentColor'],
-};
-
 const stackSpec: ComponentSpec = {
   id: 'stack',
   name: 'Stack',
   category: 'atom',
-  description: 'Layout utility for vertical or horizontal stacking with consistent spacing.',
-  anatomy: 'Container with directional children',
-  notes: [
-    'Display: flex',
-    'Vertical (default): flex-direction column',
-    'Horizontal: flex-direction row',
-    'Spacing: gap using spacing tokens (space-1 through space-16)',
-    'Align/justify: configurable',
+  description: 'Layout component for arranging children with consistent spacing.',
+  anatomy: 'Flex container + Children',
+  variants: [
+    { name: 'horizontal', background: 'transparent' },
+    { name: 'vertical', background: 'transparent' },
   ],
+  elements: [
+    { name: 'container', description: 'Flex wrapper', styles: { 'display': 'flex', 'gap': 'configurable (default --bpi-space-3 = 12px)' } },
+  ],
+  defaults: { variant: 'vertical', spacing: '--bpi-space-3 (12px)' },
+  notes: ['Horizontal: flex-direction row', 'Vertical: flex-direction column', 'Wrap: flex-wrap configurable', 'Alignment: align-items, justify-content configurable', 'Spacing uses gap property with --bpi-space-* tokens'],
 };
 
 const boxSpec: ComponentSpec = {
   id: 'box',
   name: 'Box',
   category: 'atom',
-  description: 'Generic container with configurable padding, margin, and background.',
-  anatomy: 'Container element',
-  notes: [
-    'A utility component for spacing and layout',
-    'Padding/margin: use spacing tokens',
-    'Background: any color token',
-    'Border radius: any radius token',
-  ],
-};
-
-const linearProgressSpec: ComponentSpec = {
-  id: 'linear-progress',
-  name: 'Linear Progress',
-  category: 'atom',
-  description: 'Horizontal progress indicator bar.',
-  anatomy: 'Track + Fill bar',
+  description: 'Generic container with configurable spacing and styling.',
+  anatomy: 'Single div container',
   elements: [
-    { name: 'track', description: 'Background bar', styles: { 'height': '4px', 'background': 'gray-200', 'border-radius': 'full', 'overflow': 'hidden' } },
-    { name: 'fill', description: 'Progress fill', styles: { 'height': '100%', 'background': 'primary', 'border-radius': 'full', 'transition': 'width 250ms ease' } },
+    { name: 'container', description: 'The box itself', styles: { 'padding': 'configurable via --bpi-space-* tokens', 'background': 'configurable via --bpi-bg-* or --bpi-surface-* tokens', 'border-radius': 'configurable via --bpi-radius-* tokens', 'border': 'configurable via --bpi-border-* tokens' } },
   ],
-  variants: [
-    { name: 'primary', background: 'gray-200', text: 'primary' },
-    { name: 'success', background: 'gray-200', text: 'success' },
-    { name: 'warning', background: 'gray-200', text: 'warning' },
-    { name: 'danger', background: 'gray-200', text: 'danger' },
-  ],
-  notes: ['Indeterminate: animated sliding bar', 'Track height: 4px', 'Border radius: full on both track and fill'],
-};
-
-const circularProgressSpec: ComponentSpec = {
-  id: 'circular-progress',
-  name: 'Circular Progress',
-  category: 'atom',
-  description: 'Circular progress indicator (spinner or determinate).',
-  anatomy: 'SVG circle track + circle fill',
-  sizes: [
-    { name: 'sm', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '24px', 'height': '24px' } },
-    { name: 'md', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '40px', 'height': '40px' } },
-    { name: 'lg', padding: 'N/A', fontSize: 'N/A', borderRadius: 'N/A', extra: { 'width': '56px', 'height': '56px' } },
-  ],
-  notes: ['Stroke width: 3–4px', 'Track color: gray-200', 'Fill color: primary (or variant)', 'Indeterminate: 1s linear infinite rotation'],
+  defaults: {},
+  notes: ['Utility component — all styles are configurable', 'Use --bpi-space-* for padding/margin', 'Use --bpi-shadow-* for elevation', 'Use --bpi-radius-* for corners'],
 };
 
 // ============================================================
@@ -520,15 +543,31 @@ const circularProgressSpec: ComponentSpec = {
 // ============================================================
 
 export const componentSpecs: ComponentSpec[] = [
-  buttonSpec, inputSpec, textFieldSpec, selectSpec,
-  checkboxSpec, radioSpec, switchSpec, sliderSpec,
-  badgeSpec, chipSpec, avatarSpec, alertSpec,
-  tooltipSpec, dividerSpec, typographySpec, iconSpec,
-  skeletonSpec, linearProgressSpec, circularProgressSpec,
-  stackSpec, boxSpec,
+  buttonSpec,
+  inputSpec,
+  textFieldSpec,
+  selectSpec,
+  checkboxSpec,
+  radioSpec,
+  switchSpec,
+  sliderSpec,
+  badgeSpec,
+  chipSpec,
+  avatarSpec,
+  alertSpec,
+  tooltipSpec,
+  dividerSpec,
+  typographySpec,
+  iconSpec,
+  skeletonSpec,
+  linearProgressSpec,
+  circularProgressSpec,
+  stackSpec,
+  boxSpec,
 ];
 
 export function getSpec(id: string): ComponentSpec | undefined {
   return componentSpecs.find(s => s.id === id);
 }
-// --- END OF FILE (Molecules & Organisms coming soon) ---
+
+export default componentSpecs;

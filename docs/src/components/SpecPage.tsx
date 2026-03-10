@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentSpec, colorTokens, getSpec } from '~/data/specs';
+import { ComponentSpec, getSpec } from '~/data/specs';
 
 interface SpecPageProps {
   specId: string;
@@ -7,13 +7,14 @@ interface SpecPageProps {
 
 /* ── tiny color swatch ── */
 function ColorDot({ token }: { token: string }) {
-  const hex = colorTokens[token];
-  if (!hex || hex === 'transparent' || hex === 'N/A') return null;
+  if (!token || token === 'transparent' || token === 'N/A' || token === '—') return null;
+  // token is a --bpi-* CSS variable name; use it directly
+  const cssVar = token.startsWith('--') ? `var(${token})` : token;
   return (
     <span
       className="inline-block w-3 h-3 rounded-full border border-[var(--color-border)] mr-1 align-middle"
-      style={{ backgroundColor: hex }}
-      title={`${token}: ${hex}`}
+      style={{ backgroundColor: cssVar }}
+      title={token}
     />
   );
 }
