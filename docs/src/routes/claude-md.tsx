@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-// @ts-ignore — Vite ?raw import
-import claudeMdRaw from '../../../CLAUDE.md?raw'
+import { useState, useEffect } from 'react'
 
 export const Route = createFileRoute('/claude-md')({
   component: ClaudeMdPage,
@@ -117,11 +116,30 @@ function copyToClipboard(text: string, setCopied: (v: boolean) => void) {
 }
 
 /* ── Page component ─────────────────────────────────────────────── */
-import { useState } from 'react'
-
 function ClaudeMdPage() {
   const [copied, setCopied] = useState(false)
-  const renderedHtml = renderMarkdown(claudeMdRaw)
+  const [claudeMdRaw, setClaudeMdRaw] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(import.meta.env.BASE_URL + 'CLAUDE.md')
+      .then((res) => res.text())
+      .then((text) => {
+        setClaudeMdRaw(text)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
+
+  const renderedHtml = claudeMdRaw ? renderMarkdown(claudeMdRaw) : ''
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-[var(--color-text-secondary)]">Loading CLAUDE.md...</div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">

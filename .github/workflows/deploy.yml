@@ -37,6 +37,9 @@ jobs:
         run: npm run build
 
       # Build docs site
+      - name: Copy CLAUDE.md into docs public folder
+        run: cp CLAUDE.md docs/public/CLAUDE.md
+
       - name: Install docs dependencies
         working-directory: docs
         run: npm ci
