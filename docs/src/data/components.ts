@@ -23,6 +23,12 @@ export interface ComponentExample {
   code: string;
 }
 
+/** CSS class reference for the CSS-only API */
+export interface CssClassRef {
+  name: string;
+  description: string;
+}
+
 export interface ComponentMetadata {
   id: string;
   name: string;
@@ -33,6 +39,10 @@ export interface ComponentMetadata {
   events: ComponentEvent[];
   slots: ComponentSlot[];
   examples: ComponentExample[];
+  /** Pure-HTML examples using CSS classes (no Web Components needed) */
+  cssExamples?: ComponentExample[];
+  /** CSS class reference table */
+  cssClasses?: CssClassRef[];
 }
 
 export const components: ComponentMetadata[] = [
@@ -173,6 +183,100 @@ export const components: ComponentMetadata[] = [
   </Button>
 </div>`,
       },
+    ],
+    cssExamples: [
+      {
+        title: 'Basic Variants',
+        description: 'Use .bpi-btn with variant modifiers. Works with <button>, <a>, or any element.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap;">
+  <button class="bpi-btn bpi-btn--primary bpi-btn--md">Primary</button>
+  <button class="bpi-btn bpi-btn--secondary bpi-btn--md">Secondary</button>
+  <button class="bpi-btn bpi-btn--success bpi-btn--md">Success</button>
+  <button class="bpi-btn bpi-btn--danger bpi-btn--md">Danger</button>
+  <button class="bpi-btn bpi-btn--warning bpi-btn--md">Warning</button>
+  <button class="bpi-btn bpi-btn--info bpi-btn--md">Info</button>
+  <button class="bpi-btn bpi-btn--outline bpi-btn--md">Outline</button>
+  <button class="bpi-btn bpi-btn--ghost bpi-btn--md">Ghost</button>
+</div>`,
+      },
+      {
+        title: 'Sizes',
+        description: 'Four size options: xs, sm, md, lg.',
+        code: `<div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+  <button class="bpi-btn bpi-btn--primary bpi-btn--xs">Extra Small</button>
+  <button class="bpi-btn bpi-btn--primary bpi-btn--sm">Small</button>
+  <button class="bpi-btn bpi-btn--primary bpi-btn--md">Medium</button>
+  <button class="bpi-btn bpi-btn--primary bpi-btn--lg">Large</button>
+</div>`,
+      },
+      {
+        title: 'Disabled State',
+        description: 'Add the disabled attribute or .bpi-btn--disabled class.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap;">
+  <button class="bpi-btn bpi-btn--primary bpi-btn--md" disabled>Disabled Primary</button>
+  <button class="bpi-btn bpi-btn--secondary bpi-btn--md" disabled>Disabled Secondary</button>
+  <button class="bpi-btn bpi-btn--outline bpi-btn--md" disabled>Disabled Outline</button>
+</div>`,
+      },
+      {
+        title: 'Loading State',
+        description: 'Add .bpi-btn--loading and include a .bpi-btn__spinner element inside.',
+        code: `<button class="bpi-btn bpi-btn--primary bpi-btn--md bpi-btn--loading">
+  Submitting...
+  <span class="bpi-btn__spinner"></span>
+</button>`,
+      },
+      {
+        title: 'Block (Full Width)',
+        description: 'Add .bpi-btn--block to make the button stretch to full container width.',
+        code: `<button class="bpi-btn bpi-btn--primary bpi-btn--md bpi-btn--block">
+  Sign Up Now
+</button>`,
+      },
+      {
+        title: 'As Link',
+        description: 'Use an <a> tag with button classes to create a link styled as a button.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap;">
+  <a href="#" class="bpi-btn bpi-btn--primary bpi-btn--md">Link Button</a>
+  <a href="#" class="bpi-btn bpi-btn--outline bpi-btn--md">Outline Link</a>
+</div>`,
+      },
+      {
+        title: 'With Icons (SVG)',
+        description: 'Place inline SVG or icon fonts inside the button. The .bpi-btn gap handles spacing.',
+        code: `<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+  <button class="bpi-btn bpi-btn--primary bpi-btn--md">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download
+  </button>
+  <button class="bpi-btn bpi-btn--secondary bpi-btn--md">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    Share
+  </button>
+  <button class="bpi-btn bpi-btn--ghost bpi-btn--md">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+  </button>
+</div>`,
+      },
+    ],
+    cssClasses: [
+      { name: '.bpi-btn', description: 'Base button class (required)' },
+      { name: '.bpi-btn--primary', description: 'Primary filled variant (brand color)' },
+      { name: '.bpi-btn--secondary', description: 'Secondary filled variant (dark)' },
+      { name: '.bpi-btn--success', description: 'Success / positive action variant' },
+      { name: '.bpi-btn--danger', description: 'Danger / destructive action variant' },
+      { name: '.bpi-btn--warning', description: 'Warning variant' },
+      { name: '.bpi-btn--info', description: 'Info / informational variant' },
+      { name: '.bpi-btn--outline', description: 'Outlined variant with transparent background' },
+      { name: '.bpi-btn--ghost', description: 'Ghost / text-only variant' },
+      { name: '.bpi-btn--xs', description: 'Extra small size' },
+      { name: '.bpi-btn--sm', description: 'Small size' },
+      { name: '.bpi-btn--md', description: 'Medium size (default)' },
+      { name: '.bpi-btn--lg', description: 'Large size' },
+      { name: '.bpi-btn--block', description: 'Full width button' },
+      { name: '.bpi-btn--loading', description: 'Loading state (hides text, shows spinner)' },
+      { name: '.bpi-btn--disabled', description: 'Disabled state (use with or instead of disabled attr)' },
+      { name: '.bpi-btn__spinner', description: 'Spinner element inside a loading button' },
     ],
   },
   {

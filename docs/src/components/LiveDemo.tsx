@@ -83,6 +83,8 @@ interface LiveDemoProps {
   title: string;
   description?: string;
   code: string;
+  /** When true, code is already pure HTML — skip JSX→web-component transformation */
+  rawHtml?: boolean;
   children?: React.ReactNode;
 }
 
@@ -177,13 +179,14 @@ export const LiveDemo: React.FC<LiveDemoProps> = ({
   title,
   description,
   code,
+  rawHtml = false,
   children,
 }) => {
   const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
 
-  // The code prop contains JSX-style PascalCase tags for display.
-  // For preview, we transform them to actual bpi-* web component tags.
-  const previewHtml = transformCodeToHtml(code);
+  // If rawHtml is true, code is already pure HTML with CSS classes — use as-is.
+  // Otherwise, transform JSX-style PascalCase tags to bpi-* web component tags.
+  const previewHtml = rawHtml ? code : transformCodeToHtml(code);
 
   return (
     <div className="rounded-lg border border-[var(--color-demo-border)] overflow-hidden bg-[var(--color-surface)]">
@@ -232,7 +235,7 @@ export const LiveDemo: React.FC<LiveDemoProps> = ({
             )}
           </div>
         ) : (
-          <CodeBlock code={code} language="tsx" />
+          <CodeBlock code={code} language={rawHtml ? 'html' : 'tsx'} />
         )}
       </div>
     </div>
