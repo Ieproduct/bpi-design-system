@@ -69,7 +69,7 @@ export interface ZIndexToken {
 export const brandColors: ColorToken[] = [
   {
     name: 'Primary',
-    value: '#1E40AF',
+    value: '#E32321',
     description: 'Primary brand color used for main actions and highlights',
   },
   {
@@ -88,11 +88,11 @@ export const brandColors: ColorToken[] = [
 export const semanticColors: SemanticColor[] = [
   {
     name: 'Primary',
-    lighter: '#EFF6FF',
-    light: '#93C5FD',
-    main: '#1E40AF',
-    dark: '#1E3A8A',
-    darker: '#082F4B',
+    lighter: '#FEF2F2',
+    light: '#F9A8A7',
+    main: '#E32321',
+    dark: '#B81C1A',
+    darker: '#7A1312',
     contrast: '#FFFFFF',
     description: 'For primary actions and important elements',
   },
