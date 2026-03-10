@@ -58,6 +58,65 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ── AI Agent Integration ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">AI Agent Integration</h2>
+        <p className="text-[var(--color-text-secondary)]">
+          Two ways for AI agents (Claude, Cursor, Copilot, etc.) to access design tokens programmatically:
+        </p>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {/* CLAUDE.md card */}
+          <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-3 text-sm text-[var(--color-text-primary)]">
+            <h3 className="text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">📄</span> CLAUDE.md
+            </h3>
+            <p className="text-[var(--color-text-secondary)]">
+              Drop-in reference file for your project root. AI tools auto-read it and get all token names, values, and usage rules instantly.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <Link
+                to="/claude-md"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-white transition-colors"
+                style={{ backgroundColor: 'var(--color-primary-main)' }}
+              >
+                View &amp; Download
+              </Link>
+              <a
+                href="https://github.com/Ieproduct/bpi-design-system/blob/main/CLAUDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold border transition-colors"
+                style={{ borderColor: 'var(--color-border-strong)', color: 'var(--color-text-primary)' }}
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+
+          {/* MCP Server card */}
+          <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-3 text-sm text-[var(--color-text-primary)]">
+            <h3 className="text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">🔌</span> MCP Server
+            </h3>
+            <p className="text-[var(--color-text-secondary)]">
+              Query design tokens in real-time via Model Context Protocol. AI can search tokens, get colors, and generate CSS snippets on demand.
+            </p>
+            <div className="space-y-2 pt-1">
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                <strong className="text-[var(--color-text-primary)]">Tools:</strong> list_categories, get_tokens, get_color, search_tokens, get_css_snippet
+              </p>
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                <strong className="text-[var(--color-text-primary)]">Setup:</strong> See <Link to="/claude-md" className="text-blue-600 dark:text-blue-400 hover:underline">CLAUDE.md page</Link> for config instructions
+              </p>
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                <strong className="text-[var(--color-text-primary)]">Source:</strong> <code className="font-mono text-blue-600 dark:text-blue-400">mcp/index.js</code> in the repository
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Dark mode guide ── */}
       <section className="space-y-4">
         <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Dark Mode</h2>
