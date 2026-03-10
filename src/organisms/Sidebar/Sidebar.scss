@@ -2,6 +2,7 @@
 
 // ============================================================
 // Sidebar Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-sidebar {
@@ -9,8 +10,8 @@
   flex-direction: column;
   width: 260px;
   height: 100%;
-  background-color: $bpi-bg-primary;
-  border-right: 1px solid $bpi-border-default;
+  background-color: var(--bpi-bg-primary);
+  border-right: 1px solid var(--bpi-border-default);
   font-family: $bpi-font-family-sans;
   overflow-y: auto;
 
@@ -23,7 +24,7 @@
     align-items: center;
     justify-content: space-between;
     padding: $bpi-space-4;
-    border-bottom: 1px solid $bpi-border-default;
+    border-bottom: 1px solid var(--bpi-border-default);
   }
 
   &__content {
@@ -40,7 +41,7 @@
     padding: $bpi-space-2 $bpi-space-3;
     font-size: $bpi-font-size-xs;
     font-weight: $bpi-font-weight-semibold;
-    color: $bpi-text-muted;
+    color: var(--bpi-text-muted);
     text-transform: uppercase;
     letter-spacing: $bpi-tracking-wide;
   }
@@ -51,20 +52,20 @@
     gap: $bpi-space-3;
     padding: $bpi-space-2 $bpi-space-3;
     font-size: $bpi-font-size-sm;
-    color: $bpi-text-secondary;
+    color: var(--bpi-text-secondary);
     text-decoration: none;
     border-radius: $bpi-radius-md;
     cursor: pointer;
     transition: all $bpi-transition-fast;
 
     &:hover {
-      background-color: $bpi-bg-secondary;
-      color: $bpi-text-primary;
+      background-color: var(--bpi-bg-secondary);
+      color: var(--bpi-text-primary);
     }
 
     &--active {
-      background-color: $bpi-primary-light;
-      color: $bpi-primary;
+      background-color: var(--bpi-primary-lighter, var(--bpi-primary-light));
+      color: var(--bpi-primary);
       font-weight: $bpi-font-weight-medium;
     }
   }
@@ -79,6 +80,6 @@
 
   &__footer {
     padding: $bpi-space-4;
-    border-top: 1px solid $bpi-border-default;
+    border-top: 1px solid var(--bpi-border-default);
   }
 }

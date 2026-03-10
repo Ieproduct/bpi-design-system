@@ -2,6 +2,7 @@
 
 // ============================================================
 // Alert Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-alert {
@@ -67,26 +68,26 @@
 
   // --- Variants ---
   &--success {
-    background-color: $bpi-success-light;
-    border-color: $bpi-success;
-    color: $bpi-success-dark;
+    background-color: var(--bpi-success-lighter, var(--bpi-success-light));
+    border-color: var(--bpi-success);
+    color: var(--bpi-success-dark);
   }
 
   &--error {
-    background-color: $bpi-danger-light;
-    border-color: $bpi-danger;
-    color: $bpi-danger-dark;
+    background-color: var(--bpi-danger-lighter, var(--bpi-danger-light));
+    border-color: var(--bpi-danger);
+    color: var(--bpi-danger-dark);
   }
 
   &--warning {
-    background-color: $bpi-warning-light;
-    border-color: $bpi-warning;
-    color: $bpi-warning-dark;
+    background-color: var(--bpi-warning-lighter, var(--bpi-warning-light));
+    border-color: var(--bpi-warning);
+    color: var(--bpi-warning-dark);
   }
 
   &--info {
-    background-color: $bpi-info-light;
-    border-color: $bpi-info;
-    color: $bpi-info-dark;
+    background-color: var(--bpi-info-lighter, var(--bpi-info-light));
+    border-color: var(--bpi-info);
+    color: var(--bpi-info-dark);
   }
 }

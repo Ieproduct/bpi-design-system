@@ -2,6 +2,7 @@
 
 // ============================================================
 // Dialog Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-dialog {
@@ -43,7 +44,7 @@
 
   &__content {
     position: relative;
-    background-color: $bpi-white;
+    background-color: var(--bpi-surface-card, var(--bpi-bg-primary));
     border-radius: $bpi-radius-lg;
     box-shadow: $bpi-shadow-lg;
     display: flex;
@@ -82,7 +83,7 @@
     align-items: center;
     justify-content: space-between;
     padding: $bpi-space-6;
-    border-bottom: 1px solid $bpi-border-default;
+    border-bottom: 1px solid var(--bpi-border-default);
     flex-shrink: 0;
   }
 
@@ -90,7 +91,7 @@
     margin: 0;
     font-size: $bpi-font-size-xl;
     font-weight: $bpi-font-weight-semibold;
-    color: $bpi-text-primary;
+    color: var(--bpi-text-primary);
   }
 
   &__close {
@@ -104,11 +105,11 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    color: $bpi-text-secondary;
+    color: var(--bpi-text-secondary);
     transition: color $bpi-transition-fast;
 
     &:hover {
-      color: $bpi-text-primary;
+      color: var(--bpi-text-primary);
     }
 
     &:focus {
@@ -121,14 +122,14 @@
     flex: 1;
     padding: $bpi-space-6;
     overflow-y: auto;
-    color: $bpi-text-primary;
+    color: var(--bpi-text-primary);
     font-size: $bpi-font-size-sm;
     line-height: $bpi-line-height-normal;
   }
 
   &__footer {
     padding: $bpi-space-6;
-    border-top: 1px solid $bpi-border-default;
+    border-top: 1px solid var(--bpi-border-default);
     flex-shrink: 0;
     display: flex;
     gap: $bpi-space-3;

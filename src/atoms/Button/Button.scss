@@ -2,6 +2,7 @@
 
 // ============================================================
 // Button Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-btn {
@@ -52,72 +53,94 @@
 
   // --- Variants ---
   &--primary {
-    background-color: $bpi-primary;
-    color: $bpi-text-inverse;
-    border-color: $bpi-primary;
+    background-color: var(--bpi-primary);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-primary);
 
     &:hover:not(:disabled) {
-      background-color: $bpi-primary-dark;
-      border-color: $bpi-primary-dark;
+      background-color: var(--bpi-primary-dark);
+      border-color: var(--bpi-primary-dark);
     }
 
     &:active:not(:disabled) {
-      background-color: $bpi-primary-dark;
+      background-color: var(--bpi-primary-darker, var(--bpi-primary-dark));
     }
   }
 
   &--secondary {
-    background-color: $bpi-secondary;
-    color: $bpi-text-inverse;
-    border-color: $bpi-secondary;
+    background-color: var(--bpi-secondary);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-secondary);
 
     &:hover:not(:disabled) {
-      background-color: $bpi-secondary-dark;
-      border-color: $bpi-secondary-dark;
+      background-color: var(--bpi-secondary-dark);
+      border-color: var(--bpi-secondary-dark);
     }
   }
 
   &--danger {
-    background-color: $bpi-danger;
-    color: $bpi-text-inverse;
-    border-color: $bpi-danger;
+    background-color: var(--bpi-danger);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-danger);
 
     &:hover:not(:disabled) {
-      background-color: $bpi-danger-dark;
-      border-color: $bpi-danger-dark;
+      background-color: var(--bpi-danger-dark);
+      border-color: var(--bpi-danger-dark);
     }
   }
 
   &--success {
-    background-color: $bpi-success;
-    color: $bpi-text-inverse;
-    border-color: $bpi-success;
+    background-color: var(--bpi-success);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-success);
 
     &:hover:not(:disabled) {
-      background-color: $bpi-success-dark;
-      border-color: $bpi-success-dark;
+      background-color: var(--bpi-success-dark);
+      border-color: var(--bpi-success-dark);
+    }
+  }
+
+  &--warning {
+    background-color: var(--bpi-warning);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-warning);
+
+    &:hover:not(:disabled) {
+      background-color: var(--bpi-warning-dark);
+      border-color: var(--bpi-warning-dark);
+    }
+  }
+
+  &--info {
+    background-color: var(--bpi-info);
+    color: var(--bpi-text-inverse);
+    border-color: var(--bpi-info);
+
+    &:hover:not(:disabled) {
+      background-color: var(--bpi-info-dark);
+      border-color: var(--bpi-info-dark);
     }
   }
 
   &--outline {
     background-color: transparent;
-    color: $bpi-primary;
-    border-color: $bpi-border-strong;
+    color: var(--bpi-primary);
+    border-color: var(--bpi-border-strong);
 
     &:hover:not(:disabled) {
-      background-color: $bpi-bg-secondary;
-      border-color: $bpi-primary;
+      background-color: var(--bpi-bg-secondary);
+      border-color: var(--bpi-primary);
     }
   }
 
   &--ghost {
     background-color: transparent;
-    color: $bpi-text-secondary;
+    color: var(--bpi-text-secondary);
     border-color: transparent;
 
     &:hover:not(:disabled) {
-      background-color: $bpi-bg-tertiary;
-      color: $bpi-text-primary;
+      background-color: var(--bpi-bg-tertiary);
+      color: var(--bpi-text-primary);
     }
   }
 
@@ -152,7 +175,7 @@
     border-right-color: transparent;
     border-radius: $bpi-radius-full;
     animation: bpi-spin 0.6s linear infinite;
-    color: $bpi-text-inverse;
+    color: var(--bpi-text-inverse);
   }
 }
 

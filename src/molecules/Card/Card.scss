@@ -2,13 +2,14 @@
 
 // ============================================================
 // Card Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-card {
   display: block;
   font-family: $bpi-font-family-sans;
-  background-color: $bpi-bg-primary;
-  border: 1px solid $bpi-border-default;
+  background-color: var(--bpi-surface-card, var(--bpi-bg-primary));
+  border: 1px solid var(--bpi-border-default);
   border-radius: $bpi-radius-lg;
   overflow: hidden;
 
@@ -19,7 +20,7 @@
   }
 
   &--flat {
-    border: 1px solid $bpi-border-default;
+    border: 1px solid var(--bpi-border-default);
     box-shadow: none;
   }
 
@@ -29,13 +30,13 @@
     align-items: center;
     justify-content: space-between;
     padding: $bpi-space-4 $bpi-space-5;
-    border-bottom: 1px solid $bpi-border-default;
+    border-bottom: 1px solid var(--bpi-border-default);
   }
 
   &__title {
     font-size: $bpi-font-size-lg;
     font-weight: $bpi-font-weight-semibold;
-    color: $bpi-text-primary;
+    color: var(--bpi-text-primary);
     margin: 0;
   }
 
@@ -57,7 +58,7 @@
     justify-content: flex-end;
     gap: $bpi-space-2;
     padding: $bpi-space-3 $bpi-space-5;
-    border-top: 1px solid $bpi-border-default;
-    background-color: $bpi-bg-secondary;
+    border-top: 1px solid var(--bpi-border-default);
+    background-color: var(--bpi-bg-secondary);
   }
 }

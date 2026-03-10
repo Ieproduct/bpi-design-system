@@ -6,34 +6,52 @@
 // ============================================================
 
 // --- Brand Colors ---
-$bpi-brand-primary: #1E40AF !default;
-$bpi-brand-secondary: #7C3AED !default;
+$bpi-brand-primary: #E32321 !default;
+$bpi-brand-secondary: #262626 !default;
 $bpi-brand-accent: #0891B2 !default;
 
-// --- Semantic Colors ---
+// --- Semantic Colors (Light Mode) ---
 $bpi-primary: $bpi-brand-primary !default;
-$bpi-primary-light: color.adjust($bpi-primary, $lightness: 35%) !default;
-$bpi-primary-dark: color.adjust($bpi-primary, $lightness: -10%) !default;
+$bpi-primary-lighter: #FEF2F2 !default;
+$bpi-primary-light: #FCA5A5 !default;
+$bpi-primary-dark: #B91C1C !default;
+$bpi-primary-darker: #7F1D1D !default;
+$bpi-primary-contrast: #FFFFFF !default;
 
 $bpi-secondary: $bpi-brand-secondary !default;
-$bpi-secondary-light: color.adjust($bpi-secondary, $lightness: 35%) !default;
-$bpi-secondary-dark: color.adjust($bpi-secondary, $lightness: -10%) !default;
+$bpi-secondary-lighter: #F5F5F5 !default;
+$bpi-secondary-light: #A3A3A3 !default;
+$bpi-secondary-dark: #171717 !default;
+$bpi-secondary-darker: #0A0A0A !default;
+$bpi-secondary-contrast: #FFFFFF !default;
 
 $bpi-success: #16A34A !default;
-$bpi-success-light: color.adjust($bpi-success, $lightness: 35%) !default;
-$bpi-success-dark: color.adjust($bpi-success, $lightness: -10%) !default;
+$bpi-success-lighter: #F0FDF4 !default;
+$bpi-success-light: #86EFAC !default;
+$bpi-success-dark: #15803D !default;
+$bpi-success-darker: #14532D !default;
+$bpi-success-contrast: #FFFFFF !default;
 
 $bpi-danger: #DC2626 !default;
-$bpi-danger-light: color.adjust($bpi-danger, $lightness: 35%) !default;
-$bpi-danger-dark: color.adjust($bpi-danger, $lightness: -10%) !default;
+$bpi-danger-lighter: #FEF2F2 !default;
+$bpi-danger-light: #FCA5A5 !default;
+$bpi-danger-dark: #B91C1C !default;
+$bpi-danger-darker: #7F1D1D !default;
+$bpi-danger-contrast: #FFFFFF !default;
 
 $bpi-warning: #D97706 !default;
-$bpi-warning-light: color.adjust($bpi-warning, $lightness: 35%) !default;
-$bpi-warning-dark: color.adjust($bpi-warning, $lightness: -10%) !default;
+$bpi-warning-lighter: #FFFBEB !default;
+$bpi-warning-light: #FCD34D !default;
+$bpi-warning-dark: #B45309 !default;
+$bpi-warning-darker: #78350F !default;
+$bpi-warning-contrast: #FFFFFF !default;
 
 $bpi-info: #0284C7 !default;
-$bpi-info-light: color.adjust($bpi-info, $lightness: 35%) !default;
-$bpi-info-dark: color.adjust($bpi-info, $lightness: -10%) !default;
+$bpi-info-lighter: #F0F9FF !default;
+$bpi-info-light: #7DD3FC !default;
+$bpi-info-dark: #0369A1 !default;
+$bpi-info-darker: #0C4A6E !default;
+$bpi-info-contrast: #FFFFFF !default;
 
 // --- Neutral / Gray Scale ---
 $bpi-gray-50: #F9FAFB !default;
@@ -49,11 +67,13 @@ $bpi-gray-900: #111827 !default;
 $bpi-gray-950: #030712 !default;
 
 // --- Aliases ---
-$bpi-text-primary: $bpi-gray-900 !default;
-$bpi-text-secondary: $bpi-gray-600 !default;
-$bpi-text-muted: $bpi-gray-400 !default;
+$bpi-text-primary: #0F172A !default;
+$bpi-text-secondary: #64748B !default;
+$bpi-text-muted: #94A3B8 !default;
+$bpi-text-disabled: #94A3B8 !default;
 $bpi-text-inverse: #FFFFFF !default;
 
+$bpi-bg-default: #F8FAFC !default;
 $bpi-bg-primary: #FFFFFF !default;
 $bpi-bg-secondary: $bpi-gray-50 !default;
 $bpi-bg-tertiary: $bpi-gray-100 !default;
@@ -62,11 +82,15 @@ $bpi-border-default: $bpi-gray-200 !default;
 $bpi-border-strong: $bpi-gray-300 !default;
 $bpi-border-focus: $bpi-primary !default;
 
+$bpi-surface-card: #FFFFFF !default;
+$bpi-surface-variant: #F1F5F9 !default;
+$bpi-surface-hover: #F8FAFC !default;
+
 $bpi-white: #FFFFFF !default;
 $bpi-black: #000000 !default;
 
 // ============================================================
-// CSS Custom Properties (runtime overridable)
+// CSS Custom Properties — Light Mode (default)
 // ============================================================
 :root {
   // Brand
@@ -74,28 +98,42 @@ $bpi-black: #000000 !default;
   --bpi-brand-secondary: #{$bpi-brand-secondary};
   --bpi-brand-accent: #{$bpi-brand-accent};
 
-  // Semantic
+  // Primary
   --bpi-primary: #{$bpi-primary};
+  --bpi-primary-lighter: #{$bpi-primary-lighter};
   --bpi-primary-light: #{$bpi-primary-light};
   --bpi-primary-dark: #{$bpi-primary-dark};
+  --bpi-primary-darker: #{$bpi-primary-darker};
+  --bpi-primary-contrast: #{$bpi-primary-contrast};
 
+  // Secondary
   --bpi-secondary: #{$bpi-secondary};
+  --bpi-secondary-lighter: #{$bpi-secondary-lighter};
   --bpi-secondary-light: #{$bpi-secondary-light};
   --bpi-secondary-dark: #{$bpi-secondary-dark};
+  --bpi-secondary-darker: #{$bpi-secondary-darker};
 
+  // Success
   --bpi-success: #{$bpi-success};
+  --bpi-success-lighter: #{$bpi-success-lighter};
   --bpi-success-light: #{$bpi-success-light};
   --bpi-success-dark: #{$bpi-success-dark};
 
+  // Danger
   --bpi-danger: #{$bpi-danger};
+  --bpi-danger-lighter: #{$bpi-danger-lighter};
   --bpi-danger-light: #{$bpi-danger-light};
   --bpi-danger-dark: #{$bpi-danger-dark};
 
+  // Warning
   --bpi-warning: #{$bpi-warning};
+  --bpi-warning-lighter: #{$bpi-warning-lighter};
   --bpi-warning-light: #{$bpi-warning-light};
   --bpi-warning-dark: #{$bpi-warning-dark};
 
+  // Info
   --bpi-info: #{$bpi-info};
+  --bpi-info-lighter: #{$bpi-info-lighter};
   --bpi-info-light: #{$bpi-info-light};
   --bpi-info-dark: #{$bpi-info-dark};
 
@@ -112,17 +150,97 @@ $bpi-black: #000000 !default;
   --bpi-gray-900: #{$bpi-gray-900};
   --bpi-gray-950: #{$bpi-gray-950};
 
-  // Aliases
+  // Text
   --bpi-text-primary: #{$bpi-text-primary};
   --bpi-text-secondary: #{$bpi-text-secondary};
   --bpi-text-muted: #{$bpi-text-muted};
+  --bpi-text-disabled: #{$bpi-text-disabled};
   --bpi-text-inverse: #{$bpi-text-inverse};
 
+  // Backgrounds
+  --bpi-bg-default: #{$bpi-bg-default};
   --bpi-bg-primary: #{$bpi-bg-primary};
   --bpi-bg-secondary: #{$bpi-bg-secondary};
   --bpi-bg-tertiary: #{$bpi-bg-tertiary};
 
+  // Borders
   --bpi-border-default: #{$bpi-border-default};
   --bpi-border-strong: #{$bpi-border-strong};
   --bpi-border-focus: #{$bpi-border-focus};
+
+  // Surfaces
+  --bpi-surface-card: #{$bpi-surface-card};
+  --bpi-surface-variant: #{$bpi-surface-variant};
+  --bpi-surface-hover: #{$bpi-surface-hover};
+
+  // Docs site compatibility aliases
+  --color-primary-main: var(--bpi-primary);
+  --color-primary-light: var(--bpi-primary-light);
+  --color-primary-dark: var(--bpi-primary-dark);
+  --color-secondary-main: var(--bpi-secondary);
+  --color-success-main: var(--bpi-success);
+  --color-danger-main: var(--bpi-danger);
+  --color-warning-main: var(--bpi-warning);
+  --color-info-main: var(--bpi-info);
+  --color-bg-default: var(--bpi-bg-default);
+  --color-bg-paper: var(--bpi-bg-primary);
+  --color-text-primary: var(--bpi-text-primary);
+  --color-text-secondary: var(--bpi-text-secondary);
+  --color-border: var(--bpi-border-default);
+  --color-surface-card: var(--bpi-surface-card);
+}
+
+// ============================================================
+// Dark Mode Overrides
+// ============================================================
+.dark {
+  --bpi-primary: #F87171;
+  --bpi-primary-lighter: #451A1A;
+  --bpi-primary-light: #DC2626;
+  --bpi-primary-dark: #FCA5A5;
+  --bpi-primary-contrast: #1F2937;
+
+  --bpi-secondary: #D4D4D4;
+  --bpi-secondary-lighter: #262626;
+  --bpi-secondary-light: #737373;
+  --bpi-secondary-dark: #E5E5E5;
+
+  --bpi-success: #4ADE80;
+  --bpi-success-lighter: #052E16;
+  --bpi-success-light: #16A34A;
+  --bpi-success-dark: #86EFAC;
+
+  --bpi-danger: #F87171;
+  --bpi-danger-lighter: #450A0A;
+  --bpi-danger-light: #DC2626;
+  --bpi-danger-dark: #FCA5A5;
+
+  --bpi-warning: #FBBF24;
+  --bpi-warning-lighter: #451A03;
+  --bpi-warning-light: #D97706;
+  --bpi-warning-dark: #FCD34D;
+
+  --bpi-info: #38BDF8;
+  --bpi-info-lighter: #082F49;
+  --bpi-info-light: #0284C7;
+  --bpi-info-dark: #7DD3FC;
+
+  --bpi-text-primary: #F1F5F9;
+  --bpi-text-secondary: #94A3B8;
+  --bpi-text-muted: #64748B;
+  --bpi-text-disabled: #475569;
+  --bpi-text-inverse: #0F172A;
+
+  --bpi-bg-default: #0F172A;
+  --bpi-bg-primary: #1E293B;
+  --bpi-bg-secondary: #334155;
+  --bpi-bg-tertiary: #475569;
+
+  --bpi-border-default: #334155;
+  --bpi-border-strong: #475569;
+  --bpi-border-focus: var(--bpi-primary);
+
+  --bpi-surface-card: #1E293B;
+  --bpi-surface-variant: #1E293B;
+  --bpi-surface-hover: #334155;
 }

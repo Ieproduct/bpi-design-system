@@ -2,6 +2,7 @@
 
 // ============================================================
 // Input Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-input {
@@ -9,9 +10,9 @@
   width: 100%;
   font-family: $bpi-font-family-sans;
   font-weight: $bpi-font-weight-normal;
-  color: $bpi-text-primary;
-  background-color: $bpi-bg-primary;
-  border: 1px solid $bpi-border-default;
+  color: var(--bpi-text-primary);
+  background-color: var(--bpi-bg-primary);
+  border: 1px solid var(--bpi-border-default);
   border-radius: $bpi-radius-md;
   transition: border-color $bpi-transition-fast,
               box-shadow $bpi-transition-fast;
@@ -19,11 +20,11 @@
   box-sizing: border-box;
 
   &::placeholder {
-    color: $bpi-text-muted;
+    color: var(--bpi-text-muted);
   }
 
   &:focus {
-    border-color: $bpi-border-focus;
+    border-color: var(--bpi-border-focus);
     box-shadow: 0 0 0 $bpi-focus-ring-width $bpi-focus-ring-color;
   }
 
@@ -45,10 +46,10 @@
 
   // --- Error ---
   &--error {
-    border-color: $bpi-danger;
+    border-color: var(--bpi-danger);
 
     &:focus {
-      box-shadow: 0 0 0 $bpi-focus-ring-width rgba($bpi-danger, 0.3);
+      box-shadow: 0 0 0 $bpi-focus-ring-width rgba(220, 38, 38, 0.3);
     }
   }
 
@@ -57,7 +58,7 @@
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: $bpi-bg-secondary;
+    background-color: var(--bpi-bg-secondary);
   }
 
   // --- Hint & Error Text ---
@@ -65,13 +66,13 @@
     display: block;
     margin-top: $bpi-space-1;
     font-size: $bpi-font-size-xs;
-    color: $bpi-text-muted;
+    color: var(--bpi-text-muted);
   }
 
   &__error {
     display: block;
     margin-top: $bpi-space-1;
     font-size: $bpi-font-size-xs;
-    color: $bpi-danger;
+    color: var(--bpi-danger);
   }
 }

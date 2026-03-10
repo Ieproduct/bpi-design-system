@@ -2,6 +2,7 @@
 
 // ============================================================
 // Navbar Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-navbar {
@@ -10,8 +11,8 @@
   justify-content: space-between;
   padding: 0 $bpi-space-6;
   height: 56px;
-  background-color: $bpi-bg-primary;
-  border-bottom: 1px solid $bpi-border-default;
+  background-color: var(--bpi-bg-primary);
+  border-bottom: 1px solid var(--bpi-border-default);
   font-family: $bpi-font-family-sans;
 
   &__brand {
@@ -20,7 +21,7 @@
     gap: $bpi-space-3;
     font-size: $bpi-font-size-lg;
     font-weight: $bpi-font-weight-bold;
-    color: $bpi-text-primary;
+    color: var(--bpi-text-primary);
     text-decoration: none;
   }
 
@@ -39,19 +40,19 @@
     padding: $bpi-space-2 $bpi-space-3;
     font-size: $bpi-font-size-sm;
     font-weight: $bpi-font-weight-medium;
-    color: $bpi-text-secondary;
+    color: var(--bpi-text-secondary);
     text-decoration: none;
     border-radius: $bpi-radius-md;
     transition: all $bpi-transition-fast;
 
     &:hover {
-      color: $bpi-text-primary;
-      background-color: $bpi-bg-secondary;
+      color: var(--bpi-text-primary);
+      background-color: var(--bpi-bg-secondary);
     }
 
     &--active {
-      color: $bpi-primary;
-      background-color: $bpi-primary-light;
+      color: var(--bpi-primary);
+      background-color: var(--bpi-primary-lighter, var(--bpi-primary-light));
     }
   }
 

@@ -2,6 +2,7 @@
 
 // ============================================================
 // Badge Component — BEM
+// Uses CSS custom properties for colors (dark mode / theming)
 // ============================================================
 
 .bpi-badge {
@@ -18,33 +19,33 @@
 
   // --- Variants ---
   &--primary {
-    background-color: $bpi-primary-light;
-    color: $bpi-primary-dark;
+    background-color: var(--bpi-primary-light);
+    color: var(--bpi-primary-dark);
   }
 
   &--success {
-    background-color: $bpi-success-light;
-    color: $bpi-success-dark;
+    background-color: var(--bpi-success-light);
+    color: var(--bpi-success-dark);
   }
 
   &--warning {
-    background-color: $bpi-warning-light;
-    color: $bpi-warning-dark;
+    background-color: var(--bpi-warning-light);
+    color: var(--bpi-warning-dark);
   }
 
   &--danger {
-    background-color: $bpi-danger-light;
-    color: $bpi-danger-dark;
+    background-color: var(--bpi-danger-light);
+    color: var(--bpi-danger-dark);
   }
 
   &--info {
-    background-color: $bpi-info-light;
-    color: $bpi-info-dark;
+    background-color: var(--bpi-info-light);
+    color: var(--bpi-info-dark);
   }
 
   &--neutral {
-    background-color: $bpi-gray-100;
-    color: $bpi-gray-700;
+    background-color: var(--bpi-gray-100);
+    color: var(--bpi-gray-700);
   }
 
   // --- Dot modifier ---
