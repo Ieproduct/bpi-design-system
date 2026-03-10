@@ -1,0 +1,18 @@
+{
+  "name": "@bpi/design-tokens-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for BPI Design System tokens — query colors, typography, spacing, and more",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "bpi-design-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "keywords": ["mcp", "design-system", "bpi", "tokens"],
+  "license": "MIT"
+}
