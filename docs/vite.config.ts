@@ -1,0 +1,24 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import { resolve } from 'path'
+
+export default defineConfig({
+  base: '/bpi-design-system/',
+  plugins: [
+    react(),
+    tailwindcss(),
+    TanStackRouterVite(),
+  ],
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    fs: {
+      allow: ['.', resolve(__dirname, '../dist')],
+    },
+  },
+})

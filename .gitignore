@@ -3,3 +3,8 @@ dist/
 .tmp/
 *.log
 .DS_Store
+
+# Docs
+docs/node_modules/
+docs/dist/
+docs/.tanstack/

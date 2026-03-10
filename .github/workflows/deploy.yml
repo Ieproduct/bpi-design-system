@@ -28,13 +28,30 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      - name: Install dependencies
+      # Build design system library
+      - name: Install design system dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build design system
         run: npm run build
+
+      # Build docs site
+      - name: Install docs dependencies
+        working-directory: docs
+        run: npm ci
+
+      - name: Build docs
+        working-directory: docs
+        run: npm run build
+
+      # Merge outputs: docs/dist becomes the root, design system dist is also available
+      - name: Prepare deploy folder
+        run: |
+          mkdir -p _site
+          cp -r docs/dist/* _site/
+          mkdir -p _site/lib
+          cp -r dist/* _site/lib/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -42,7 +59,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

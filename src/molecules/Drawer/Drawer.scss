@@ -14,24 +14,6 @@
   pointer-events: none;
   z-index: $bpi-z-modal;
 
-  &--open {
-    pointer-events: auto;
-
-    .bpi-drawer__backdrop {
-      opacity: 1;
-    }
-
-    .bpi-drawer__content {
-      transform: translateX(0);
-    }
-
-    &.bpi-drawer--right {
-      .bpi-drawer__content {
-        transform: translateX(0);
-      }
-    }
-  }
-
   &__backdrop {
     position: fixed;
     top: 0;
@@ -87,6 +69,19 @@
   &--lg {
     .bpi-drawer__content {
       width: 500px;
+    }
+  }
+
+  // --- Open state (MUST come after position variants for cascade to work) ---
+  &--open {
+    pointer-events: auto;
+
+    .bpi-drawer__backdrop {
+      opacity: 1;
+    }
+
+    .bpi-drawer__content {
+      transform: translateX(0);
     }
   }
 }
