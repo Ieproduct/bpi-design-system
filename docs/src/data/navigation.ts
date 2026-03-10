@@ -25,6 +25,13 @@ export const navigationStructure: NavItem[] = [
       { label: 'Misc', path: '/tokens/misc' },
     ],
   },
+  {
+    label: 'Resources',
+    icon: '📦',
+    children: [
+      { label: 'CLAUDE.md', path: '/claude-md' },
+    ],
+  },
 ];
 
 export default navigationStructure;

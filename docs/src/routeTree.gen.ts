@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ClaudeMdRouteImport } from './routes/claude-md'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TokensTypographyRouteImport } from './routes/tokens/typography'
 import { Route as TokensSpacingRouteImport } from './routes/tokens/spacing'
@@ -57,6 +58,11 @@ import { Route as ComponentsAutocompleteRouteImport } from './routes/components/
 import { Route as ComponentsAlertRouteImport } from './routes/components/alert'
 import { Route as ComponentsAccordionRouteImport } from './routes/components/accordion'
 
+const ClaudeMdRoute = ClaudeMdRouteImport.update({
+  id: '/claude-md',
+  path: '/claude-md',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -301,6 +307,7 @@ const ComponentsAccordionRoute = ComponentsAccordionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/claude-md': typeof ClaudeMdRoute
   '/components/accordion': typeof ComponentsAccordionRoute
   '/components/alert': typeof ComponentsAlertRoute
   '/components/autocomplete': typeof ComponentsAutocompleteRoute
@@ -350,6 +357,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/claude-md': typeof ClaudeMdRoute
   '/components/accordion': typeof ComponentsAccordionRoute
   '/components/alert': typeof ComponentsAlertRoute
   '/components/autocomplete': typeof ComponentsAutocompleteRoute
@@ -400,6 +408,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/claude-md': typeof ClaudeMdRoute
   '/components/accordion': typeof ComponentsAccordionRoute
   '/components/alert': typeof ComponentsAlertRoute
   '/components/autocomplete': typeof ComponentsAutocompleteRoute
@@ -451,6 +460,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/claude-md'
     | '/components/accordion'
     | '/components/alert'
     | '/components/autocomplete'
@@ -500,6 +510,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/claude-md'
     | '/components/accordion'
     | '/components/alert'
     | '/components/autocomplete'
@@ -549,6 +560,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/claude-md'
     | '/components/accordion'
     | '/components/alert'
     | '/components/autocomplete'
@@ -599,6 +611,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClaudeMdRoute: typeof ClaudeMdRoute
   ComponentsAccordionRoute: typeof ComponentsAccordionRoute
   ComponentsAlertRoute: typeof ComponentsAlertRoute
   ComponentsAutocompleteRoute: typeof ComponentsAutocompleteRoute
@@ -971,6 +984,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsAlertRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/claude-md': {
+      id: '/claude-md'
+      path: '/claude-md'
+      fullPath: '/claude-md'
+      preLoaderRoute: typeof ClaudeMdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/accordion': {
       id: '/components/accordion'
       path: '/components/accordion'
@@ -983,6 +1003,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClaudeMdRoute: ClaudeMdRoute,
   ComponentsAccordionRoute: ComponentsAccordionRoute,
   ComponentsAlertRoute: ComponentsAlertRoute,
   ComponentsAutocompleteRoute: ComponentsAutocompleteRoute,
