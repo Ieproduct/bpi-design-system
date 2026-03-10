@@ -11,7 +11,7 @@ function HomePage() {
     {
       label: 'Colors',
       path: '/tokens/colors',
-      desc: 'Brand colors, semantic colors (primary, secondary, success, danger, warning, info), background, text, and full 50–950 palette for 22 color families.',
+      desc: 'Brand colors, semantic colors (primary, secondary, success, danger, warning, info), background, text, surface tokens, and full 50–950 palette for 22 color families. Includes light vs dark mode comparison tables.',
     },
     {
       label: 'Typography',
@@ -55,6 +55,20 @@ function HomePage() {
           The tokens are framework-agnostic — they work with React, Vue, Angular, Svelte, plain HTML, or any other technology.
           </p>
           <p><strong>When updating:</strong> Edit the token data in <code className="text-xs font-mono text-blue-600">docs/src/data/tokens.ts</code>, push to <code className="text-xs font-mono text-blue-600">main</code>, and GitHub Actions will auto-deploy.</p>
+        </div>
+      </section>
+
+      {/* ── Dark mode guide ── */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Dark Mode</h2>
+        <div className="bg-[var(--color-surface-variant)] rounded-lg p-6 space-y-4 text-sm text-[var(--color-text-primary)]">
+          <p><strong>How it works:</strong> Add <code className="font-mono text-blue-600 dark:text-blue-400">class="dark"</code> to <code className="font-mono text-blue-600 dark:text-blue-400">&lt;html&gt;</code> to activate dark mode. All CSS variables automatically switch to their dark values. Use the same variable names in both modes.</p>
+          <p><strong>Toggle in JS:</strong> <code className="font-mono text-blue-600 dark:text-blue-400">document.documentElement.classList.toggle('dark')</code></p>
+          <p><strong>Persist preference:</strong> <code className="font-mono text-blue-600 dark:text-blue-400">localStorage.setItem('theme', 'dark')</code> — On page load, check <code className="font-mono text-blue-600 dark:text-blue-400">localStorage.getItem('theme')</code> or fall back to <code className="font-mono text-blue-600 dark:text-blue-400">window.matchMedia('(prefers-color-scheme: dark)').matches</code></p>
+          <p><strong>What changes in dark mode:</strong> Semantic colors (primary, secondary, success, danger, warning, info), background colors, text colors, and surface/border tokens all have dark mode values. The full 50–950 color palette does NOT change — those are absolute values.</p>
+          <p><strong>For AI agents:</strong> Always use CSS variables like <code className="font-mono text-blue-600 dark:text-blue-400">var(--color-primary-main)</code> — never hard-code hex values. This ensures your UI automatically adapts to light/dark mode. See the <Link to="/tokens/colors" className="text-blue-600 dark:text-blue-400 hover:underline">Colors page</Link> for a full side-by-side comparison of all light vs dark values.</p>
+          <p><strong>CSS file:</strong> <code className="font-mono text-blue-600 dark:text-blue-400">docs/src/styles/app.css</code> — all dark mode overrides are in the <code className="font-mono">.dark {'{'} ... {'}'}</code> block.</p>
+          <p><strong>Token data:</strong> <code className="font-mono text-blue-600 dark:text-blue-400">docs/src/data/tokens.ts</code> — exports <code className="font-mono">darkSemanticColors</code>, <code className="font-mono">darkBackgroundColors</code>, <code className="font-mono">darkTextColors</code>, <code className="font-mono">darkSurfaceTokens</code>.</p>
         </div>
       </section>
 

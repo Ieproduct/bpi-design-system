@@ -516,6 +516,119 @@ export const colorScales: Record<string, Record<string, string>> = {
   },
 };
 
+// ═══════════════════════════════════════════════════════════════════
+// DARK MODE TOKENS
+// ═══════════════════════════════════════════════════════════════════
+// Dark mode uses the same CSS variable NAMES as light mode.
+// The values swap automatically when html.dark class is present.
+// AI agents: use the same --color-* variables — the theme toggle handles switching.
+// These data exports let you inspect both sets of values.
+
+export const darkSemanticColors: SemanticColor[] = [
+  {
+    name: 'Primary',
+    lighter: '#3B1414',
+    light: '#F87171',
+    main: '#EF4444',
+    dark: '#FCA5A5',
+    darker: '#FEE2E2',
+    contrast: '#FFFFFF',
+    description: 'Primary actions — brighter on dark backgrounds',
+  },
+  {
+    name: 'Secondary',
+    lighter: '#1E1E1E',
+    light: '#A3A3A3',
+    main: '#D4D4D4',
+    dark: '#E5E5E5',
+    darker: '#F5F5F5',
+    contrast: '#171717',
+    description: 'Secondary actions — inverted for dark mode',
+  },
+  {
+    name: 'Success',
+    lighter: '#052E16',
+    light: '#4ADE80',
+    main: '#22C55E',
+    dark: '#86EFAC',
+    darker: '#DCFCE7',
+    contrast: '#FFFFFF',
+    description: 'Success states — brighter green',
+  },
+  {
+    name: 'Danger',
+    lighter: '#450A0A',
+    light: '#F87171',
+    main: '#EF4444',
+    dark: '#FCA5A5',
+    darker: '#FEE2E2',
+    contrast: '#FFFFFF',
+    description: 'Error states — brighter red',
+  },
+  {
+    name: 'Warning',
+    lighter: '#451A03',
+    light: '#FBBF24',
+    main: '#F59E0B',
+    dark: '#FCD34D',
+    darker: '#FEF3C7',
+    contrast: '#171717',
+    description: 'Warning states — brighter amber',
+  },
+  {
+    name: 'Info',
+    lighter: '#082F49',
+    light: '#38BDF8',
+    main: '#0EA5E9',
+    dark: '#7DD3FC',
+    darker: '#E0F2FE',
+    contrast: '#FFFFFF',
+    description: 'Info states — brighter sky blue',
+  },
+]
+
+export const darkBackgroundColors: BackgroundColor[] = [
+  {
+    name: 'Default',
+    value: '#0F172A',
+    description: 'Default page background (slate-900)',
+  },
+  {
+    name: 'Paper',
+    value: '#1E293B',
+    description: 'Elevated surface background (slate-800)',
+  },
+]
+
+export const darkTextColors: TextColor[] = [
+  {
+    name: 'Primary',
+    value: '#F1F5F9',
+    description: 'Primary text on dark backgrounds (slate-100)',
+  },
+  {
+    name: 'Secondary',
+    value: '#94A3B8',
+    description: 'Secondary text on dark backgrounds (slate-400)',
+  },
+  {
+    name: 'Disabled',
+    value: '#64748B',
+    description: 'Disabled text on dark backgrounds (slate-500)',
+  },
+]
+
+// Dark mode surface & utility tokens (used in CSS .dark override)
+export const darkSurfaceTokens = {
+  surface: '#0F172A',
+  surfaceVariant: '#1E293B',
+  surfaceHover: '#334155',
+  border: '#334155',
+  borderStrong: '#475569',
+  sidebar: '#0B1120',
+  codeBg: '#1E293B',
+}
+
 // Complete tokens object for easy access
 export const designTokens = {
   colors: {
@@ -525,6 +638,12 @@ export const designTokens = {
     background: backgroundColors,
     text: textColors,
     scales: colorScales,
+  },
+  darkMode: {
+    semantic: darkSemanticColors,
+    background: darkBackgroundColors,
+    text: darkTextColors,
+    surface: darkSurfaceTokens,
   },
   spacing: spacingScale,
   typography: {

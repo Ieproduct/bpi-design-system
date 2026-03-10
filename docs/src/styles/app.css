@@ -28,10 +28,72 @@
   --color-code-bg: #F8FAFC;
   --color-demo-bg: #FFFFFF;
   --color-demo-border: #E2E8F0;
+
+  /* Semantic: Primary (light mode defaults) */
+  --color-primary-lighter: #FEF2F2;
+  --color-primary-light: #F9A8A7;
+  --color-primary-main: #E32321;
+  --color-primary-dark: #B81C1A;
+  --color-primary-darker: #7A1312;
+  --color-primary-contrast: #FFFFFF;
+
+  /* Semantic: Secondary */
+  --color-secondary-lighter: #F5F5F5;
+  --color-secondary-light: #A3A3A3;
+  --color-secondary-main: #262626;
+  --color-secondary-dark: #1A1A1A;
+  --color-secondary-darker: #0D0D0D;
+  --color-secondary-contrast: #FFFFFF;
+
+  /* Semantic: Success */
+  --color-success-lighter: #ECFDF5;
+  --color-success-light: #86EFAC;
+  --color-success-main: #16A34A;
+  --color-success-dark: #15803D;
+  --color-success-darker: #14532D;
+  --color-success-contrast: #FFFFFF;
+
+  /* Semantic: Danger */
+  --color-danger-lighter: #FEF2F2;
+  --color-danger-light: #FCA5A5;
+  --color-danger-main: #DC2626;
+  --color-danger-dark: #B91C1C;
+  --color-danger-darker: #7F1D1D;
+  --color-danger-contrast: #FFFFFF;
+
+  /* Semantic: Warning */
+  --color-warning-lighter: #FFFBEB;
+  --color-warning-light: #FCD34D;
+  --color-warning-main: #D97706;
+  --color-warning-dark: #B45309;
+  --color-warning-darker: #78350F;
+  --color-warning-contrast: #FFFFFF;
+
+  /* Semantic: Info */
+  --color-info-lighter: #F0F9FF;
+  --color-info-light: #7DD3FC;
+  --color-info-main: #0284C7;
+  --color-info-dark: #0369A1;
+  --color-info-darker: #0C2D48;
+  --color-info-contrast: #FFFFFF;
+
+  /* Background tokens */
+  --color-bg-default: #F8FAFC;
+  --color-bg-paper: #FFFFFF;
+
+  /* Text tokens */
+  --color-text-primary: #0F172A;
+  --color-text-secondary-token: #64748B;
+  --color-text-disabled: #94A3B8;
 }
 
-/* Dark mode overrides */
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE OVERRIDES
+   Activated by adding class="dark" to <html>.
+   AI agents: use the same CSS variable names — values swap automatically.
+   ═══════════════════════════════════════════════════════════════════ */
 .dark {
+  /* Surface & layout */
   --color-surface: #0F172A;
   --color-surface-variant: #1E293B;
   --color-surface-hover: #334155;
@@ -44,6 +106,63 @@
   --color-code-bg: #1E293B;
   --color-demo-bg: #1E293B;
   --color-demo-border: #334155;
+
+  /* Semantic: Primary (BPI Red — brightened for dark bg) */
+  --color-primary-lighter: #3B1414;
+  --color-primary-light: #F87171;
+  --color-primary-main: #EF4444;
+  --color-primary-dark: #FCA5A5;
+  --color-primary-darker: #FEE2E2;
+  --color-primary-contrast: #FFFFFF;
+
+  /* Semantic: Secondary (Neutral — inverted for dark bg) */
+  --color-secondary-lighter: #1E1E1E;
+  --color-secondary-light: #A3A3A3;
+  --color-secondary-main: #D4D4D4;
+  --color-secondary-dark: #E5E5E5;
+  --color-secondary-darker: #F5F5F5;
+  --color-secondary-contrast: #171717;
+
+  /* Semantic: Success */
+  --color-success-lighter: #052E16;
+  --color-success-light: #4ADE80;
+  --color-success-main: #22C55E;
+  --color-success-dark: #86EFAC;
+  --color-success-darker: #DCFCE7;
+  --color-success-contrast: #FFFFFF;
+
+  /* Semantic: Danger */
+  --color-danger-lighter: #450A0A;
+  --color-danger-light: #F87171;
+  --color-danger-main: #EF4444;
+  --color-danger-dark: #FCA5A5;
+  --color-danger-darker: #FEE2E2;
+  --color-danger-contrast: #FFFFFF;
+
+  /* Semantic: Warning */
+  --color-warning-lighter: #451A03;
+  --color-warning-light: #FBBF24;
+  --color-warning-main: #F59E0B;
+  --color-warning-dark: #FCD34D;
+  --color-warning-darker: #FEF3C7;
+  --color-warning-contrast: #171717;
+
+  /* Semantic: Info */
+  --color-info-lighter: #082F49;
+  --color-info-light: #38BDF8;
+  --color-info-main: #0EA5E9;
+  --color-info-dark: #7DD3FC;
+  --color-info-darker: #E0F2FE;
+  --color-info-contrast: #FFFFFF;
+
+  /* Background */
+  --color-bg-default: #0F172A;
+  --color-bg-paper: #1E293B;
+
+  /* Text */
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary-token: #94A3B8;
+  --color-text-disabled: #64748B;
 }
 
 html {
