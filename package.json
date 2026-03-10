@@ -1,39 +1,31 @@
 {
   "name": "@bpi/design-system",
-  "version": "1.0.0",
-  "description": "BPI Design System — Web Components, CSS classes, and design tokens for multi-framework ERP projects",
+  "version": "2.0.0",
+  "description": "BPI Design System — Design tokens and component specifications for multi-framework ERP projects",
   "type": "module",
-  "main": "./dist/bpi.js",
-  "module": "./dist/bpi.js",
-  "types": "./types/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/bpi.js",
-      "types": "./types/index.d.ts"
-    },
-    "./react": "./types/react.d.ts",
-    "./vue": "./types/vue.d.ts",
-    "./tokens": "./src/tokens/index.scss"
+    "./tokens": "./src/tokens/index.scss",
+    "./css": "./dist/bpi-tokens.css",
+    "./css-min": "./dist/bpi.min.css",
+    "./json": "./dist/tokens.json"
   },
   "files": [
     "dist",
-    "types",
     "src/tokens"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
-    "dev": "node scripts/build.js --watch"
+    "build": "node scripts/build.js"
   },
   "devDependencies": {
-    "esbuild": "^0.20.0",
-    "sass": "^1.77.0"
+    "sass": "^1.97.3"
   },
   "keywords": [
     "design-system",
-    "web-components",
+    "design-tokens",
     "bpi",
     "erp",
-    "tokens"
+    "tokens",
+    "specifications"
   ],
   "license": "MIT"
 }

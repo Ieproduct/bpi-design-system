@@ -26,7 +26,7 @@ export const navigationStructure: NavItem[] = [
     ],
   },
   {
-    label: 'Atoms',
+    label: 'Component Specs — Atoms',
     icon: '⚛️',
     children: [
       { label: 'Alert', path: '/components/alert' },
@@ -42,18 +42,18 @@ export const navigationStructure: NavItem[] = [
       { label: 'Input', path: '/components/input' },
       { label: 'Linear Progress', path: '/components/linear-progress' },
       { label: 'Radio', path: '/components/radio' },
+      { label: 'Select', path: '/components/select' },
       { label: 'Skeleton', path: '/components/skeleton' },
       { label: 'Slider', path: '/components/slider' },
       { label: 'Stack', path: '/components/stack' },
       { label: 'Switch', path: '/components/switch' },
-      { label: 'Table', path: '/components/table' },
       { label: 'Text Field', path: '/components/text-field' },
       { label: 'Tooltip', path: '/components/tooltip' },
       { label: 'Typography', path: '/components/typography' },
     ],
   },
   {
-    label: 'Molecules',
+    label: 'Component Specs — Molecules',
     icon: '🧩',
     children: [
       { label: 'Accordion', path: '/components/accordion' },
@@ -68,13 +68,12 @@ export const navigationStructure: NavItem[] = [
       { label: 'Menu', path: '/components/menu' },
       { label: 'Pagination', path: '/components/pagination' },
       { label: 'Search Bar', path: '/components/search-bar' },
-      { label: 'Select', path: '/components/select' },
       { label: 'Snackbar', path: '/components/snackbar' },
       { label: 'Tabs', path: '/components/tabs' },
     ],
   },
   {
-    label: 'Organisms',
+    label: 'Component Specs — Organisms',
     icon: '🏗️',
     children: [
       { label: 'Data Table', path: '/components/data-table' },

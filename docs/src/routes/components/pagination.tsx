@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ComponentPage } from '~/components/ComponentPage'
+import { SpecPage } from '~/components/SpecPage'
 
 export const Route = createFileRoute('/components/pagination')({
-  component: () => <ComponentPage componentId="pagination" />,
+  component: () => <SpecPage specId="pagination" />,
 })

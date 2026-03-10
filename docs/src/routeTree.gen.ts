@@ -22,7 +22,6 @@ import { Route as ComponentsTypographyRouteImport } from './routes/components/ty
 import { Route as ComponentsTooltipRouteImport } from './routes/components/tooltip'
 import { Route as ComponentsTextFieldRouteImport } from './routes/components/text-field'
 import { Route as ComponentsTabsRouteImport } from './routes/components/tabs'
-import { Route as ComponentsTableRouteImport } from './routes/components/table'
 import { Route as ComponentsSwitchRouteImport } from './routes/components/switch'
 import { Route as ComponentsStackRouteImport } from './routes/components/stack'
 import { Route as ComponentsSnackbarRouteImport } from './routes/components/snackbar'
@@ -123,11 +122,6 @@ const ComponentsTextFieldRoute = ComponentsTextFieldRouteImport.update({
 const ComponentsTabsRoute = ComponentsTabsRouteImport.update({
   id: '/components/tabs',
   path: '/components/tabs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsTableRoute = ComponentsTableRouteImport.update({
-  id: '/components/table',
-  path: '/components/table',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsSwitchRoute = ComponentsSwitchRouteImport.update({
@@ -342,7 +336,6 @@ export interface FileRoutesByFullPath {
   '/components/snackbar': typeof ComponentsSnackbarRoute
   '/components/stack': typeof ComponentsStackRoute
   '/components/switch': typeof ComponentsSwitchRoute
-  '/components/table': typeof ComponentsTableRoute
   '/components/tabs': typeof ComponentsTabsRoute
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
@@ -392,7 +385,6 @@ export interface FileRoutesByTo {
   '/components/snackbar': typeof ComponentsSnackbarRoute
   '/components/stack': typeof ComponentsStackRoute
   '/components/switch': typeof ComponentsSwitchRoute
-  '/components/table': typeof ComponentsTableRoute
   '/components/tabs': typeof ComponentsTabsRoute
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
@@ -443,7 +435,6 @@ export interface FileRoutesById {
   '/components/snackbar': typeof ComponentsSnackbarRoute
   '/components/stack': typeof ComponentsStackRoute
   '/components/switch': typeof ComponentsSwitchRoute
-  '/components/table': typeof ComponentsTableRoute
   '/components/tabs': typeof ComponentsTabsRoute
   '/components/text-field': typeof ComponentsTextFieldRoute
   '/components/tooltip': typeof ComponentsTooltipRoute
@@ -495,7 +486,6 @@ export interface FileRouteTypes {
     | '/components/snackbar'
     | '/components/stack'
     | '/components/switch'
-    | '/components/table'
     | '/components/tabs'
     | '/components/text-field'
     | '/components/tooltip'
@@ -545,7 +535,6 @@ export interface FileRouteTypes {
     | '/components/snackbar'
     | '/components/stack'
     | '/components/switch'
-    | '/components/table'
     | '/components/tabs'
     | '/components/text-field'
     | '/components/tooltip'
@@ -595,7 +584,6 @@ export interface FileRouteTypes {
     | '/components/snackbar'
     | '/components/stack'
     | '/components/switch'
-    | '/components/table'
     | '/components/tabs'
     | '/components/text-field'
     | '/components/tooltip'
@@ -646,7 +634,6 @@ export interface RootRouteChildren {
   ComponentsSnackbarRoute: typeof ComponentsSnackbarRoute
   ComponentsStackRoute: typeof ComponentsStackRoute
   ComponentsSwitchRoute: typeof ComponentsSwitchRoute
-  ComponentsTableRoute: typeof ComponentsTableRoute
   ComponentsTabsRoute: typeof ComponentsTabsRoute
   ComponentsTextFieldRoute: typeof ComponentsTextFieldRoute
   ComponentsTooltipRoute: typeof ComponentsTooltipRoute
@@ -662,6 +649,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/claude-md': {
+      id: '/claude-md'
+      path: '/claude-md'
+      fullPath: '/claude-md'
+      preLoaderRoute: typeof ClaudeMdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -744,13 +738,6 @@ declare module '@tanstack/react-router' {
       path: '/components/tabs'
       fullPath: '/components/tabs'
       preLoaderRoute: typeof ComponentsTabsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/table': {
-      id: '/components/table'
-      path: '/components/table'
-      fullPath: '/components/table'
-      preLoaderRoute: typeof ComponentsTableRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/switch': {
@@ -984,13 +971,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsAlertRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/claude-md': {
-      id: '/claude-md'
-      path: '/claude-md'
-      fullPath: '/claude-md'
-      preLoaderRoute: typeof ClaudeMdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/accordion': {
       id: '/components/accordion'
       path: '/components/accordion'
@@ -1038,7 +1018,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsSnackbarRoute: ComponentsSnackbarRoute,
   ComponentsStackRoute: ComponentsStackRoute,
   ComponentsSwitchRoute: ComponentsSwitchRoute,
-  ComponentsTableRoute: ComponentsTableRoute,
   ComponentsTabsRoute: ComponentsTabsRoute,
   ComponentsTextFieldRoute: ComponentsTextFieldRoute,
   ComponentsTooltipRoute: ComponentsTooltipRoute,
