@@ -246,11 +246,6 @@ const COMPONENT_SPECS = {
     defaults: { size: "md", variant: "outlined", radius: "radius-md" },
     a11y: { role: "textbox", labelRequired: true },
   },
-  card: {
-    name: "Card", category: "molecule",
-    description: "Container for grouping related content",
-    variants: [
-      { name: "elevated", bg: "bg-paper", shadow: "shadow-md", border: "none" },
       { name: "outlined", bg: "bg-paper", shadow: "none", border: "1px solid border" },
       { name: "filled", bg: "surface-variant", shadow: "none", border: "none" },
     ],
@@ -261,11 +256,6 @@ const COMPONENT_SPECS = {
     ],
     defaults: { variant: "elevated", radius: "radius-lg" },
   },
-  dialog: {
-    name: "Dialog", category: "molecule",
-    description: "Modal overlay for focused interactions",
-    sizes: [
-      { name: "sm", width: "400px", maxHeight: "80vh" },
       { name: "md", width: "560px", maxHeight: "80vh" },
       { name: "lg", width: "720px", maxHeight: "80vh" },
       { name: "fullscreen", width: "100vw", maxHeight: "100vh" },
@@ -328,11 +318,6 @@ const COMPONENT_SPECS = {
     defaults: { size: "md" },
     a11y: { role: "switch", minTouchTarget: "44px" },
   },
-  tabs: {
-    name: "Tabs", category: "molecule",
-    description: "Navigation between content sections",
-    variants: [
-      { name: "underline", indicator: "2px bottom border primary-main" },
       { name: "contained", activeBg: "bg-paper", inactiveBg: "transparent" },
       { name: "pills", activeBg: "primary-main", activeText: "primary-contrast", radius: "radius-full" },
     ],
@@ -395,22 +380,12 @@ const COMPONENT_SPECS = {
     defaults: { bg: "secondary-main", text: "secondary-contrast", fontSize: "text-xs", padding: "spacing-1 spacing-2", radius: "radius-sm", zIndex: "z-tooltip", maxWidth: "240px" },
     a11y: { role: "tooltip", delay: "300ms" },
   },
-  accordion: {
-    name: "Accordion", category: "molecule",
-    description: "Collapsible content sections",
-    elements: [
-      { name: "header", padding: "spacing-4", fontWeight: "font-medium", cursor: "pointer" },
       { name: "content", padding: "spacing-4", borderTop: "1px solid border" },
       { name: "icon", size: "20px", transition: "transform 200ms" },
     ],
     defaults: { radius: "radius-md", border: "1px solid border" },
     a11y: { role: "region", ariaExpanded: true },
   },
-  "data-table": {
-    name: "DataTable", category: "organism",
-    description: "Data display with sorting, filtering, pagination",
-    elements: [
-      { name: "header-cell", padding: "spacing-3 spacing-4", fontWeight: "font-semibold", fontSize: "text-xs", textTransform: "uppercase", bg: "surface-variant" },
       { name: "body-cell", padding: "spacing-3 spacing-4", fontSize: "text-sm", borderBottom: "1px solid border" },
       { name: "row-hover", bg: "surface-hover" },
       { name: "row-selected", bg: "primary-lighter" },
@@ -418,59 +393,27 @@ const COMPONENT_SPECS = {
     defaults: { radius: "radius-lg", border: "1px solid border" },
     a11y: { role: "table", ariaSort: true },
   },
-  navbar: {
-    name: "Navbar", category: "organism",
-    description: "Top navigation bar",
-    defaults: { height: "64px", bg: "bg-paper", borderBottom: "1px solid border", padding: "0 spacing-6", zIndex: "z-sticky" },
   },
-  sidebar: {
-    name: "Sidebar", category: "organism",
-    description: "Side navigation panel",
-    defaults: { width: "260px", bg: "sidebar", borderRight: "1px solid border", padding: "spacing-4" },
   },
-  pagination: {
-    name: "Pagination", category: "molecule",
-    description: "Page navigation control",
-    elements: [
-      { name: "button", size: "36px", radius: "radius-md", fontSize: "text-sm" },
       { name: "active", bg: "primary-main", text: "primary-contrast" },
       { name: "inactive", bg: "transparent", text: "text-primary" },
     ],
     defaults: { gap: "spacing-1" },
     a11y: { role: "navigation", ariaLabel: "Pagination" },
   },
-  drawer: {
-    name: "Drawer", category: "molecule",
-    description: "Slide-in panel from edge",
-    sizes: [
-      { name: "sm", width: "320px" },
       { name: "md", width: "400px" },
       { name: "lg", width: "560px" },
     ],
     defaults: { size: "md", bg: "bg-paper", shadow: "shadow-xl", zIndex: "z-modal" },
     a11y: { role: "dialog", focusTrap: true, escClose: true },
   },
-  snackbar: {
-    name: "Snackbar", category: "molecule",
-    description: "Brief notification message",
-    defaults: { bg: "secondary-main", text: "secondary-contrast", padding: "spacing-3 spacing-4", radius: "radius-md", shadow: "shadow-lg", zIndex: "z-toast", maxWidth: "400px" },
     a11y: { role: "status", ariaLive: "polite", autoHide: "5000ms" },
   },
-  menu: {
-    name: "Menu", category: "molecule",
-    description: "Dropdown list of actions",
-    elements: [
-      { name: "container", bg: "bg-paper", shadow: "shadow-lg", radius: "radius-md", border: "1px solid border", zIndex: "z-popover", minWidth: "180px" },
       { name: "item", padding: "spacing-2 spacing-3", fontSize: "text-sm", hoverBg: "surface-hover" },
       { name: "divider", height: "1px", bg: "border", margin: "spacing-1 0" },
     ],
     a11y: { role: "menu", keyboardNavigation: true },
   },
-  breadcrumbs: {
-    name: "Breadcrumbs", category: "molecule",
-    description: "Navigation hierarchy indicator",
-    elements: [
-      { name: "item", fontSize: "text-sm", color: "text-secondary" },
       { name: "active", color: "text-primary", fontWeight: "font-medium" },
       { name: "separator", margin: "0 spacing-2", color: "text-disabled" },
     ],
@@ -533,38 +476,16 @@ const COMPONENT_SPECS = {
     ],
     defaults: { size: "md", variant: "filled", radius: "radius-full" },
   },
-  "search-bar": {
-    name: "SearchBar", category: "molecule",
-    description: "Search input with icon",
-    defaults: { height: "40px", radius: "radius-md", bg: "surface-variant", iconSize: "20px", padding: "spacing-2 spacing-3" },
   },
-  "form-field": {
-    name: "FormField", category: "molecule",
-    description: "Label + input + helper/error text wrapper",
-    elements: [
-      { name: "label", fontSize: "text-sm", fontWeight: "font-medium", color: "text-primary", marginBottom: "spacing-1" },
       { name: "helper", fontSize: "text-xs", color: "text-secondary", marginTop: "spacing-1" },
       { name: "error", fontSize: "text-xs", color: "danger-main", marginTop: "spacing-1" },
     ],
     defaults: { gap: "spacing-1" },
   },
-  autocomplete: {
-    name: "Autocomplete", category: "molecule",
-    description: "Input with suggestion dropdown",
-    defaults: { dropdownMaxHeight: "240px", dropdownShadow: "shadow-lg", dropdownRadius: "radius-md" },
     a11y: { role: "combobox", ariaExpanded: true, ariaAutocomplete: "list" },
   },
-  "date-picker": {
-    name: "DatePicker", category: "molecule",
-    description: "Calendar-based date selection",
-    defaults: { calendarWidth: "300px", cellSize: "36px", radius: "radius-md", shadow: "shadow-lg" },
     a11y: { keyboardNavigation: true, ariaLabel: "Choose date" },
   },
-  list: {
-    name: "List", category: "molecule",
-    description: "Vertical list of items",
-    elements: [
-      { name: "item", padding: "spacing-2 spacing-4", fontSize: "text-sm", hoverBg: "surface-hover" },
       { name: "divider", height: "1px", bg: "border" },
     ],
     a11y: { role: "list" },
@@ -703,8 +624,8 @@ server.tool(
 
 server.tool(
   "list_components",
-  "List all component specifications with their category (atom/molecule/organism)",
-  { category: z.enum(["all", "atom", "molecule", "organism"]).optional().describe("Filter by category. Default: all") },
+  "List all atom-level component specifications (molecules & organisms coming soon)",
+  { category: z.enum(["all", "atom"]).optional().describe("Filter by category. Default: all (currently atoms only)") },
   async ({ category }) => {
     const filter = category || "all";
     const list = COMPONENT_IDS
@@ -717,7 +638,7 @@ server.tool(
 server.tool(
   "get_component_spec",
   "Get the full design specification for a component — sizes, variants, states, sub-elements, accessibility, defaults",
-  { id: z.enum(COMPONENT_IDS).describe("Component ID (e.g., 'button', 'card', 'data-table')") },
+  { id: z.enum(COMPONENT_IDS).describe("Component ID (e.g., 'button', 'input', 'checkbox')") },
   async ({ id }) => {
     const spec = COMPONENT_SPECS[id];
     return { content: [{ type: "text", text: JSON.stringify({ id, ...spec, docsUrl: `https://ieproduct.github.io/bpi-design-system/components/${id}` }, null, 2) }] };
@@ -835,7 +756,7 @@ RULES:
 - Framework-agnostic: works with React, Vue, Angular, Svelte, plain HTML
 
 TOKEN CATEGORIES: ${TOKEN_CATEGORIES.join(", ")}
-COMPONENT SPECS: ${COMPONENT_IDS.length} components (atoms, molecules, organisms)
+COMPONENT SPECS: ${COMPONENT_IDS.length} atom components (molecules & organisms coming soon)
 
 Tools: list_categories, get_tokens, get_color, search_tokens, list_components, get_component_spec, search_specs, get_css_snippet
 `,

@@ -91,11 +91,11 @@ Add to `.cursor/mcp.json` in your project:
 |------|-------------|---------|
 | `get_css_snippet` | Generate CSS from spec + tokens | `get_css_snippet(component: "button", variant: "primary", size: "md")` |
 
-### Component Categories
+### Available Components (Atoms — 21)
 
-- **Atoms (21):** Alert, Avatar, Badge, Box, Button, Checkbox, Chip, CircularProgress, Divider, Icon, Input, LinearProgress, Radio, Select, Skeleton, Slider, Stack, Switch, TextField, Tooltip, Typography
-- **Molecules (14):** Accordion, Autocomplete, Breadcrumbs, Card, DatePicker, Dialog, Drawer, FormField, List, Menu, Pagination, SearchBar, Snackbar, Tabs
-- **Organisms (3):** DataTable, Navbar, Sidebar
+Alert, Avatar, Badge, Box, Button, Checkbox, Chip, CircularProgress, Divider, Icon, Input, LinearProgress, Radio, Select, Skeleton, Slider, Stack, Switch, TextField, Tooltip, Typography
+
+> Molecules & Organisms coming soon.
 
 ---
 

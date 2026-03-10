@@ -44,35 +44,6 @@ export const navigationStructure: NavItem[] = [
     ],
   },
   {
-    label: 'Component Specs — Molecules',
-    icon: '🧩',
-    children: [
-      { label: 'Accordion', path: '/components/accordion' },
-      { label: 'Autocomplete', path: '/components/autocomplete' },
-      { label: 'Breadcrumbs', path: '/components/breadcrumbs' },
-      { label: 'Card', path: '/components/card' },
-      { label: 'Date Picker', path: '/components/date-picker' },
-      { label: 'Dialog', path: '/components/dialog' },
-      { label: 'Drawer', path: '/components/drawer' },
-      { label: 'Form Field', path: '/components/form-field' },
-      { label: 'List', path: '/components/list' },
-      { label: 'Menu', path: '/components/menu' },
-      { label: 'Pagination', path: '/components/pagination' },
-      { label: 'Search Bar', path: '/components/search-bar' },
-      { label: 'Snackbar', path: '/components/snackbar' },
-      { label: 'Tabs', path: '/components/tabs' },
-    ],
-  },
-  {
-    label: 'Component Specs — Organisms',
-    icon: '🏗️',
-    children: [
-      { label: 'Data Table', path: '/components/data-table' },
-      { label: 'Navbar', path: '/components/navbar-component' },
-      { label: 'Sidebar', path: '/components/sidebar-component' },
-    ],
-  },
-  {
     label: 'Resources',
     icon: '📦',
     children: [

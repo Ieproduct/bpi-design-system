@@ -129,21 +129,15 @@ function HomePage() {
           Each component spec defines sizes, color variants, interactive states, sub-element styles, and accessibility requirements.
           Browse by category:
         </p>
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { label: 'Atoms', desc: 'Button, Input, Badge, Checkbox, Switch, Avatar, and more', path: '/components/button', count: 21 },
-            { label: 'Molecules', desc: 'Card, Dialog, Tabs, Menu, Accordion, Drawer, and more', path: '/components/card', count: 14 },
-            { label: 'Organisms', desc: 'DataTable, Navbar, Sidebar', path: '/components/data-table', count: 3 },
-          ].map((cat) => (
-            <Link
-              key={cat.label}
-              to={cat.path}
-              className="bg-[var(--color-surface-variant)] rounded-lg p-5 hover:bg-[var(--color-surface-hover)] transition-colors block"
-            >
-              <h3 className="text-lg font-bold text-[var(--color-text-primary)] mb-1">{cat.label} <span className="text-sm font-normal text-[var(--color-text-secondary)]">({cat.count})</span></h3>
-              <p className="text-sm text-[var(--color-text-secondary)]">{cat.desc}</p>
-            </Link>
-          ))}
+        <div className="grid gap-4 md:grid-cols-1">
+          <Link
+            to="/components/button"
+            className="bg-[var(--color-surface-variant)] rounded-lg p-5 hover:bg-[var(--color-surface-hover)] transition-colors block"
+          >
+            <h3 className="text-lg font-bold text-[var(--color-text-primary)] mb-1">Atoms <span className="text-sm font-normal text-[var(--color-text-secondary)]">(21)</span></h3>
+            <p className="text-sm text-[var(--color-text-secondary)]">Button, Input, Badge, Checkbox, Switch, Avatar, Alert, Tooltip, and more</p>
+          </Link>
+          <p className="text-sm text-[var(--color-text-muted)] italic">Molecules & Organisms coming soon.</p>
         </div>
       </section>
 
