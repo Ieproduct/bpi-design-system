@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentSpec, getSpec } from '~/data/specs';
 import { LayoutPreview } from './LayoutPreviews';
+import { AtomPreview } from './AtomPreviews';
 
 interface SpecPageProps {
   specId: string;
@@ -103,13 +104,13 @@ export const SpecPage: React.FC<SpecPageProps> = ({ specId }) => {
         )}
       </div>
 
-      {/* Visual Preview (layout components) */}
-      {spec.category === 'layout' && (
-        <>
-          <SH>Preview</SH>
-          <LayoutPreview specId={spec.id} />
-        </>
-      )}
+      {/* Visual Preview */}
+      <>
+        <SH>Preview</SH>
+        {spec.category === 'layout'
+          ? <LayoutPreview specId={spec.id} />
+          : <AtomPreview specId={spec.id} />}
+      </>
 
       {/* Sizes */}
       {spec.sizes && spec.sizes.length > 0 && (
