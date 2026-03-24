@@ -11,11 +11,13 @@
 
 | Resource | Link |
 |----------|------|
-| Full documentation | https://ieproduct.github.io/bpi-design-system/ |
+| Full documentation (with interactive previews) | https://ieproduct.github.io/bpi-design-system/ |
 | Token viewer & download | https://ieproduct.github.io/bpi-design-system/claude-md |
 | Token data source | `docs/src/data/tokens.ts` |
 | Component specs data | `docs/src/data/specs.ts` |
 | CSS variables file | `docs/src/styles/app.css` |
+| Atom previews | `docs/src/components/AtomPreviews.tsx` |
+| Layout previews | `docs/src/components/LayoutPreviews.tsx` |
 | MCP Server | `mcp/index.js` (see setup below) |
 | Repository | https://github.com/Ieproduct/bpi-design-system |
 
@@ -27,6 +29,8 @@ BPI Design System is a **specification-only** package. It provides:
 
 1. **Design Tokens** — CSS custom properties (all `--bpi-*` prefix) for colors, typography, spacing, radius, shadows, z-index
 2. **Component Specs** — Structured specifications (sizes, variants, states, accessibility) for 21 atom components + 4 layout components
+3. **Interactive Previews** — Every component spec page includes a live visual preview demonstrating sizes, variants, states, and interactions
+
 Each project team implements their own components using their preferred framework (React, Vue, Angular, Svelte, etc.) following these specs. There is no component library to install.
 
 ---
