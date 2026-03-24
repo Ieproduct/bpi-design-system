@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentSpec, getSpec } from '~/data/specs';
+import { LayoutPreview } from './LayoutPreviews';
 
 interface SpecPageProps {
   specId: string;
@@ -101,6 +102,14 @@ export const SpecPage: React.FC<SpecPageProps> = ({ specId }) => {
           </div>
         )}
       </div>
+
+      {/* Visual Preview (layout components) */}
+      {spec.category === 'layout' && (
+        <>
+          <SH>Preview</SH>
+          <LayoutPreview specId={spec.id} />
+        </>
+      )}
 
       {/* Sizes */}
       {spec.sizes && spec.sizes.length > 0 && (
