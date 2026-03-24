@@ -231,24 +231,24 @@ export function SidebarPreview() {
       <PreviewShell label={`Sidebar — ${open ? 'open' : 'closed'}`}>
         <div style={{
           display: 'flex', height: 300, fontFamily: 'Inter, sans-serif', overflow: 'hidden',
-          position: 'relative',
+          position: 'relative', maxWidth: '100%',
         }}>
           {/* Main content area mock */}
           <div style={{
-            flex: 1, padding: 24, background: '#F8FAFC',
-            display: 'flex', flexDirection: 'column', gap: 12,
+            flex: 1, minWidth: 0, padding: 20, background: '#F8FAFC',
+            display: 'flex', flexDirection: 'column', gap: 10,
           }}>
             <div style={{ width: '60%', height: 14, background: '#E2E8F0', borderRadius: 4 }} />
             <div style={{ width: '80%', height: 10, background: '#E2E8F0', borderRadius: 4 }} />
             <div style={{ width: '70%', height: 10, background: '#E2E8F0', borderRadius: 4 }} />
             <div style={{ width: '50%', height: 10, background: '#E2E8F0', borderRadius: 4 }} />
-            <div style={{ marginTop: 12, width: '90%', height: 60, background: '#E2E8F0', borderRadius: 8 }} />
+            <div style={{ marginTop: 8, width: '90%', height: 50, background: '#E2E8F0', borderRadius: 8 }} />
             <div style={{ width: '75%', height: 10, background: '#E2E8F0', borderRadius: 4 }} />
           </div>
 
           {/* Sidebar */}
           <div style={{
-            width: 280, background: '#fff', borderLeft: '1px solid #E2E8F0',
+            width: 220, flexShrink: 0, background: '#fff', borderLeft: '1px solid #E2E8F0',
             display: 'flex', flexDirection: 'column',
             transform: open ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 250ms ease',
