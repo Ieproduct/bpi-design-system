@@ -230,7 +230,7 @@ export function SidebarPreview() {
       </div>
       <PreviewShell label={`Sidebar — ${open ? 'open' : 'closed'}`}>
         <div style={{
-          display: 'flex', height: 300, fontFamily: 'Inter, sans-serif', overflow: 'hidden',
+          display: 'flex', height: 360, fontFamily: 'Inter, sans-serif', overflow: 'hidden',
           position: 'relative', maxWidth: '100%',
         }}>
           {/* Main content area mock */}
