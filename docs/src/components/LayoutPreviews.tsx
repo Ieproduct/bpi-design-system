@@ -120,15 +120,39 @@ export function AppBarPreview() {
 
 export function NavBarPreview() {
   const [collapsed, setCollapsed] = useState(false);
-  const [active, setActive] = useState('Dashboard');
+  const [active, setActive] = useState('Overview');
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ Dashboard: true });
 
-  const items = [
+  interface NavItem {
+    icon: string;
+    label: string;
+    children?: { label: string }[];
+  }
+
+  const items: NavItem[] = [
     { icon: '🏠', label: 'Home' },
-    { icon: '📊', label: 'Dashboard' },
-    { icon: '📋', label: 'Reports' },
+    { icon: '📊', label: 'Dashboard', children: [
+      { label: 'Overview' },
+      { label: 'Analytics' },
+      { label: 'Performance' },
+    ]},
+    { icon: '📋', label: 'Reports', children: [
+      { label: 'Monthly' },
+      { label: 'Quarterly' },
+      { label: 'Annual' },
+    ]},
     { icon: '👥', label: 'Users' },
     { icon: '⚙️', label: 'Settings' },
   ];
+
+  const toggleGroup = (label: string) => {
+    setExpanded(prev => ({ ...prev, [label]: !prev[label] }));
+  };
+
+  const isItemActive = (item: NavItem) => {
+    if (item.label === active) return true;
+    return item.children?.some(c => c.label === active) ?? false;
+  };
 
   return (
     <div className="space-y-3">
@@ -144,9 +168,9 @@ export function NavBarPreview() {
             : 'bg-[var(--color-surface-variant)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)]'
           }`}>compact (64px)</button>
       </div>
-      <PreviewShell label={`NavBar — ${collapsed ? 'compact' : 'expanded'}`}>
+      <PreviewShell label={`NavBar — ${collapsed ? 'compact' : 'expanded with sub-items'}`}>
         <div style={{
-          width: collapsed ? 64 : 240, minHeight: 320,
+          width: collapsed ? 64 : 240, minHeight: 380,
           background: '#fff', borderRight: '1px solid #E2E8F0',
           fontFamily: 'Inter, sans-serif', transition: 'width 250ms ease',
           display: 'flex', flexDirection: 'column',
@@ -175,30 +199,100 @@ export function NavBarPreview() {
           {/* Items */}
           <div style={{ padding: collapsed ? 8 : '4px 8px', display: 'flex', flexDirection: 'column', gap: 2 }}>
             {items.map(item => {
-              const isActive = item.label === active;
+              const hasChildren = !!item.children && item.children.length > 0;
+              const isOpen = expanded[item.label] ?? false;
+              const isParentActive = isItemActive(item);
+
               return (
-                <div key={item.label} onClick={() => setActive(item.label)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 12,
-                    padding: collapsed ? '10px' : '8px 12px',
-                    borderRadius: 8, cursor: 'pointer', fontSize: 14,
-                    justifyContent: collapsed ? 'center' : 'flex-start',
-                    background: isActive ? '#FEF2F2' : 'transparent',
-                    color: isActive ? '#E32321' : '#475569',
-                    fontWeight: isActive ? 600 : 400,
-                    transition: 'all 150ms ease',
-                    position: 'relative',
-                  }}
-                  title={collapsed ? item.label : undefined}
-                >
-                  {isActive && (
+                <div key={item.label}>
+                  {/* Parent item */}
+                  <div
+                    onClick={() => {
+                      if (hasChildren && !collapsed) {
+                        toggleGroup(item.label);
+                      } else {
+                        setActive(item.label);
+                      }
+                    }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      padding: collapsed ? '10px' : '8px 12px',
+                      borderRadius: 8, cursor: 'pointer', fontSize: 14,
+                      justifyContent: collapsed ? 'center' : 'flex-start',
+                      background: (!hasChildren && active === item.label) ? '#FEF2F2'
+                        : (hasChildren && isParentActive && !isOpen) ? '#FEF2F2'
+                        : 'transparent',
+                      color: isParentActive ? '#E32321' : '#475569',
+                      fontWeight: isParentActive ? 600 : 400,
+                      transition: 'all 150ms ease',
+                      position: 'relative',
+                    }}
+                    title={collapsed ? item.label : undefined}
+                  >
+                    {!hasChildren && active === item.label && (
+                      <div style={{
+                        position: 'absolute', left: 0, top: '20%', bottom: '20%', width: 3,
+                        background: '#E32321', borderRadius: '0 4px 4px 0',
+                      }} />
+                    )}
+                    <span style={{ fontSize: 16, flexShrink: 0 }}>{item.icon}</span>
+                    {!collapsed && (
+                      <>
+                        <span style={{ flex: 1 }}>{item.label}</span>
+                        {hasChildren && (
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            style={{
+                              transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                              transition: 'transform 200ms ease',
+                              flexShrink: 0,
+                            }}>
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Sub-items */}
+                  {hasChildren && !collapsed && (
                     <div style={{
-                      position: 'absolute', left: 0, top: '20%', bottom: '20%', width: 3,
-                      background: '#E32321', borderRadius: '0 4px 4px 0',
-                    }} />
+                      overflow: 'hidden',
+                      maxHeight: isOpen ? `${item.children!.length * 36}px` : '0px',
+                      transition: 'max-height 250ms ease',
+                    }}>
+                      {item.children!.map(child => {
+                        const isChildActive = active === child.label;
+                        return (
+                          <div key={child.label}
+                            onClick={() => setActive(child.label)}
+                            style={{
+                              display: 'flex', alignItems: 'center',
+                              padding: '6px 12px 6px 44px',
+                              borderRadius: 6, cursor: 'pointer', fontSize: 13,
+                              margin: '1px 8px',
+                              background: isChildActive ? '#FEF2F2' : 'transparent',
+                              color: isChildActive ? '#E32321' : '#64748B',
+                              fontWeight: isChildActive ? 600 : 400,
+                              transition: 'all 150ms ease',
+                              position: 'relative',
+                            }}
+                          >
+                            {isChildActive && (
+                              <div style={{
+                                position: 'absolute', left: 8, top: '25%', bottom: '25%', width: 3,
+                                background: '#E32321', borderRadius: '0 4px 4px 0',
+                              }} />
+                            )}
+                            <span style={{
+                              width: 4, height: 4, borderRadius: '50%', marginRight: 10, flexShrink: 0,
+                              background: isChildActive ? '#E32321' : '#CBD5E1',
+                            }} />
+                            {child.label}
+                          </div>
+                        );
+                      })}
+                    </div>
                   )}
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>{item.icon}</span>
-                  {!collapsed && <span>{item.label}</span>}
                 </div>
               );
             })}
