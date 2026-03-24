@@ -22,11 +22,14 @@ import { Route as ComponentsSwitchRouteImport } from './routes/components/switch
 import { Route as ComponentsStackRouteImport } from './routes/components/stack'
 import { Route as ComponentsSliderRouteImport } from './routes/components/slider'
 import { Route as ComponentsSkeletonRouteImport } from './routes/components/skeleton'
+import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
 import { Route as ComponentsRadioRouteImport } from './routes/components/radio'
+import { Route as ComponentsNavBarRouteImport } from './routes/components/nav-bar'
 import { Route as ComponentsLinearProgressRouteImport } from './routes/components/linear-progress'
 import { Route as ComponentsInputRouteImport } from './routes/components/input'
 import { Route as ComponentsIconRouteImport } from './routes/components/icon'
+import { Route as ComponentsFooterRouteImport } from './routes/components/footer'
 import { Route as ComponentsDividerRouteImport } from './routes/components/divider'
 import { Route as ComponentsCircularProgressRouteImport } from './routes/components/circular-progress'
 import { Route as ComponentsChipRouteImport } from './routes/components/chip'
@@ -35,6 +38,7 @@ import { Route as ComponentsButtonRouteImport } from './routes/components/button
 import { Route as ComponentsBoxRouteImport } from './routes/components/box'
 import { Route as ComponentsBadgeRouteImport } from './routes/components/badge'
 import { Route as ComponentsAvatarRouteImport } from './routes/components/avatar'
+import { Route as ComponentsAppBarRouteImport } from './routes/components/app-bar'
 import { Route as ComponentsAlertRouteImport } from './routes/components/alert'
 
 const ClaudeMdRoute = ClaudeMdRouteImport.update({
@@ -102,6 +106,11 @@ const ComponentsSkeletonRoute = ComponentsSkeletonRouteImport.update({
   path: '/components/skeleton',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsSidebarRoute = ComponentsSidebarRouteImport.update({
+  id: '/components/sidebar',
+  path: '/components/sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
   id: '/components/select',
   path: '/components/select',
@@ -110,6 +119,11 @@ const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
 const ComponentsRadioRoute = ComponentsRadioRouteImport.update({
   id: '/components/radio',
   path: '/components/radio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsNavBarRoute = ComponentsNavBarRouteImport.update({
+  id: '/components/nav-bar',
+  path: '/components/nav-bar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsLinearProgressRoute =
@@ -126,6 +140,11 @@ const ComponentsInputRoute = ComponentsInputRouteImport.update({
 const ComponentsIconRoute = ComponentsIconRouteImport.update({
   id: '/components/icon',
   path: '/components/icon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsFooterRoute = ComponentsFooterRouteImport.update({
+  id: '/components/footer',
+  path: '/components/footer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsDividerRoute = ComponentsDividerRouteImport.update({
@@ -169,6 +188,11 @@ const ComponentsAvatarRoute = ComponentsAvatarRouteImport.update({
   path: '/components/avatar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsAppBarRoute = ComponentsAppBarRouteImport.update({
+  id: '/components/app-bar',
+  path: '/components/app-bar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsAlertRoute = ComponentsAlertRouteImport.update({
   id: '/components/alert',
   path: '/components/alert',
@@ -179,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/claude-md': typeof ClaudeMdRoute
   '/components/alert': typeof ComponentsAlertRoute
+  '/components/app-bar': typeof ComponentsAppBarRoute
   '/components/avatar': typeof ComponentsAvatarRoute
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/box': typeof ComponentsBoxRoute
@@ -187,11 +212,14 @@ export interface FileRoutesByFullPath {
   '/components/chip': typeof ComponentsChipRoute
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
+  '/components/footer': typeof ComponentsFooterRoute
   '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
+  '/components/nav-bar': typeof ComponentsNavBarRoute
   '/components/radio': typeof ComponentsRadioRoute
   '/components/select': typeof ComponentsSelectRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
   '/components/stack': typeof ComponentsStackRoute
@@ -208,6 +236,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/claude-md': typeof ClaudeMdRoute
   '/components/alert': typeof ComponentsAlertRoute
+  '/components/app-bar': typeof ComponentsAppBarRoute
   '/components/avatar': typeof ComponentsAvatarRoute
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/box': typeof ComponentsBoxRoute
@@ -216,11 +245,14 @@ export interface FileRoutesByTo {
   '/components/chip': typeof ComponentsChipRoute
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
+  '/components/footer': typeof ComponentsFooterRoute
   '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
+  '/components/nav-bar': typeof ComponentsNavBarRoute
   '/components/radio': typeof ComponentsRadioRoute
   '/components/select': typeof ComponentsSelectRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
   '/components/stack': typeof ComponentsStackRoute
@@ -238,6 +270,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/claude-md': typeof ClaudeMdRoute
   '/components/alert': typeof ComponentsAlertRoute
+  '/components/app-bar': typeof ComponentsAppBarRoute
   '/components/avatar': typeof ComponentsAvatarRoute
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/box': typeof ComponentsBoxRoute
@@ -246,11 +279,14 @@ export interface FileRoutesById {
   '/components/chip': typeof ComponentsChipRoute
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
+  '/components/footer': typeof ComponentsFooterRoute
   '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
+  '/components/nav-bar': typeof ComponentsNavBarRoute
   '/components/radio': typeof ComponentsRadioRoute
   '/components/select': typeof ComponentsSelectRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
   '/components/stack': typeof ComponentsStackRoute
@@ -269,6 +305,7 @@ export interface FileRouteTypes {
     | '/'
     | '/claude-md'
     | '/components/alert'
+    | '/components/app-bar'
     | '/components/avatar'
     | '/components/badge'
     | '/components/box'
@@ -277,11 +314,14 @@ export interface FileRouteTypes {
     | '/components/chip'
     | '/components/circular-progress'
     | '/components/divider'
+    | '/components/footer'
     | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
+    | '/components/nav-bar'
     | '/components/radio'
     | '/components/select'
+    | '/components/sidebar'
     | '/components/skeleton'
     | '/components/slider'
     | '/components/stack'
@@ -298,6 +338,7 @@ export interface FileRouteTypes {
     | '/'
     | '/claude-md'
     | '/components/alert'
+    | '/components/app-bar'
     | '/components/avatar'
     | '/components/badge'
     | '/components/box'
@@ -306,11 +347,14 @@ export interface FileRouteTypes {
     | '/components/chip'
     | '/components/circular-progress'
     | '/components/divider'
+    | '/components/footer'
     | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
+    | '/components/nav-bar'
     | '/components/radio'
     | '/components/select'
+    | '/components/sidebar'
     | '/components/skeleton'
     | '/components/slider'
     | '/components/stack'
@@ -327,6 +371,7 @@ export interface FileRouteTypes {
     | '/'
     | '/claude-md'
     | '/components/alert'
+    | '/components/app-bar'
     | '/components/avatar'
     | '/components/badge'
     | '/components/box'
@@ -335,11 +380,14 @@ export interface FileRouteTypes {
     | '/components/chip'
     | '/components/circular-progress'
     | '/components/divider'
+    | '/components/footer'
     | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
+    | '/components/nav-bar'
     | '/components/radio'
     | '/components/select'
+    | '/components/sidebar'
     | '/components/skeleton'
     | '/components/slider'
     | '/components/stack'
@@ -357,6 +405,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ClaudeMdRoute: typeof ClaudeMdRoute
   ComponentsAlertRoute: typeof ComponentsAlertRoute
+  ComponentsAppBarRoute: typeof ComponentsAppBarRoute
   ComponentsAvatarRoute: typeof ComponentsAvatarRoute
   ComponentsBadgeRoute: typeof ComponentsBadgeRoute
   ComponentsBoxRoute: typeof ComponentsBoxRoute
@@ -365,11 +414,14 @@ export interface RootRouteChildren {
   ComponentsChipRoute: typeof ComponentsChipRoute
   ComponentsCircularProgressRoute: typeof ComponentsCircularProgressRoute
   ComponentsDividerRoute: typeof ComponentsDividerRoute
+  ComponentsFooterRoute: typeof ComponentsFooterRoute
   ComponentsIconRoute: typeof ComponentsIconRoute
   ComponentsInputRoute: typeof ComponentsInputRoute
   ComponentsLinearProgressRoute: typeof ComponentsLinearProgressRoute
+  ComponentsNavBarRoute: typeof ComponentsNavBarRoute
   ComponentsRadioRoute: typeof ComponentsRadioRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
+  ComponentsSidebarRoute: typeof ComponentsSidebarRoute
   ComponentsSkeletonRoute: typeof ComponentsSkeletonRoute
   ComponentsSliderRoute: typeof ComponentsSliderRoute
   ComponentsStackRoute: typeof ComponentsStackRoute
@@ -476,6 +528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsSkeletonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/sidebar': {
+      id: '/components/sidebar'
+      path: '/components/sidebar'
+      fullPath: '/components/sidebar'
+      preLoaderRoute: typeof ComponentsSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/select': {
       id: '/components/select'
       path: '/components/select'
@@ -488,6 +547,13 @@ declare module '@tanstack/react-router' {
       path: '/components/radio'
       fullPath: '/components/radio'
       preLoaderRoute: typeof ComponentsRadioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/nav-bar': {
+      id: '/components/nav-bar'
+      path: '/components/nav-bar'
+      fullPath: '/components/nav-bar'
+      preLoaderRoute: typeof ComponentsNavBarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/linear-progress': {
@@ -509,6 +575,13 @@ declare module '@tanstack/react-router' {
       path: '/components/icon'
       fullPath: '/components/icon'
       preLoaderRoute: typeof ComponentsIconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/footer': {
+      id: '/components/footer'
+      path: '/components/footer'
+      fullPath: '/components/footer'
+      preLoaderRoute: typeof ComponentsFooterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/divider': {
@@ -567,6 +640,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsAvatarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/app-bar': {
+      id: '/components/app-bar'
+      path: '/components/app-bar'
+      fullPath: '/components/app-bar'
+      preLoaderRoute: typeof ComponentsAppBarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/alert': {
       id: '/components/alert'
       path: '/components/alert'
@@ -581,6 +661,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ClaudeMdRoute: ClaudeMdRoute,
   ComponentsAlertRoute: ComponentsAlertRoute,
+  ComponentsAppBarRoute: ComponentsAppBarRoute,
   ComponentsAvatarRoute: ComponentsAvatarRoute,
   ComponentsBadgeRoute: ComponentsBadgeRoute,
   ComponentsBoxRoute: ComponentsBoxRoute,
@@ -589,11 +670,14 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsChipRoute: ComponentsChipRoute,
   ComponentsCircularProgressRoute: ComponentsCircularProgressRoute,
   ComponentsDividerRoute: ComponentsDividerRoute,
+  ComponentsFooterRoute: ComponentsFooterRoute,
   ComponentsIconRoute: ComponentsIconRoute,
   ComponentsInputRoute: ComponentsInputRoute,
   ComponentsLinearProgressRoute: ComponentsLinearProgressRoute,
+  ComponentsNavBarRoute: ComponentsNavBarRoute,
   ComponentsRadioRoute: ComponentsRadioRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
+  ComponentsSidebarRoute: ComponentsSidebarRoute,
   ComponentsSkeletonRoute: ComponentsSkeletonRoute,
   ComponentsSliderRoute: ComponentsSliderRoute,
   ComponentsStackRoute: ComponentsStackRoute,

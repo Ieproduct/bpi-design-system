@@ -1,5 +1,5 @@
 // ============================================================
-// BPI Design System — Component Specifications (Atoms)
+// BPI Design System — Component Specifications (Atoms + Layouts)
 //
 // TOKEN REFERENCE CONVENTION:
 // All token references use the actual CSS custom property names
@@ -66,7 +66,7 @@ export interface A11ySpec {
 export interface ComponentSpec {
   id: string;
   name: string;
-  category: 'atom';
+  category: 'atom' | 'layout';
   description: string;
   anatomy?: string;
   sizes?: SizeSpec[];
@@ -539,10 +539,175 @@ const boxSpec: ComponentSpec = {
 };
 
 // ============================================================
+// LAYOUT COMPONENTS
+// ============================================================
+
+const appBarSpec: ComponentSpec = {
+  id: 'app-bar',
+  name: 'AppBar',
+  category: 'layout',
+  description: 'Top-level horizontal bar for branding, navigation links, and action buttons.',
+  anatomy: 'Container → Logo (left) + Nav links (center/left) + Actions (right)',
+  sizes: [
+    { name: 'sm', extra: { height: '48px' }, padding: '--bpi-space-2 (8px) --bpi-space-4 (16px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: 'none' },
+    { name: 'md', extra: { height: '56px' }, padding: '--bpi-space-3 (12px) --bpi-space-6 (24px)', fontSize: '--bpi-font-size-base (16px)', borderRadius: 'none' },
+    { name: 'lg', extra: { height: '64px' }, padding: '--bpi-space-4 (16px) --bpi-space-8 (32px)', fontSize: '--bpi-font-size-base (16px)', borderRadius: 'none' },
+  ],
+  variants: [
+    { name: 'filled', background: '--bpi-primary', text: '--bpi-primary-contrast' },
+    { name: 'light', background: '--bpi-bg-default', text: '--bpi-text-primary', border: '--bpi-border-default' },
+    { name: 'transparent', background: 'transparent', text: '--bpi-text-primary' },
+  ],
+  states: [
+    { name: 'default', description: 'Normal visible state', css: { 'position': 'fixed | sticky', 'top': '0', 'z-index': '--bpi-z-fixed (1030)' } },
+    { name: 'scrolled', description: 'After user scrolls — adds shadow', css: { 'box-shadow': '--bpi-shadow-md' }, transition: '--bpi-transition-normal (250ms)' },
+  ],
+  elements: [
+    { name: 'container', description: 'Full-width outer wrapper', styles: { 'display': 'flex', 'align-items': 'center', 'width': '100%', 'padding': 'see sizes' } },
+    { name: 'logo', description: 'Brand logo/text on the left', styles: { 'font-weight': '--bpi-font-weight-bold (700)', 'font-size': '--bpi-font-size-lg (18px)', 'margin-right': '--bpi-space-6 (24px)' } },
+    { name: 'nav', description: 'Navigation links group', styles: { 'display': 'flex', 'gap': '--bpi-space-4 (16px)', 'align-items': 'center' } },
+    { name: 'nav-link', description: 'Individual navigation link', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'font-weight': '--bpi-font-weight-medium (500)', 'color': 'inherit', 'padding': '--bpi-space-1 (4px) --bpi-space-2 (8px)', 'border-radius': '--bpi-radius-md (8px)' } },
+    { name: 'nav-link:hover', description: 'Hovered nav link', styles: { 'background': '--bpi-surface-hover', 'transition': '--bpi-transition-fast (150ms)' } },
+    { name: 'nav-link.active', description: 'Currently active nav link', styles: { 'color': '--bpi-primary', 'font-weight': '--bpi-font-weight-semibold (600)' } },
+    { name: 'actions', description: 'Right-side action buttons area', styles: { 'display': 'flex', 'gap': '--bpi-space-2 (8px)', 'margin-left': 'auto', 'align-items': 'center' } },
+  ],
+  defaults: { size: 'md', variant: 'filled', position: 'sticky' },
+  a11y: { role: 'banner', keyboard: ['Tab to navigate links', 'Enter/Space to activate'], ariaProps: ['aria-label="Main navigation"'] },
+  notes: [
+    'Always use position sticky or fixed with z-index --bpi-z-fixed (1030)',
+    'Add box-shadow on scroll using --bpi-shadow-md for elevation feedback',
+    'Logo area accepts image or text — min-width: 120px recommended',
+    'Mobile: collapse nav links into hamburger menu at breakpoint < 768px',
+    'Actions slot: typically icon buttons (notification, profile) or primary CTA',
+  ],
+};
+
+const navBarSpec: ComponentSpec = {
+  id: 'nav-bar',
+  name: 'NavBar',
+  category: 'layout',
+  description: 'Vertical side navigation with expandable/collapsible groups and active state indicators.',
+  anatomy: 'Container → Nav header (optional) + Nav groups → Nav items + Sub-items (collapsible)',
+  sizes: [
+    { name: 'compact', extra: { width: '64px' }, padding: '--bpi-space-2 (8px)', fontSize: '--bpi-font-size-xs (12px)', borderRadius: '--bpi-radius-md (8px)' },
+    { name: 'default', extra: { width: '240px' }, padding: '--bpi-space-3 (12px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (8px)' },
+    { name: 'wide', extra: { width: '280px' }, padding: '--bpi-space-4 (16px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: '--bpi-radius-md (8px)' },
+  ],
+  variants: [
+    { name: 'light', background: '--bpi-bg-default', text: '--bpi-text-primary', border: '--bpi-border-default' },
+    { name: 'filled', background: '--bpi-bg-secondary', text: '--bpi-text-primary' },
+    { name: 'brand', background: '--bpi-primary-darker', text: '--bpi-primary-contrast' },
+  ],
+  states: [
+    { name: 'expanded', description: 'Full-width showing labels and icons', css: { 'width': 'see sizes (default/wide)' }, transition: '--bpi-transition-normal (250ms)' },
+    { name: 'collapsed', description: 'Icon-only compact mode', css: { 'width': '64px', 'overflow': 'hidden' }, transition: '--bpi-transition-normal (250ms)' },
+  ],
+  elements: [
+    { name: 'container', description: 'Outer nav wrapper', styles: { 'display': 'flex', 'flex-direction': 'column', 'height': '100%', 'border-right': '1px solid --bpi-border-default', 'overflow-y': 'auto' } },
+    { name: 'header', description: 'Optional top area (logo/title)', styles: { 'padding': '--bpi-space-4 (16px)', 'border-bottom': '1px solid --bpi-border-default', 'font-weight': '--bpi-font-weight-semibold (600)' } },
+    { name: 'group', description: 'Collapsible section with label', styles: { 'padding': '--bpi-space-2 (8px) 0' } },
+    { name: 'group-label', description: 'Section heading text', styles: { 'font-size': '--bpi-font-size-xs (12px)', 'font-weight': '--bpi-font-weight-semibold (600)', 'color': '--bpi-text-muted', 'text-transform': 'uppercase', 'letter-spacing': '0.05em', 'padding': '--bpi-space-2 (8px) --bpi-space-3 (12px)' } },
+    { name: 'item', description: 'Navigation link row', styles: { 'display': 'flex', 'align-items': 'center', 'gap': '--bpi-space-3 (12px)', 'padding': '--bpi-space-2 (8px) --bpi-space-3 (12px)', 'border-radius': '--bpi-radius-md (8px)', 'font-size': '--bpi-font-size-sm (14px)', 'color': '--bpi-text-secondary', 'cursor': 'pointer' } },
+    { name: 'item:hover', description: 'Hovered nav item', styles: { 'background': '--bpi-surface-hover', 'color': '--bpi-text-primary', 'transition': '--bpi-transition-fast (150ms)' } },
+    { name: 'item.active', description: 'Currently active item', styles: { 'background': '--bpi-primary-lighter', 'color': '--bpi-primary', 'font-weight': '--bpi-font-weight-semibold (600)' } },
+    { name: 'item-icon', description: 'Icon in nav item', styles: { 'width': '20px', 'height': '20px', 'flex-shrink': '0' } },
+    { name: 'sub-items', description: 'Nested children container', styles: { 'padding-left': '--bpi-space-8 (32px)' } },
+    { name: 'collapse-toggle', description: 'Button to expand/collapse navbar', styles: { 'position': 'absolute', 'right': '-12px', 'top': '--bpi-space-5 (20px)', 'width': '24px', 'height': '24px', 'border-radius': '--bpi-radius-full', 'background': '--bpi-bg-default', 'border': '1px solid --bpi-border-default', 'box-shadow': '--bpi-shadow-sm' } },
+  ],
+  defaults: { size: 'default', variant: 'light' },
+  a11y: { role: 'navigation', keyboard: ['Tab between items', 'Enter/Space to activate', 'Arrow Up/Down within group'], ariaProps: ['aria-label="Side navigation"', 'aria-expanded (on groups)', 'aria-current="page" (active item)'] },
+  notes: [
+    'Compact mode (64px): show only icons, reveal labels via tooltip on hover',
+    'Use --bpi-z-sticky (1010) if navbar overlays content on mobile',
+    'Active indicator: left border (3px solid --bpi-primary) or background highlight',
+    'Collapsible groups: animate height with --bpi-transition-normal',
+    'Mobile: transform to slide-in drawer with --bpi-z-modal (1050) overlay',
+    'Scroll: overflow-y auto with custom scrollbar styling',
+  ],
+};
+
+const sideBarSpec: ComponentSpec = {
+  id: 'sidebar',
+  name: 'Sidebar',
+  category: 'layout',
+  description: 'Secondary side panel for contextual content, filters, or auxiliary navigation.',
+  anatomy: 'Container → Header (optional) + Content area + Footer (optional)',
+  sizes: [
+    { name: 'sm', extra: { width: '240px' }, padding: '--bpi-space-3 (12px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: 'none' },
+    { name: 'md', extra: { width: '320px' }, padding: '--bpi-space-4 (16px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: 'none' },
+    { name: 'lg', extra: { width: '400px' }, padding: '--bpi-space-5 (20px)', fontSize: '--bpi-font-size-base (16px)', borderRadius: 'none' },
+  ],
+  variants: [
+    { name: 'default', background: '--bpi-bg-default', text: '--bpi-text-primary', border: '--bpi-border-default' },
+    { name: 'elevated', background: '--bpi-surface-card', text: '--bpi-text-primary' },
+    { name: 'overlay', background: '--bpi-surface-card', text: '--bpi-text-primary' },
+  ],
+  states: [
+    { name: 'open', description: 'Sidebar is visible', css: { 'transform': 'translateX(0)' }, transition: '--bpi-transition-normal (250ms)' },
+    { name: 'closed', description: 'Sidebar is hidden (slide out)', css: { 'transform': 'translateX(100%)' }, transition: '--bpi-transition-normal (250ms)' },
+  ],
+  elements: [
+    { name: 'container', description: 'Outer wrapper', styles: { 'display': 'flex', 'flex-direction': 'column', 'height': '100%', 'border-left': '1px solid --bpi-border-default', 'overflow-y': 'auto' } },
+    { name: 'header', description: 'Title bar with optional close button', styles: { 'display': 'flex', 'align-items': 'center', 'justify-content': 'space-between', 'padding': '--bpi-space-4 (16px)', 'border-bottom': '1px solid --bpi-border-default', 'font-weight': '--bpi-font-weight-semibold (600)', 'font-size': '--bpi-font-size-lg (18px)' } },
+    { name: 'content', description: 'Scrollable main content area', styles: { 'flex': '1', 'padding': 'see sizes', 'overflow-y': 'auto' } },
+    { name: 'footer', description: 'Sticky bottom area', styles: { 'padding': '--bpi-space-3 (12px) --bpi-space-4 (16px)', 'border-top': '1px solid --bpi-border-default', 'background': '--bpi-bg-default' } },
+    { name: 'overlay-backdrop', description: 'Background overlay for overlay variant', styles: { 'position': 'fixed', 'inset': '0', 'background': 'rgba(0,0,0,0.3)', 'z-index': '--bpi-z-modal-backdrop (1040)' } },
+  ],
+  defaults: { size: 'md', variant: 'default', position: 'right' },
+  a11y: { role: 'complementary', keyboard: ['Tab to navigate content', 'Escape to close (overlay variant)'], ariaProps: ['aria-label="Sidebar"', 'aria-hidden (when closed)'] },
+  notes: [
+    'Overlay variant: add backdrop + z-index --bpi-z-modal (1050)',
+    'Default variant: inline within layout (no overlay)',
+    'Elevated variant: uses --bpi-shadow-lg for depth instead of border',
+    'Position: left or right — use border-left or border-right accordingly',
+    'Mobile: always use overlay variant with full-height slide-in',
+    'Close button: 24x24 icon button in header area',
+  ],
+};
+
+const footerSpec: ComponentSpec = {
+  id: 'footer',
+  name: 'Footer',
+  category: 'layout',
+  description: 'Bottom section for copyright, links, branding, and secondary navigation.',
+  anatomy: 'Container → Content columns + Bottom bar (copyright)',
+  sizes: [
+    { name: 'compact', extra: { minHeight: '48px' }, padding: '--bpi-space-3 (12px) --bpi-space-6 (24px)', fontSize: '--bpi-font-size-xs (12px)', borderRadius: 'none' },
+    { name: 'default', extra: { minHeight: '120px' }, padding: '--bpi-space-6 (24px) --bpi-space-8 (32px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: 'none' },
+    { name: 'expanded', extra: { minHeight: '200px' }, padding: '--bpi-space-8 (32px) --bpi-space-10 (40px)', fontSize: '--bpi-font-size-sm (14px)', borderRadius: 'none' },
+  ],
+  variants: [
+    { name: 'light', background: '--bpi-bg-secondary', text: '--bpi-text-secondary', border: '--bpi-border-default' },
+    { name: 'dark', background: '--bpi-primary-darker', text: '--bpi-primary-contrast' },
+    { name: 'transparent', background: 'transparent', text: '--bpi-text-secondary', border: '--bpi-border-default' },
+  ],
+  elements: [
+    { name: 'container', description: 'Full-width outer wrapper', styles: { 'border-top': '1px solid --bpi-border-default', 'margin-top': 'auto' } },
+    { name: 'content', description: 'Multi-column layout area', styles: { 'display': 'grid', 'grid-template-columns': 'repeat(auto-fit, minmax(200px, 1fr))', 'gap': '--bpi-space-6 (24px)', 'max-width': '1200px', 'margin': '0 auto' } },
+    { name: 'column', description: 'Individual content column', styles: { 'display': 'flex', 'flex-direction': 'column', 'gap': '--bpi-space-2 (8px)' } },
+    { name: 'column-title', description: 'Column heading', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'font-weight': '--bpi-font-weight-semibold (600)', 'color': '--bpi-text-primary', 'margin-bottom': '--bpi-space-2 (8px)' } },
+    { name: 'link', description: 'Footer link item', styles: { 'font-size': '--bpi-font-size-sm (14px)', 'color': '--bpi-text-secondary', 'text-decoration': 'none' } },
+    { name: 'link:hover', description: 'Hovered footer link', styles: { 'color': '--bpi-text-primary', 'transition': '--bpi-transition-fast (150ms)' } },
+    { name: 'bottom-bar', description: 'Copyright/legal strip at bottom', styles: { 'padding-top': '--bpi-space-4 (16px)', 'border-top': '1px solid --bpi-border-default', 'font-size': '--bpi-font-size-xs (12px)', 'color': '--bpi-text-muted', 'text-align': 'center' } },
+  ],
+  defaults: { size: 'default', variant: 'light' },
+  a11y: { role: 'contentinfo', keyboard: ['Tab to navigate links'], ariaProps: ['aria-label="Footer"'] },
+  notes: [
+    'Use margin-top: auto on container to push footer to bottom of page',
+    'Compact: single-line copyright only — no columns',
+    'Default: 2-4 columns with links + copyright bar',
+    'Expanded: columns + newsletter/social section + copyright',
+    'Mobile: stack columns vertically, center-align text',
+    'Sticky footer: use min-height: 100vh on parent + flex layout',
+  ],
+};
+
+// ============================================================
 // EXPORTS
 // ============================================================
 
 export const componentSpecs: ComponentSpec[] = [
+  // Atoms
   buttonSpec,
   inputSpec,
   textFieldSpec,
@@ -564,6 +729,11 @@ export const componentSpecs: ComponentSpec[] = [
   circularProgressSpec,
   stackSpec,
   boxSpec,
+  // Layouts
+  appBarSpec,
+  navBarSpec,
+  sideBarSpec,
+  footerSpec,
 ];
 
 export function getSpec(id: string): ComponentSpec | undefined {

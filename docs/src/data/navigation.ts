@@ -44,6 +44,16 @@ export const navigationStructure: NavItem[] = [
     ],
   },
   {
+    label: 'Component Specs — Layout',
+    icon: '🏗️',
+    children: [
+      { label: 'AppBar', path: '/components/app-bar' },
+      { label: 'NavBar', path: '/components/nav-bar' },
+      { label: 'Sidebar', path: '/components/sidebar' },
+      { label: 'Footer', path: '/components/footer' },
+    ],
+  },
+  {
     label: 'Resources',
     icon: '📦',
     children: [

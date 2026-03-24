@@ -552,6 +552,64 @@ const COMPONENT_SPECS = {
     defaults: { display: "block" },
     notes: ["Padding: --bpi-space-*", "Background: --bpi-bg-* or --bpi-surface-*", "Border-radius: --bpi-radius-*", "Shadow: --bpi-shadow-*", "Border: --bpi-border-*"],
   },
+
+  // ── Layout Components ──
+  "app-bar": {
+    name: "AppBar", category: "layout",
+    description: "Top-level horizontal bar for branding, navigation links, and action buttons",
+    anatomy: "Container → Logo (left) + Nav links (center/left) + Actions (right)",
+    sizes: { sm: "h-48px py-8px px-16px", md: "h-56px py-12px px-24px", lg: "h-64px py-16px px-32px" },
+    variants: {
+      filled: { bg: "--bpi-primary", text: "--bpi-primary-contrast" },
+      light: { bg: "--bpi-bg-default", text: "--bpi-text-primary", border: "--bpi-border-default" },
+      transparent: { bg: "transparent", text: "--bpi-text-primary" },
+    },
+    elements: ["container", "logo", "nav", "nav-link", "actions"],
+    defaults: { size: "md", variant: "filled", position: "sticky" },
+    notes: ["Position: sticky/fixed with z-index --bpi-z-fixed (1030)", "Scrolled state: add --bpi-shadow-md", "Mobile: collapse nav to hamburger at <768px", "Nav-link hover: --bpi-surface-hover bg", "Active nav-link: --bpi-primary color + semibold weight"],
+  },
+  "nav-bar": {
+    name: "NavBar", category: "layout",
+    description: "Vertical side navigation with expandable/collapsible groups and active state indicators",
+    anatomy: "Container → Header (optional) + Nav groups → Nav items + Sub-items",
+    sizes: { compact: "w-64px", default: "w-240px", wide: "w-280px" },
+    variants: {
+      light: { bg: "--bpi-bg-default", text: "--bpi-text-primary", border: "--bpi-border-default" },
+      filled: { bg: "--bpi-bg-secondary", text: "--bpi-text-primary" },
+      brand: { bg: "--bpi-primary-darker", text: "--bpi-primary-contrast" },
+    },
+    elements: ["container", "header", "group", "group-label", "item", "item-icon", "sub-items", "collapse-toggle"],
+    defaults: { size: "default", variant: "light" },
+    notes: ["Compact mode: icons only, labels via tooltip", "Active item: --bpi-primary-lighter bg + --bpi-primary text", "Group labels: uppercase --bpi-font-size-xs --bpi-text-muted", "Collapsible: animate with --bpi-transition-normal", "Mobile: slide-in drawer with --bpi-z-modal overlay"],
+  },
+  sidebar: {
+    name: "Sidebar", category: "layout",
+    description: "Secondary side panel for contextual content, filters, or auxiliary navigation",
+    anatomy: "Container → Header (optional) + Content area + Footer (optional)",
+    sizes: { sm: "w-240px", md: "w-320px", lg: "w-400px" },
+    variants: {
+      default: { bg: "--bpi-bg-default", text: "--bpi-text-primary", border: "--bpi-border-default" },
+      elevated: { bg: "--bpi-surface-card", text: "--bpi-text-primary", shadow: "--bpi-shadow-lg" },
+      overlay: { bg: "--bpi-surface-card", text: "--bpi-text-primary", backdrop: "rgba(0,0,0,0.3)" },
+    },
+    elements: ["container", "header", "content", "footer", "overlay-backdrop"],
+    defaults: { size: "md", variant: "default", position: "right" },
+    notes: ["Overlay: backdrop + --bpi-z-modal (1050)", "Open/Close: translateX animation --bpi-transition-normal", "Header: title + close button", "Mobile: always overlay variant"],
+  },
+  footer: {
+    name: "Footer", category: "layout",
+    description: "Bottom section for copyright, links, branding, and secondary navigation",
+    anatomy: "Container → Content columns + Bottom bar (copyright)",
+    sizes: { compact: "min-h-48px", default: "min-h-120px", expanded: "min-h-200px" },
+    variants: {
+      light: { bg: "--bpi-bg-secondary", text: "--bpi-text-secondary", border: "--bpi-border-default" },
+      dark: { bg: "--bpi-primary-darker", text: "--bpi-primary-contrast" },
+      transparent: { bg: "transparent", text: "--bpi-text-secondary", border: "--bpi-border-default" },
+    },
+    elements: ["container", "content", "column", "column-title", "link", "bottom-bar"],
+    defaults: { size: "default", variant: "light" },
+    notes: ["margin-top: auto to push to bottom", "Compact: single-line copyright only", "Default: 2-4 columns + copyright", "Expanded: columns + social/newsletter + copyright", "Mobile: stack columns vertically"],
+  },
 };
 
 const COMPONENT_IDS = Object.keys(COMPONENT_SPECS);
