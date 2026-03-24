@@ -18,6 +18,7 @@
  *   - get_component_spec   → get full spec for a component
  *   - search_specs         → search component specs by keyword
  *   - get_css_snippet      → generate CSS from spec + tokens
+ *   - get_font_setup       → get font setup instructions (TH Sarabun New via Google Fonts)
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -128,7 +129,7 @@ const BORDER_TOKENS = {
 
 const TYPOGRAPHY = {
   families: {
-    sans: { variable: "--bpi-font-family-sans", value: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' },
+    sans: { variable: "--bpi-font-family-sans", value: 'Sarabun New, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', googleFonts: "https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap" },
     mono: { variable: "--bpi-font-family-mono", value: 'JetBrains Mono, Menlo, Monaco, "Courier New", monospace' },
   },
   sizes: {
@@ -818,6 +819,42 @@ server.tool(
     return { content: [{ type: "text", text: css }] };
   }
 );
+// ── Font Setup Tool ──────────────────────────────────────────────
+
+server.tool(
+  "get_font_setup",
+  "Get font setup instructions for BPI Design System. Returns Google Fonts link, CSS import, and font-family tokens. Primary font: TH Sarabun New.",
+  {},
+  async () => {
+    const setup = {
+      primaryFont: "TH Sarabun New (Sarabun New on Google Fonts)",
+      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap",
+      htmlLink: `<link rel="preconnect" href="https://fonts.googleapis.com" />\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n<link href="https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap" rel="stylesheet" />`,
+      cssImport: `@import url('https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap');`,
+      cssVariable: "--bpi-font-family-sans",
+      cssUsage: "font-family: var(--bpi-font-family-sans);",
+      weights: {
+        light: { value: 300, variable: "--bpi-font-weight-light" },
+        normal: { value: 400, variable: "--bpi-font-weight-normal" },
+        medium: { value: 500, variable: "--bpi-font-weight-medium" },
+        semibold: { value: 600, variable: "--bpi-font-weight-semibold" },
+        bold: { value: 700, variable: "--bpi-font-weight-bold" },
+      },
+      monoFont: {
+        name: "JetBrains Mono",
+        variable: "--bpi-font-family-mono",
+        googleFontsUrl: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+      notes: [
+        "TH Sarabun New supports both Thai and Latin characters",
+        "Always use var(--bpi-font-family-sans) — never hard-code font names",
+        "Include weights 300–700 for full design system support",
+      ],
+    };
+    return { content: [{ type: "text", text: JSON.stringify(setup, null, 2) }] };
+  }
+);
+
 // ── Resource ─────────────────────────────────────────────────────
 
 server.resource(
@@ -842,7 +879,8 @@ TOKEN CATEGORIES: ${TOKEN_CATEGORIES.join(", ")}
 COMPONENT SPECS: ${COMPONENT_IDS.length} atom components (molecules & organisms coming soon)
 COMPONENTS: ${COMPONENT_IDS.join(", ")}
 
-Tools: list_categories, get_tokens, get_color, search_tokens, list_components, get_component_spec, search_specs, get_css_snippet
+Font: TH Sarabun New (Google Fonts) — use get_font_setup for setup instructions
+Tools: list_categories, get_tokens, get_color, search_tokens, list_components, get_component_spec, search_specs, get_css_snippet, get_font_setup
 `,
     }],
   })

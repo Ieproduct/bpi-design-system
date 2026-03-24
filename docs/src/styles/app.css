@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', 'Sarabun', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Sarabun New', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --color-primary-50: #FEF2F2;
