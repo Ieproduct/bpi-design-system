@@ -9,7 +9,7 @@ Built on **Web Components** with an **Atomic Design** structure:
 ```
 src/
 ├── tokens/          Design Tokens (SCSS + CSS custom properties)
-├── atoms/           Button, Input, Badge, Icon
+├── atoms/           Button, Input, Badge, etc.
 ├── molecules/       FormField, SearchBar, Card
 ├── organisms/       DataTable, Navbar, Sidebar
 types/               TypeScript definitions (index, react, vue)
@@ -122,7 +122,8 @@ $bpi-font-family-sans: 'Kanit', sans-serif;
 | Button | `<bpi-button>` | `.bpi-btn` | primary, secondary, danger, outline, ghost, success |
 | Input | `<bpi-input>` | `.bpi-input` | text, email, password, number, tel |
 | Badge | `<bpi-badge>` | `.bpi-badge` | primary, success, warning, danger, info, neutral |
-| Icon | `<bpi-icon>` | `.bpi-icon` | xs, sm, md, lg, xl |
+
+> **Note:** Icon is not included — each team should use their own icon library (e.g., Lucide, Heroicons, Material Icons).
 
 ### Molecules
 

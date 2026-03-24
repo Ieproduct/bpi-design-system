@@ -482,17 +482,8 @@ const COMPONENT_SPECS = {
     ],
     defaults: { size: "body1", variant: "default" },
     notes: ["Font family: --bpi-font-family-sans", "Mono text: --bpi-font-family-mono"],
-  },  icon: {
-    name: "Icon", category: "atom",
-    description: "SVG icon display component",
-    sizes: [
-      { name: "xs", size: "16px" }, { name: "sm", size: "20px" },
-      { name: "md", size: "24px" }, { name: "lg", size: "32px" },
-      { name: "xl", size: "48px" },
-    ],
-    defaults: { size: "md" },
-    notes: ["Color inherits from parent (currentColor)", "Stroke-width: 1.5–2px"],
   },
+  // Icon removed — each team should use their own icon library (e.g., Lucide, Heroicons, Material Icons)
   skeleton: {
     name: "Skeleton", category: "atom",
     description: "Placeholder loading animation",

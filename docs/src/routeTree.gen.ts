@@ -28,7 +28,6 @@ import { Route as ComponentsRadioRouteImport } from './routes/components/radio'
 import { Route as ComponentsNavBarRouteImport } from './routes/components/nav-bar'
 import { Route as ComponentsLinearProgressRouteImport } from './routes/components/linear-progress'
 import { Route as ComponentsInputRouteImport } from './routes/components/input'
-import { Route as ComponentsIconRouteImport } from './routes/components/icon'
 import { Route as ComponentsFooterRouteImport } from './routes/components/footer'
 import { Route as ComponentsDividerRouteImport } from './routes/components/divider'
 import { Route as ComponentsCircularProgressRouteImport } from './routes/components/circular-progress'
@@ -137,11 +136,6 @@ const ComponentsInputRoute = ComponentsInputRouteImport.update({
   path: '/components/input',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsIconRoute = ComponentsIconRouteImport.update({
-  id: '/components/icon',
-  path: '/components/icon',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsFooterRoute = ComponentsFooterRouteImport.update({
   id: '/components/footer',
   path: '/components/footer',
@@ -213,7 +207,6 @@ export interface FileRoutesByFullPath {
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
   '/components/footer': typeof ComponentsFooterRoute
-  '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
   '/components/nav-bar': typeof ComponentsNavBarRoute
@@ -246,7 +239,6 @@ export interface FileRoutesByTo {
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
   '/components/footer': typeof ComponentsFooterRoute
-  '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
   '/components/nav-bar': typeof ComponentsNavBarRoute
@@ -280,7 +272,6 @@ export interface FileRoutesById {
   '/components/circular-progress': typeof ComponentsCircularProgressRoute
   '/components/divider': typeof ComponentsDividerRoute
   '/components/footer': typeof ComponentsFooterRoute
-  '/components/icon': typeof ComponentsIconRoute
   '/components/input': typeof ComponentsInputRoute
   '/components/linear-progress': typeof ComponentsLinearProgressRoute
   '/components/nav-bar': typeof ComponentsNavBarRoute
@@ -315,7 +306,6 @@ export interface FileRouteTypes {
     | '/components/circular-progress'
     | '/components/divider'
     | '/components/footer'
-    | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
     | '/components/nav-bar'
@@ -348,7 +338,6 @@ export interface FileRouteTypes {
     | '/components/circular-progress'
     | '/components/divider'
     | '/components/footer'
-    | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
     | '/components/nav-bar'
@@ -381,7 +370,6 @@ export interface FileRouteTypes {
     | '/components/circular-progress'
     | '/components/divider'
     | '/components/footer'
-    | '/components/icon'
     | '/components/input'
     | '/components/linear-progress'
     | '/components/nav-bar'
@@ -415,7 +403,6 @@ export interface RootRouteChildren {
   ComponentsCircularProgressRoute: typeof ComponentsCircularProgressRoute
   ComponentsDividerRoute: typeof ComponentsDividerRoute
   ComponentsFooterRoute: typeof ComponentsFooterRoute
-  ComponentsIconRoute: typeof ComponentsIconRoute
   ComponentsInputRoute: typeof ComponentsInputRoute
   ComponentsLinearProgressRoute: typeof ComponentsLinearProgressRoute
   ComponentsNavBarRoute: typeof ComponentsNavBarRoute
@@ -570,13 +557,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsInputRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/icon': {
-      id: '/components/icon'
-      path: '/components/icon'
-      fullPath: '/components/icon'
-      preLoaderRoute: typeof ComponentsIconRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/footer': {
       id: '/components/footer'
       path: '/components/footer'
@@ -671,7 +651,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsCircularProgressRoute: ComponentsCircularProgressRoute,
   ComponentsDividerRoute: ComponentsDividerRoute,
   ComponentsFooterRoute: ComponentsFooterRoute,
-  ComponentsIconRoute: ComponentsIconRoute,
   ComponentsInputRoute: ComponentsInputRoute,
   ComponentsLinearProgressRoute: ComponentsLinearProgressRoute,
   ComponentsNavBarRoute: ComponentsNavBarRoute,

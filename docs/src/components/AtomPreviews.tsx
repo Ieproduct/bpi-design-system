@@ -401,37 +401,6 @@ function TypographyPreview() {
   );
 }
 
-/* ═══ Icon ═══ */
-function IconPreview() {
-  const icons = [
-    { name: 'home', d: 'M3 12l9-8 9 8M5 11v8h4v-4h6v4h4v-8' },
-    { name: 'search', d: 'M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z' },
-    { name: 'user', d: 'M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z' },
-    { name: 'heart', d: 'M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z' },
-    { name: 'star', d: 'M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z' },
-    { name: 'settings', d: 'M12 15a3 3 0 100-6 3 3 0 000 6z' },
-  ];
-  const sizes = [16, 20, 24];
-  return (
-    <PreviewShell label="Icon — sizes">
-      <div style={{ padding: 24, fontFamily: F }}>
-        <div style={{ display: 'flex', gap: 24 }}>
-          {sizes.map(sz => (
-            <div key={sz} style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-              <span style={{ fontSize: 11, color: '#94A3B8' }}>{sz}px</span>
-              <div style={{ display: 'flex', gap: 10 }}>
-                {icons.slice(0, 4).map(ic => (
-                  <svg key={ic.name} width={sz} height={sz} viewBox="0 0 24 24" fill="none" stroke="#475569" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={ic.d}/></svg>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </PreviewShell>
-  );
-}
-
 /* ═══ Skeleton ═══ */
 function SkeletonPreview() {
   return (
@@ -603,7 +572,6 @@ const PREVIEWS: Record<string, React.FC> = {
   tooltip: TooltipPreview,
   divider: DividerPreview,
   typography: TypographyPreview,
-  icon: IconPreview,
   skeleton: SkeletonPreview,
   'linear-progress': LinearProgressPreview,
   'circular-progress': CircularProgressPreview,

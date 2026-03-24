@@ -28,7 +28,7 @@
 BPI Design System is a **specification-only** package. It provides:
 
 1. **Design Tokens** — CSS custom properties (all `--bpi-*` prefix) for colors, typography, spacing, radius, shadows, z-index
-2. **Component Specs** — Structured specifications (sizes, variants, states, accessibility) for 21 atom components + 4 layout components
+2. **Component Specs** — Structured specifications (sizes, variants, states, accessibility) for 20 atom components + 4 layout components
 3. **Interactive Previews** — Every component spec page includes a live visual preview demonstrating sizes, variants, states, and interactions
 
 Each project team implements their own components using their preferred framework (React, Vue, Angular, Svelte, etc.) following these specs. There is no component library to install.
@@ -81,7 +81,9 @@ Add to your `claude_desktop_config.json` or `.mcp.json`:
 
 ### Available Components
 
-**Atoms (21):** Alert, Avatar, Badge, Box, Button, Checkbox, Chip, CircularProgress, Divider, Icon, Input, LinearProgress, Radio, Select, Skeleton, Slider, Stack, Switch, TextField, Tooltip, Typography
+**Atoms (20):** Alert, Avatar, Badge, Box, Button, Checkbox, Chip, CircularProgress, Divider, Input, LinearProgress, Radio, Select, Skeleton, Slider, Stack, Switch, TextField, Tooltip, Typography
+
+> **Note:** Icon is not included — each team should use their own icon library (e.g., Lucide, Heroicons, Material Icons).
 
 **Layout (4):** AppBar, NavBar, Sidebar, Footer
 

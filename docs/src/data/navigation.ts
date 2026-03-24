@@ -29,7 +29,6 @@ export const navigationStructure: NavItem[] = [
       { label: 'Chip', path: '/components/chip' },
       { label: 'Circular Progress', path: '/components/circular-progress' },
       { label: 'Divider', path: '/components/divider' },
-      { label: 'Icon', path: '/components/icon' },
       { label: 'Input', path: '/components/input' },
       { label: 'Linear Progress', path: '/components/linear-progress' },
       { label: 'Radio', path: '/components/radio' },

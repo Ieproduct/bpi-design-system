@@ -426,23 +426,7 @@ const typographySpec: ComponentSpec = {
   defaults: { size: 'body1', variant: 'default' },
   notes: ['Font family: --bpi-font-family-sans', 'Mono text: --bpi-font-family-mono'],
 };
-const iconSpec: ComponentSpec = {
-  id: 'icon',
-  name: 'Icon',
-  category: 'atom',
-  description: 'SVG icon display component.',
-  anatomy: 'SVG container',
-  sizes: [
-    { name: 'xs', extra: { size: '16px' } },
-    { name: 'sm', extra: { size: '20px' } },
-    { name: 'md', extra: { size: '24px' } },
-    { name: 'lg', extra: { size: '32px' } },
-    { name: 'xl', extra: { size: '48px' } },
-  ],
-  defaults: { size: 'md' },
-  a11y: { ariaProps: ['aria-hidden=true for decorative', 'aria-label for meaningful'] },
-  notes: ['Color inherits from parent (currentColor)', 'Stroke-width: 1.5–2px'],
-};
+// Icon spec removed — each team should use their own icon library (e.g., Lucide, Heroicons, Material Icons)
 
 const skeletonSpec: ComponentSpec = {
   id: 'skeleton',
@@ -729,7 +713,6 @@ export const componentSpecs: ComponentSpec[] = [
   tooltipSpec,
   dividerSpec,
   typographySpec,
-  iconSpec,
   skeletonSpec,
   linearProgressSpec,
   circularProgressSpec,
