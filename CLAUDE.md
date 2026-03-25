@@ -91,20 +91,20 @@ Add to your `claude_desktop_config.json` or `.mcp.json`:
 
 ## Font Setup
 
-The system uses **TH Sarabun New** (Sarabun New on Google Fonts) as the primary font for both Thai and English text.
+The system uses **Prompt** (Google Fonts) as the primary font for both Thai and English text.
 
 Add this to your HTML `<head>`:
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 ```
 
 Or import in CSS:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 ```
 
 ---
@@ -115,7 +115,7 @@ Or import in CSS:
 2. **Dark mode** activates via `class="dark"` on `<html>` — CSS variables auto-swap
 3. **Framework-agnostic** — use any framework, follow the component specs
 4. **Follow component specs** — use the specified sizes, variants, states, and accessibility rules
-5. **Font: TH Sarabun New** — always use `var(--bpi-font-family-sans)` — load from Google Fonts (see Font Setup above)
+5. **Font: Prompt** — always use `var(--bpi-font-family-sans)` — load from Google Fonts (see Font Setup above)
 6. **Toggle dark mode in JS:** `document.documentElement.classList.toggle('dark')`
 7. **Persist theme:** `localStorage.setItem('theme', 'dark' | 'light')`
 
@@ -143,7 +143,7 @@ Example: `var(--bpi-primary)` → `#E32321` (light) / `#F87171` (dark)
 
 | Token | CSS Variable | Value |
 |-------|-------------|-------|
-| Font Sans | `--bpi-font-family-sans` | Sarabun New (TH Sarabun New), system fonts |
+| Font Sans | `--bpi-font-family-sans` | Prompt, system fonts |
 | Font Mono | `--bpi-font-family-mono` | JetBrains Mono, monospace |
 | Size XS | `--bpi-font-size-xs` | 12px |
 | Size SM | `--bpi-font-size-sm` | 14px |

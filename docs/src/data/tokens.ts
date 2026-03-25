@@ -257,8 +257,8 @@ export const spacingScale: SpacingToken[] = [
 
 // Typography - Font Families
 export const fontFamilies = {
-  display: 'Sarabun New, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-  body: 'Sarabun New, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  display: 'Prompt, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  body: 'Prompt, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   mono: 'JetBrains Mono, Menlo, Monaco, "Courier New", monospace',
 };
 

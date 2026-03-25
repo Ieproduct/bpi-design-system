@@ -18,7 +18,7 @@
  *   - get_component_spec   → get full spec for a component
  *   - search_specs         → search component specs by keyword
  *   - get_css_snippet      → generate CSS from spec + tokens
- *   - get_font_setup       → get font setup instructions (TH Sarabun New via Google Fonts)
+ *   - get_font_setup       → get font setup instructions (Prompt via Google Fonts)
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -129,7 +129,7 @@ const BORDER_TOKENS = {
 
 const TYPOGRAPHY = {
   families: {
-    sans: { variable: "--bpi-font-family-sans", value: 'Sarabun New, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', googleFonts: "https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap" },
+    sans: { variable: "--bpi-font-family-sans", value: 'Prompt, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', googleFonts: "https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" },
     mono: { variable: "--bpi-font-family-mono", value: 'JetBrains Mono, Menlo, Monaco, "Courier New", monospace' },
   },
   sizes: {
@@ -814,14 +814,14 @@ server.tool(
 
 server.tool(
   "get_font_setup",
-  "Get font setup instructions for BPI Design System. Returns Google Fonts link, CSS import, and font-family tokens. Primary font: TH Sarabun New.",
+  "Get font setup instructions for BPI Design System. Returns Google Fonts link, CSS import, and font-family tokens. Primary font: Prompt.",
   {},
   async () => {
     const setup = {
-      primaryFont: "TH Sarabun New (Sarabun New on Google Fonts)",
-      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap",
-      htmlLink: `<link rel="preconnect" href="https://fonts.googleapis.com" />\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n<link href="https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap" rel="stylesheet" />`,
-      cssImport: `@import url('https://fonts.googleapis.com/css2?family=Sarabun+New:wght@300;400;500;600;700&display=swap');`,
+      primaryFont: "Prompt (Prompt on Google Fonts)",
+      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap",
+      htmlLink: `<link rel="preconnect" href="https://fonts.googleapis.com" />\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />`,
+      cssImport: `@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');`,
       cssVariable: "--bpi-font-family-sans",
       cssUsage: "font-family: var(--bpi-font-family-sans);",
       weights: {
@@ -837,7 +837,7 @@ server.tool(
         googleFontsUrl: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap",
       },
       notes: [
-        "TH Sarabun New supports both Thai and Latin characters",
+        "Prompt supports both Thai and Latin characters",
         "Always use var(--bpi-font-family-sans) — never hard-code font names",
         "Include weights 300–700 for full design system support",
       ],
@@ -870,7 +870,7 @@ TOKEN CATEGORIES: ${TOKEN_CATEGORIES.join(", ")}
 COMPONENT SPECS: ${COMPONENT_IDS.length} atom components (molecules & organisms coming soon)
 COMPONENTS: ${COMPONENT_IDS.join(", ")}
 
-Font: TH Sarabun New (Google Fonts) — use get_font_setup for setup instructions
+Font: Prompt (Google Fonts) — use get_font_setup for setup instructions
 Tools: list_categories, get_tokens, get_color, search_tokens, list_components, get_component_spec, search_specs, get_css_snippet, get_font_setup
 `,
     }],
